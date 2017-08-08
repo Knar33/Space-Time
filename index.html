@@ -11,7 +11,7 @@
         <div id="box3" class="box3"></div>
         <script>
             //physics variables
-            var gravity = 1;
+            var gravity = .5;
             var windResistance = .05;
             var terminalVelocity = -10;
             
@@ -33,7 +33,7 @@
             blocky.xpos = 0;
             blocky.ypos = 0;
             blocky.xBox = 5000;
-            blocky.yBox = 100;
+            blocky.yBox = 99;
             blocky.friction = .2;
             blocky.collide = function(target) {
                 //ground collision 
@@ -194,8 +194,7 @@
                     }
                 }
                 if (downDown) {
-                    if (player.yspeed > -10)
-                        player.yspeed--;
+                    
                 }
                 
                 //vertical movement

@@ -19,6 +19,8 @@ body {
     height: 100px;
     width: 5000px;
     background-color: red;
+    margin: 0;
+    padding: 0;
 }
 
 .box3 {
