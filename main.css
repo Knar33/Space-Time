@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    position: absolute;
+    bottom: 500px;
+    left: 300px;
+    height: 100px;
+    width: 100px;
+    background-color: black;
+}
+
+.box2 {
+    position: absolute;
+    bottom: 300px;
+    left: 300px;
+    height: 100px;
+    width: 100px;
+    background-color: red;
+}

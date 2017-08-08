@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+    <head>
+    <title>test</title>
+        <script src="main.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body onkeydown="keyPressDown(event)" onkeyup="keyPressUp(event)">
+        <div id="box" class="box"></div>
+        <div id="box2" class="box2"></div>
+        <script>
+            var player = new Object();
+            player.myID = box;
+            player.speed = 5;
+            player.xpos = 300;
+            player.ypos = 500;
+            player.xBox = 100;
+            player.yBox = 100;
+            
+            var blocky = new Object();
+            blocky.myID = box2;
+            blocky.xpos = 300;
+            blocky.ypos = 300;
+            blocky.xBox = 100;
+            blocky.yBox = 100;
+            
+            var rightDown = false;
+            var leftDown = false;
+            var upDown = false;
+            var downDown = false;
+            
+            function keyPressDown(key) {
+                var thisKey = key.keyCode? key.keyCode : key.charCode;
+                switch(thisKey) {
+                    case 65: 
+                        leftDown = true;
+                        break;
+                    case 68:
+                        rightDown = true;
+                        break;
+                    case 87:
+                        upDown = true;
+                        break;
+                    case 83:
+                        downDown = true;
+                        break;
+                }
+            }
+            
+            function keyPressUp(key) {
+                var thisKey = key.keyCode? key.keyCode : key.charCode;
+                switch(thisKey) {
+                    case 65: 
+                        leftDown = false;
+                        break;
+                    case 68:
+                        rightDown = false;
+                        break;
+                    case 87:
+                        upDown = false;
+                        break;
+                    case 83:
+                        downDown = false;
+                        break;
+                }
+            } 
+            
+            function checkCollision(obj1, obj2) {
+                    //top left corner
+                        if (obj1.xpos > obj2.xpos && 
+                            obj1.xpos < obj2.xpos+obj2.xBox && 
+                            obj1.ypos+obj1.yBox > obj2.ypos && 
+                            obj1.ypos+obj1.yBox < obj2.ypos+obj2.yBox) {
+                                return false;
+                        }
+                    //top right corner
+                        if (obj1.xpos+obj1.xBox >= obj2.xpos && 
+                            obj1.xpos+obj1.xBox <= obj2.xpos+obj2.xBox && 
+                            obj1.ypos+obj1.yBox >= obj2.ypos && 
+                            obj1.ypos+obj1.yBox <= obj2.ypos+obj2.yBox) {
+                            return false;
+                        }
+                    //bottom left corner
+                        
+                        if (obj1.xpos >= obj2.xpos && 
+                            obj1.xpos <= obj2.xpos+obj2.xBox && 
+                            obj1.ypos >= obj2.ypos && 
+                            obj1.ypos <= obj2.ypos+obj2.yBox) {
+                            return false;
+                        }
+                    //bottom right 
+                        if (obj1.xpos+obj1.xBox >= obj2.xpos && 
+                            obj1.xpos+obj1.xBox <= obj2.xpos+obj2.xBox && 
+                            obj1.ypos >= obj2.ypos && 
+                            obj1.ypos <= obj2.ypos+obj2.yBox) {
+                            return false;
+                        }
+                return true;
+            }
+            
+            //main running event - 60fps
+            setInterval(function() { 
+                if (rightDown) {
+                    //check 1px at a time if collision occurs
+                    for (i = 0; i < player.speed; i++) {
+                        player.xpos++;
+                        if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
+                            document.getElementById("box").style.left = player.xpos + "px";
+                        } else {
+                            player.xpos--
+                            break;
+                        }
+                    }
+                }
+                if (leftDown) {
+                    //check 1px at a time if collision occurs
+                    for (i = 0; i < player.speed; i++) {
+                        player.xpos--;
+                        if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
+                            document.getElementById("box").style.left = player.xpos + "px";
+                        } else {
+                            player.xpos++
+                            break;
+                        }
+                    }
+                }
+                if (upDown) {
+                    //check 1px at a time if collision occurs
+                    for (i = 0; i < player.speed; i++) {
+                        player.ypos++;
+                        if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
+                            document.getElementById("box").style.bottom = player.ypos + "px";
+                        } else {
+                            player.ypos--;
+                            break;
+                        }
+                    }
+                }
+                if (downDown) {
+                    //check 1px at a time if collision occurs
+                    for (i = 0; i < player.speed; i++) {
+                        player.ypos--;
+                        if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
+                            document.getElementById("box").style.bottom = player.ypos + "px";
+                        } else {
+                            player.ypos++;
+                            break;
+                        }
+                    }
+                }
+            }, 17);
+        </script>
+    </body>
+</html>
