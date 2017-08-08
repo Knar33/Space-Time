@@ -8,21 +8,66 @@
     <body onkeydown="keyPressDown(event)" onkeyup="keyPressUp(event)">
         <div id="box" class="box"></div>
         <div id="box2" class="box2"></div>
+        <div id="box3" class="box3"></div>
         <script>
+            //physics variables
+            var gravity = 1;
+            var windResistance = .05;
+            var terminalVelocity = -10;
+            
+            //player object
             var player = new Object();
             player.myID = box;
-            player.speed = 5;
+            player.xspeed = 0;
+            player.yspeed = 0;
             player.xpos = 300;
             player.ypos = 500;
             player.xBox = 100;
             player.yBox = 100;
+            player.jumpStrength = 25;
+            player.airborne = true;
             
+            //ground object
             var blocky = new Object();
             blocky.myID = box2;
-            blocky.xpos = 300;
-            blocky.ypos = 300;
-            blocky.xBox = 100;
+            blocky.xpos = 0;
+            blocky.ypos = 0;
+            blocky.xBox = 5000;
             blocky.yBox = 100;
+            blocky.friction = .2;
+            blocky.collide = function(target) {
+                //ground collision 
+                if (target.ypos >= this.ypos + this.yBox) {
+                    target.airborne = false;
+                    if (target.xspeed >= this.friction)
+                        target.xspeed -= this.friction;
+                    else if (target.xspeed <= -1 * this.friction)
+                        target.xspeed += this.friction;
+                    else 
+                        target.xspeed = 0;
+                }
+            }
+            
+            //ice object
+            var blocky2 = new Object();
+            blocky2.myID = box2;
+            blocky2.xpos = 500;
+            blocky2.ypos = 100;
+            blocky2.xBox = 500;
+            blocky2.yBox = 50;
+            blocky2.friction = .03;
+            blocky2.collide = function(target) {
+                //ground collision 
+                if (target.ypos >= this.ypos + this.yBox) {
+                    target.airborne = false;
+                    if (target.xspeed >= this.friction)
+                        target.xspeed -= this.friction;
+                    else if (target.xspeed <= -1 * this.friction)
+                        target.xspeed += this.friction;
+                    else 
+                        target.xspeed = 0;
+                }
+            }
             
             var rightDown = false;
             var leftDown = false;
@@ -71,6 +116,7 @@
                             obj1.xpos < obj2.xpos+obj2.xBox && 
                             obj1.ypos+obj1.yBox > obj2.ypos && 
                             obj1.ypos+obj1.yBox < obj2.ypos+obj2.yBox) {
+                                obj2.collide(obj1);
                                 return false;
                         }
                     //top right corner
@@ -78,6 +124,7 @@
                             obj1.xpos+obj1.xBox <= obj2.xpos+obj2.xBox && 
                             obj1.ypos+obj1.yBox >= obj2.ypos && 
                             obj1.ypos+obj1.yBox <= obj2.ypos+obj2.yBox) {
+                                obj2.collide(obj1);
                             return false;
                         }
                     //bottom left corner
@@ -86,6 +133,7 @@
                             obj1.xpos <= obj2.xpos+obj2.xBox && 
                             obj1.ypos >= obj2.ypos && 
                             obj1.ypos <= obj2.ypos+obj2.yBox) {
+                                obj2.collide(obj1);
                             return false;
                         }
                     //bottom right 
@@ -93,40 +141,101 @@
                             obj1.xpos+obj1.xBox <= obj2.xpos+obj2.xBox && 
                             obj1.ypos >= obj2.ypos && 
                             obj1.ypos <= obj2.ypos+obj2.yBox) {
+                                obj2.collide(obj1);
                             return false;
                         }
+                
+                    //top left corner
+                            if (obj2.xpos > obj1.xpos && 
+                                obj2.xpos < obj1.xpos+obj1.xBox && 
+                                obj2.ypos+obj2.yBox > obj1.ypos && 
+                                obj2.ypos+obj2.yBox < obj1.ypos+obj1.yBox) {
+                                    return false;
+                            }
+                        //top right corner
+                            if (obj2.xpos+obj2.xBox >= obj1.xpos && 
+                                obj2.xpos+obj2.xBox <= obj1.xpos+obj1.xBox && 
+                                obj2.ypos+obj2.yBox >= obj1.ypos && 
+                                obj2.ypos+obj2.yBox <= obj1.ypos+obj1.yBox) {
+                                return false;
+                            }
+                        //bottom left corner
+
+                            if (obj2.xpos >= obj1.xpos && 
+                                obj2.xpos <= obj1.xpos+obj1.xBox && 
+                                obj2.ypos >= obj1.ypos && 
+                                obj2.ypos <= obj1.ypos+obj1.yBox) {
+                                return false;
+                            }
+                        //bottom right 
+                            if (obj2.xpos+obj2.xBox >= obj1.xpos && 
+                                obj2.xpos+obj2.xBox <= obj1.xpos+obj1.xBox && 
+                                obj2.ypos >= obj1.ypos && 
+                                obj2.ypos <= obj1.ypos+obj1.yBox) {
+                                return false;
+                            }
                 return true;
             }
             
             //main running event - 60fps
             setInterval(function() { 
                 if (rightDown) {
-                    //check 1px at a time if collision occurs
-                    for (i = 0; i < player.speed; i++) {
-                        player.xpos++;
-                        if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
-                            document.getElementById("box").style.left = player.xpos + "px";
-                        } else {
-                            player.xpos--
-                            break;
-                        }
-                    }
+                    if (player.xspeed < 10)
+                        player.xspeed++;
                 }
                 if (leftDown) {
-                    //check 1px at a time if collision occurs
-                    for (i = 0; i < player.speed; i++) {
-                        player.xpos--;
-                        if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
+                    if (player.xspeed > -10)
+                        player.xspeed--;
+                }
+                if (upDown) {
+                    if (player.airborne == false) {
+                        player.yspeed += player.jumpStrength;
+                        player.airborne = true;
+                    }
+                }
+                if (downDown) {
+                    if (player.yspeed > -10)
+                        player.yspeed--;
+                }
+                
+                //vertical movement
+                for (i = 0; i < Math.abs(player.xspeed); i++) {
+                    if (player.xspeed > 0) {
+                        player.xpos++;
+                        if (checkCollision(player, blocky)) {
                             document.getElementById("box").style.left = player.xpos + "px";
                         } else {
-                            player.xpos++
+                            player.xpos--;
+                            break;
+                        }
+                        //remove this and create loop of all nearby objects to check
+                        if (checkCollision(player, blocky2)) {
+                            document.getElementById("box").style.left = player.xpos + "px";
+                        } else {
+                            player.xpos--;
+                            break;
+                        }
+                    } else if (player.xspeed < 0) {
+                        player.xpos--;
+                        if (checkCollision(player, blocky)) {
+                            document.getElementById("box").style.left = player.xpos + "px";
+                        } else {
+                            player.xpos++;
+                            break;
+                        }
+                        //remove this and create loop of all nearby objects to check
+                        if (checkCollision(player, blocky2)) {
+                            document.getElementById("box").style.left = player.xpos + "px";
+                        } else {
+                            player.xpos++;
                             break;
                         }
                     }
                 }
-                if (upDown) {
-                    //check 1px at a time if collision occurs
-                    for (i = 0; i < player.speed; i++) {
+                
+                //horizontal movement
+                for (i = 0; i < Math.abs(player.yspeed); i++) {
+                    if (player.yspeed > 0) {
                         player.ypos++;
                         if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
                             document.getElementById("box").style.bottom = player.ypos + "px";
@@ -134,11 +243,14 @@
                             player.ypos--;
                             break;
                         }
-                    }
-                }
-                if (downDown) {
-                    //check 1px at a time if collision occurs
-                    for (i = 0; i < player.speed; i++) {
+                        //remove this and create loop of all nearby objects to check
+                        if (checkCollision(player, blocky2) && checkCollision(blocky, player)) {
+                            document.getElementById("box").style.bottom = player.ypos + "px";
+                        } else {
+                            player.ypos--;
+                            break;
+                        }
+                    } else if (player.yspeed < 0) {
                         player.ypos--;
                         if (checkCollision(player, blocky) && checkCollision(blocky, player)) {
                             document.getElementById("box").style.bottom = player.ypos + "px";
@@ -146,8 +258,28 @@
                             player.ypos++;
                             break;
                         }
+                        //remove this and create loop of all nearby objects to check
+                        if (checkCollision(player, blocky2) && checkCollision(blocky, player)) {
+                            document.getElementById("box").style.bottom = player.ypos + "px";
+                        } else {
+                            player.ypos++;
+                            break;
+                        }
                     }
                 }
+                
+                //gravity
+                if (player.yspeed > terminalVelocity)
+                    player.yspeed -= gravity;
+                //wind resistance
+                if (player.xspeed >= windResistance)
+                    player.xspeed -= windResistance;
+                else if (player.xspeed <= -1 * windResistance)
+                    player.xspeed += windResistance;
+                else 
+                    player.xspeed = 0;
+                
+                
             }, 17);
         </script>
     </body>
