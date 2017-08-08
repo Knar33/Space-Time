@@ -4,6 +4,7 @@
     <title>test</title>
         <script src="main.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css">
+        <scriptsrc="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     </head>
     <body onkeydown="keyPressDown(event)" onkeyup="keyPressUp(event)">
         <div id="box" class="box"></div>
@@ -11,7 +12,7 @@
         <div id="box3" class="box3"></div>
         <script>
             //physics variables
-            var gravity = .5;
+            var gravity = .3;
             var windResistance = .05;
             var terminalVelocity = -10;
             
@@ -34,7 +35,7 @@
             blocky.ypos = 0;
             blocky.xBox = 5000;
             blocky.yBox = 99;
-            blocky.friction = .2;
+            blocky.friction = .5;
             blocky.collide = function(target) {
                 //ground collision 
                 if (target.ypos >= this.ypos + this.yBox) {
@@ -54,7 +55,7 @@
             blocky2.xpos = 500;
             blocky2.ypos = 100;
             blocky2.xBox = 500;
-            blocky2.yBox = 50;
+            blocky2.yBox = 150;
             blocky2.friction = .03;
             blocky2.collide = function(target) {
                 //ground collision 
@@ -68,6 +69,10 @@
                         target.xspeed = 0;
                 }
             }
+            
+            var objects = [];
+            objects.push(blocky);
+            objects.push(blocky2);
             
             var rightDown = false;
             var leftDown = false;
@@ -146,34 +151,34 @@
                         }
                 
                     //top left corner
-                            if (obj2.xpos > obj1.xpos && 
-                                obj2.xpos < obj1.xpos+obj1.xBox && 
-                                obj2.ypos+obj2.yBox > obj1.ypos && 
-                                obj2.ypos+obj2.yBox < obj1.ypos+obj1.yBox) {
-                                    return false;
-                            }
-                        //top right corner
-                            if (obj2.xpos+obj2.xBox >= obj1.xpos && 
-                                obj2.xpos+obj2.xBox <= obj1.xpos+obj1.xBox && 
-                                obj2.ypos+obj2.yBox >= obj1.ypos && 
-                                obj2.ypos+obj2.yBox <= obj1.ypos+obj1.yBox) {
+                        if (obj2.xpos > obj1.xpos && 
+                            obj2.xpos < obj1.xpos+obj1.xBox && 
+                            obj2.ypos+obj2.yBox > obj1.ypos && 
+                            obj2.ypos+obj2.yBox < obj1.ypos+obj1.yBox) {
                                 return false;
-                            }
-                        //bottom left corner
+                        }
+                    //top right corner
+                        if (obj2.xpos+obj2.xBox >= obj1.xpos && 
+                            obj2.xpos+obj2.xBox <= obj1.xpos+obj1.xBox && 
+                            obj2.ypos+obj2.yBox >= obj1.ypos && 
+                            obj2.ypos+obj2.yBox <= obj1.ypos+obj1.yBox) {
+                            return false;
+                        }
+                    //bottom left corner
 
-                            if (obj2.xpos >= obj1.xpos && 
-                                obj2.xpos <= obj1.xpos+obj1.xBox && 
-                                obj2.ypos >= obj1.ypos && 
-                                obj2.ypos <= obj1.ypos+obj1.yBox) {
-                                return false;
-                            }
-                        //bottom right 
-                            if (obj2.xpos+obj2.xBox >= obj1.xpos && 
-                                obj2.xpos+obj2.xBox <= obj1.xpos+obj1.xBox && 
-                                obj2.ypos >= obj1.ypos && 
-                                obj2.ypos <= obj1.ypos+obj1.yBox) {
-                                return false;
-                            }
+                        if (obj2.xpos >= obj1.xpos && 
+                            obj2.xpos <= obj1.xpos+obj1.xBox && 
+                            obj2.ypos >= obj1.ypos && 
+                            obj2.ypos <= obj1.ypos+obj1.yBox) {
+                            return false;
+                        }
+                    //bottom right 
+                        if (obj2.xpos+obj2.xBox >= obj1.xpos && 
+                            obj2.xpos+obj2.xBox <= obj1.xpos+obj1.xBox && 
+                            obj2.ypos >= obj1.ypos && 
+                            obj2.ypos <= obj1.ypos+obj1.yBox) {
+                            return false;
+                        }
                 return true;
             }
             
@@ -197,42 +202,54 @@
                     
                 }
                 
-                //vertical movement
+                //horizontal movement
                 for (i = 0; i < Math.abs(player.xspeed); i++) {
                     if (player.xspeed > 0) {
+                        
+                        var collisions = 0;
                         player.xpos++;
-                        if (checkCollision(player, blocky)) {
-                            document.getElementById("box").style.left = player.xpos + "px";
-                        } else {
+                        
+                        var returnedObjects = objects.filter(   function(obj) {
+                                                                return  obj.xpos < player.xpos + player.xBox;
+                                                            });
+                        //array of all objects with x values that could potentially collide
+                        returnedObjects.forEach(function(object) {
+                            if (!checkCollision(player, object)) {
+                                collisions++;
+                            }
+                        });
+                        
+                        if (collisions > 0) {
                             player.xpos--;
                             break;
-                        }
-                        //remove this and create loop of all nearby objects to check
-                        if (checkCollision(player, blocky2)) {
-                            document.getElementById("box").style.left = player.xpos + "px";
                         } else {
-                            player.xpos--;
-                            break;
+                            document.getElementById("box").style.left = player.xpos + "px";
                         }
                     } else if (player.xspeed < 0) {
+                        
+                        var collisions = 0;
                         player.xpos--;
-                        if (checkCollision(player, blocky)) {
-                            document.getElementById("box").style.left = player.xpos + "px";
-                        } else {
+                        
+                        var returnedObjects = objects.filter(   function(obj) {
+                                                                return  obj.xpos+obj.xBox > player.xpos;
+                                                            });
+                        //array of all objects with x values that could potentially collide
+                        returnedObjects.forEach(function(object) {
+                            if (!checkCollision(player, object)) {
+                                collisions++;
+                            }
+                        });
+                        
+                        if (collisions > 0) {
                             player.xpos++;
                             break;
-                        }
-                        //remove this and create loop of all nearby objects to check
-                        if (checkCollision(player, blocky2)) {
-                            document.getElementById("box").style.left = player.xpos + "px";
                         } else {
-                            player.xpos++;
-                            break;
+                            document.getElementById("box").style.left = player.xpos + "px";
                         }
                     }
                 }
                 
-                //horizontal movement
+                //vertical movement
                 for (i = 0; i < Math.abs(player.yspeed); i++) {
                     if (player.yspeed > 0) {
                         player.ypos++;
