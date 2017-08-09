@@ -21,6 +21,8 @@
             var terminalVelocity = -20  ;
             
             //TODO: create objects in external object file.
+            //      create world builder
+            //      load dynamic world
             
             //player object
             var player = new Object();
@@ -38,15 +40,13 @@
             player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
             
             //ground object
-                var blocky = new Object();
+            var blocky = new Object();
             blocky.myID = box2;
             blocky.xpos = 0;
             blocky.ypos = 0;
             blocky.xBox = 5000;
-
             blocky.yBox = 70;
             blocky.friction = .5;
-          
             blocky.collide = function(target) {
                 //ground collision 
                 if (target.ypos+1 >= this.ypos + this.yBox) {
@@ -111,6 +111,7 @@
                 document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
             }
             
+            //left boundry
             var blockLeft = new Object();
             blockLeft.myID = boxleft;
             blockLeft.xpos = 0;
@@ -119,6 +120,7 @@
             blockLeft.yBox = 5000;
             blockLeft.collide = function(target) {};
             
+            //right boundry
             var blockRight = new Object();
             blockRight.myID = boxright;
             blockRight.xpos = 5000;
@@ -127,6 +129,7 @@
             blockRight.yBox = 5000;
             blockRight.collide = function(target) {};
             
+            //array of objects
             var objects = [];
             objects.push(blocky);
             objects.push(blocky2);
