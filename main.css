@@ -4,7 +4,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: black;
-    background-image: images/bg_castle.png;
+    background-image: URL("images/bg_castle.png");
 }
 
 .box {
