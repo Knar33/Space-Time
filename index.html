@@ -27,10 +27,13 @@
             player.yspeed = 0;
             player.xpos = 300;
             player.ypos = 500;
-            player.xBox = 100;
-            player.yBox = 100;
+            player.xBox = 70;
+            player.yBox = 92;
+            player.animFrame = 0;
             player.jumpStrength = 20;
             player.airborne = true;
+            player.moveSpeed = 1;
+            player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
             
             //ground object
                 var blocky = new Object();
@@ -39,7 +42,7 @@
             blocky.ypos = 0;
             blocky.xBox = 5000;
 
-            blocky.yBox = 100;
+            blocky.yBox = 70;
             blocky.friction = .5;
           
             blocky.collide = function(target) {
@@ -53,16 +56,18 @@
                         target.xspeed += this.friction;
                     else 
                         target.xspeed = 0;
-                }
+                }    
+                //update debug menu
+                document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
             }
             
             //ice object
             var blocky2 = new Object();
             blocky2.myID = box3;
             blocky2.xpos = 500;
-            blocky2.ypos = 100;
+            blocky2.ypos = 70;
             blocky2.xBox = 500;
-            blocky2.yBox = 50;
+            blocky2.yBox = 70;
             blocky2.friction = .03;
             blocky2.collide = function(target) {
                 //ground collision 
@@ -75,16 +80,18 @@
                         target.xspeed += this.friction;
                     else 
                         target.xspeed = 0;
-                }
+                }    
+                //update debug menu
+                document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
             }
             
-            //block
+            //floating block
             var blocky3 = new Object();
             blocky3.myID = box4;
-            blocky3.xpos = 100;
+            blocky3.xpos = 1200;
             blocky3.ypos = 300;
             blocky3.xBox = 300;
-            blocky3.yBox = 100;
+            blocky3.yBox = 70;
             blocky3.friction = .5;
             blocky3.collide = function(target) {
                 //ground collision 
@@ -97,7 +104,9 @@
                         target.xspeed += this.friction;
                     else 
                         target.xspeed = 0;
-                }
+                }    
+                //update debug menu
+                document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
             }
             
             var objects = [];
@@ -215,13 +224,26 @@
             
             //main running event - 60fps
             setInterval(function() { 
+                
+                
+                //gravity
+                if (player.yspeed > terminalVelocity)
+                    player.yspeed -= gravity;
+                //wind resistance
+                if (player.xspeed >= windResistance)
+                    player.xspeed -= windResistance;
+                else if (player.xspeed <= -1 * windResistance)
+                    player.xspeed += windResistance;
+                else 
+                    player.xspeed = 0;
+                
                 if (rightDown) {
                     if (player.xspeed < 10)
-                        player.xspeed++;
+                        player.xspeed += player.moveSpeed;
                 }
                 if (leftDown) {
                     if (player.xspeed > -10)
-                        player.xspeed--;
+                        player.xspeed -= player.moveSpeed;
                 }
                 if (upDown) {
                     if (player.airborne == false) {
@@ -230,7 +252,11 @@
                     }
                 }
                 if (downDown) {
-                    
+                    //nothing here yet
+                }
+                
+                if (player.yspeed != 0) {
+                    player.airborne = true;
                 }
                 
                 //horizontal movement
@@ -258,7 +284,7 @@
                         }
                         
                         //update debug menu
-                        document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed + " | yspeed: " + player.yspeed + " ";
+                        document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
                     } else if (player.xspeed < 0) {
                         
                         var collisions = 0;
@@ -282,7 +308,7 @@
                         }
                         
                         //update debug menu
-                        document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed + " | yspeed: " + player.yspeed + " ";
+                        document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
                     }
                 }
                 
@@ -311,7 +337,7 @@
                         }
                         
                         //update debug menu
-                        document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed + " | yspeed: " + player.yspeed + " ";
+                        document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
                     } else if (player.yspeed < 0) {
                         
                         var collisions = 0;
@@ -335,22 +361,37 @@
                         }
                         
                         //update debug menu
-                        document.getElementById("debug").innerHTML="xpos: " + Math.fround(player.xpos) + " | ypos: " + player.ypos + " | xspeed: " + Math.fround(player.xspeed) + " | yspeed: " + player.yspeed + " ";
+                        document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
                     }
                 }
                 
-                //gravity
-                if (player.yspeed > terminalVelocity)
-                    player.yspeed -= gravity;
-                //wind resistance
-                if (player.xspeed >= windResistance)
-                    player.xspeed -= windResistance;
-                else if (player.xspeed <= -1 * windResistance)
-                    player.xspeed += windResistance;
-                else 
-                    player.xspeed = 0;
-                
-                
+                //animation of player
+                //jump
+                if (player.yspeed > 0) {
+                    player.animFrame = 0;
+                    document.getElementById("box").style.backgroundPosition = "-423px -95px";
+                }
+                //falling
+                else if (player.yspeed < 0) {
+                    player.animFrame = 0;
+                    document.getElementById("box").style.backgroundPosition = "-423px 0px";
+                }
+                //standing
+                else if (player.yspeed == 0 && player.xspeed == 0) {
+                    player.animFrame = 0;
+                    document.getElementById("box").style.backgroundPosition = "-67px -190px";
+                }
+                //run
+                else if (Math.abs(player.xspeed) > 0) {
+                    if (player.animFrame == 30) {
+                        player.animFrame = 0;
+                        document.getElementById("box").style.background = "url('images/p2_spritesheet.png') 0 0;";
+                    }
+                    else {
+                        player.animFrame++;
+                        document.getElementById("box").style.backgroundPosition = "-" + player.walk[player.animFrame/3][0] + "px -" + player.walk[player.animFrame/3][1] + "px";
+                    }
+                }
             }, 17);
         </script>
     </body>

@@ -1,54 +1,50 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("sunset.jpg");
     background-attachment: fixed;
     background-size: cover;
+    background-color: black;
 }
 
 .box {
     position: absolute;
     bottom: 500px;
     left: 300px;
-    height: 100px;
-    width: 100px;
-    background-color: white;
-    border: 3px solid black;
+    height: 92px;
+    width: 70px;
     box-sizing: border-box;
+    background-color: white;
+    background: url("images/p2_spritesheet.png");
+    background-position: 0px 0px;
 }
 
 .box2 {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    height: 100px;
+    height: 70px;
     width: 5000px;
-    background-color: red;
     margin: 0;
     padding: 0;
-    background-image: url("mud.jpg");
+    background-image: url("images/grassMid.png");
 }
 
 .box3 {
     position: absolute;
-    bottom: 100px;
+    bottom: 70px;
     left: 500px;
-    height: 50px;
+    height: 70px;
     width: 500px;
-    background-color: blue;
-    background-image: url("ice.jpg");
-    background-size: cover;
+    background-image: url("images/snowMid.png");
 }
 
 .box4 {
     position: absolute;
     bottom: 300px;
-    left: 100px;
-    height: 100px;
+    left: 1200px;
+    height: 70px;
     width: 300px;
-    background-color: blue;
-    background-image: url("mud.jpg");
-    background-size: cover;
+    background-image: url("images/grassMid.png");
 }
 .debug {
     background-color: rgba(0,0,0,.5);
