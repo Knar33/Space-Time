@@ -54,3 +54,17 @@ body {
     z-index: 100;
     color: white;
 }
+.boxleft {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 5000px;
+    width: 2px;
+}
+.boxright {
+    position: absolute;
+    bottom: 0px;
+    left: 5000px;
+    height: 5000px;
+    width: 1px;
+}

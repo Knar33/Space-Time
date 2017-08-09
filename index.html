@@ -12,6 +12,8 @@
         <div id="box2" class="box2"></div>
         <div id="box3" class="box3"></div>
         <div id="box4" class="box4"></div>
+        <div id="boxleft" class="boxright"></div>
+        <div id="boxright" class="boxright"></div>
         <script>
             //physics variables
             var gravity = .7;
@@ -109,10 +111,28 @@
                 document.getElementById("debug").innerHTML="xpos: " + player.xpos + " | ypos: " + player.ypos + " | xspeed: " + player.xspeed.toFixed(2) + " | yspeed: " + player.yspeed.toFixed(2) + " ";
             }
             
+            var blockLeft = new Object();
+            blockLeft.myID = boxleft;
+            blockLeft.xpos = 0;
+            blockLeft.ypos = 0;
+            blockLeft.xBox = 2;
+            blockLeft.yBox = 5000;
+            blockLeft.collide = function(target) {};
+            
+            var blockRight = new Object();
+            blockRight.myID = boxright;
+            blockRight.xpos = 5000;
+            blockRight.ypos = 0;
+            blockRight.xBox = 2;
+            blockRight.yBox = 5000;
+            blockRight.collide = function(target) {};
+            
             var objects = [];
             objects.push(blocky);
             objects.push(blocky2);
             objects.push(blocky3);
+            objects.push(blockLeft);
+            objects.push(blockRight);
             
             var rightDown = false;
             var leftDown = false;
