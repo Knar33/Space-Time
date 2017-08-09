@@ -38,8 +38,10 @@
             blocky.xpos = 0;
             blocky.ypos = 0;
             blocky.xBox = 5000;
+
             blocky.yBox = 100;
             blocky.friction = .5;
+          
             blocky.collide = function(target) {
                 //ground collision 
                 if (target.ypos+1 >= this.ypos + this.yBox) {
