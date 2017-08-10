@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 body {
     margin: 0;
     padding: 0;
@@ -26,7 +30,7 @@ body {
     width: 5000px;
     margin: 0;
     padding: 0;
-    background-image: url("images/grassMid.png");
+    background-image: url("images/2.png");
 }
 
 .box3 {
@@ -35,7 +39,7 @@ body {
     left: 500px;
     height: 70px;
     width: 500px;
-    background-image: url("images/snowMid.png");
+    background-image: url("images/2.png");
 }
 
 .box4 {
@@ -44,7 +48,7 @@ body {
     left: 1200px;
     height: 70px;
     width: 300px;
-    background-image: url("images/grassMid.png");
+    background-image: url("images/2.png");
 }
 .debug {
     background-color: rgba(0,0,0,.5);
@@ -67,4 +71,40 @@ body {
     left: 5000px;
     height: 5000px;
     width: 1px;
+}
+
+
+/*worldBuilder*/
+
+.gameWindow {
+    width: 100%;
+    height: 100%;
+}
+
+.toolbar {
+    height: 100%;
+    width: 200px;
+    background-color: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.block {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    background-color: white;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.gridBox {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    display: inline-block;
+    border: 1px solid gray; 
 }

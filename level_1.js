@@ -1,51 +1,4 @@
-<!-- 
-tile panel floating left
-    onclick a tile -> set selection = this.tileCode
-    default = empty tile
-create an array of divs (generated using while statement) custom properties: tileCode, xPos, yPos
-    javascript array of tile codes, all 0 (empty) by default
-    onclick a div -> set this.tileCode = currentTile and change backgroud image, update array at [this.xPo], [this.yPos]
-save button
-    serialize array and store to new file
-
-on world load:
-    accept a tile array object
-    create divs and js elements for each object in the array
-        case 0: do nothing
-        case 1: create object inheriting from ____
-        case 2: ......
-    
-toDo:
-    creat prototype classes
-    
--->
-<!doctype html>
-<html>
-    <head>
-    <title>test</title>
-        <script src="main.js"></script>
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <script src="jquery-3.2.1.js"></script>
-    </head>
-    <body style="background: none;">
-        <div class="toolbar" id="toolbar">
-            <div class="block" id = "0" onClick="clickTool(this)" style="border: 3px solid black;">eraser</div>
-            <br>
-            <script>
-                //TODO: add second array for background layer
-                function clickTool(tool) {
-                    tool.style.border='3px solid black'; document.getElementById(selection).style.border='none'; selection = tool.id;
-                }
-                
-                for(i = 1; i < 25; i++) {
-                    var imageBG = "url(images/" + i + ".png)";
-                    $("#toolbar").append("<div class='block' id='" + i + "' onClick='clickTool(this)' style='background-image: " + imageBG + "'></div>");
-                }
-            </script>
-        </div>
-        <div class="grid" id="grid"> </div>
-        <script>
-            var gridVals = [
+var gridVals = [
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
@@ -67,20 +20,4 @@ toDo:
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]
             ];
-            
-            var selection = 0;
-            //create grid layout
-            for (y = 0; y < 20; y++) {
-                for (x = 0; x < 30; x++) {
-                    $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (200+ x * 70) + "px' onclick='changeBG(this)'></div>");
-                }
-            }
-            
-            function changeBG(box) {
-                box.style.backgroundImage = "url('images/" + selection + ".png')";
-                gridVals[parseInt(box.dataset.y)][parseInt(box.dataset.x)] = selection;
-            }
-            
-        </script>
-    </body>
-</html>
+
