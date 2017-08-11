@@ -7,8 +7,10 @@ body {
     padding: 0;
     background-attachment: fixed;
     background-color: black;
-    background-image: URL("images/bg_castle.png");
+    background-image: URL("../images/bg_castle.png");
 }
+
+/* Objects */
 
 .box {
     position: absolute;
@@ -18,37 +20,10 @@ body {
     width: 70px;
     box-sizing: border-box;
     background-color: white;
-    background: url("images/p2_spritesheet.png");
+    background: url("../images/p2_spritesheet.png");
     background-position: 0px 0px;
-}
-
-.box2 {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 70px;
-    width: 5000px;
-    margin: 0;
-    padding: 0;
-    background-image: url("images/2.png");
-}
-
-.box3 {
-    position: absolute;
-    bottom: 70px;
-    left: 500px;
-    height: 70px;
-    width: 500px;
-    background-image: url("images/2.png");
-}
-
-.box4 {
-    position: absolute;
-    bottom: 300px;
-    left: 1200px;
-    height: 70px;
-    width: 300px;
-    background-image: url("images/2.png");
+    z-index: 100;
+    border: 1px solid black;
 }
 .debug {
     background-color: rgba(0,0,0,.5);
@@ -73,6 +48,17 @@ body {
     width: 1px;
 }
 
+
+/* tiles */
+
+.tile {
+    position: absolute;
+    background-color: black;
+    height: 70px;
+    width: 70px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
 
 /*worldBuilder*/
 
