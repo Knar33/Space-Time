@@ -15,8 +15,18 @@ for (y = 0; y < grid.height; y++) {
             thisObj.yBox = 70;
             thisObj.friction = .2;
             thisObj.collide = function(target) {
-                //ground collision 
-                if (target.ypos+1 >= this.ypos + this.yBox) {
+                //collision from above
+                if (target.ypos == this.ypos + this.yBox - 1 && 
+                        (
+                            (
+                                (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)
+                            ) 
+                            || 
+                            (
+                                (target.xpos < this.xpos+this.xBox-1) && (target.xpos >= this.xpos)
+                            )
+                        )
+                   ) {
                     target.yspeed = 0;
                     target.airborne = false;
                     if (target.xspeed >= this.friction) {

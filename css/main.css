@@ -23,7 +23,6 @@ body {
     background: url("../images/p2_spritesheet.png");
     background-position: 0px 0px;
     z-index: 100;
-    border: 1px solid black;
 }
 .debug {
     background-color: rgba(0,0,0,.5);
@@ -56,7 +55,6 @@ body {
     background-color: black;
     height: 70px;
     width: 70px;
-    border: 1px solid black;
     box-sizing: border-box;
 }
 
