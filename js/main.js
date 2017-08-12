@@ -1,10 +1,14 @@
 //TODO: 
-//      go over physics collisions and fix issues (possibly rewrite collision function)
-//      general purpose solution to animation
-
-//Odd behavior to investigate:
-//      when player width = tile width, player falls through (maybe add a check if left corner pos == right corner pos) { collision }
-//      when player hitbox is wider than tile width, player gets stuck in fall animation when walking into L corners. Can't move vertically, only vertically.
+//      add bottom collision to objects
+//      add reverse animations to player
+//      add win condition
+//      add more block types
+//          spring
+//          ice
+//          coin (after win condition added)
+//          spike (after loss condition added)
+//      add fun down animation
+//      general animation function to loop through all objects that need to animate
 
 //physics variables
 var gravity = .7;

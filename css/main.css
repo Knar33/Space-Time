@@ -67,12 +67,14 @@ body {
 
 .toolbar {
     height: 100%;
-    width: 200px;
+    width: 210px;
     background-color: rgba(0,0,0,.5);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .block {
@@ -91,4 +93,9 @@ body {
     background-color: white;
     display: inline-block;
     border: 1px solid gray; 
+}
+
+.grid {
+    overflow-y: scroll;
+    overflow-x: scroll;
 }

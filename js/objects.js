@@ -7,45 +7,83 @@ for (y = 0; y < grid.height; y++) {
             thisTile = "images/" + grid.vals[y][x] + ".png";
             $("body").append("<div class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; background: url(" + thisTile + ");'></div>");
 
-            //ground object
-            var thisObj = new Object();
-            thisObj.xpos = x * 70;
-            thisObj.ypos = y * 70;
-            thisObj.xBox = 70;
-            thisObj.yBox = 70;
-            thisObj.friction = .2;
-            thisObj.collide = function(target) {
-                //collision from above
-                if (target.ypos == this.ypos + this.yBox - 1 && 
-                        (
-                            (
-                                (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)
-                            ) 
-                            || 
-                            (
-                                (target.xpos < this.xpos+this.xBox-1) && (target.xpos >= this.xpos)
-                            )
-                        )
-                   ) {
-                    target.yspeed = 0;
-                    target.airborne = false;
-                    if (target.xspeed >= this.friction) {
-                        target.xspeed -= this.friction;
+            switch(grid.vals[y][x]) {
+                case "41":
+                    //spring
+                    var thisObj = new Object();
+                    thisObj.xpos = x * 70;
+                    thisObj.ypos = y * 70;
+                    thisObj.xBox = 70;
+                    thisObj.yBox = 50;
+                    thisObj.friction = .2;
+                    thisObj.collide = function(target) {
+                        //collision from above
+                        if (target.ypos == this.ypos + this.yBox - 1 && 
+                                (
+                                    (
+                                        (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)
+                                    ) 
+                                    || 
+                                    (
+                                        (target.xpos < this.xpos+this.xBox-1) && (target.xpos >= this.xpos)
+                                    )
+                                )
+                           ) {
+                            target.yspeed = 33;
+                            target.airborne = true;
+                            if (target.xspeed >= this.friction) {
+                                target.xspeed -= this.friction;
+                            }
+                            else if (target.xspeed <= -1 * this.friction) {
+                                target.xspeed += this.friction;
+                            }
+                            else 
+                                target.xspeed = 0;
+                        } 
+                        //update debug menu
+                        updateDebug();
                     }
-                    else if (target.xspeed <= -1 * this.friction) {
-                        target.xspeed += this.friction;
+                    objects.push(thisObj);
+                    break;
+                    
+                default:
+                    //basic ground object
+                    var thisObj = new Object();
+                    thisObj.xpos = x * 70;
+                    thisObj.ypos = y * 70;
+                    thisObj.xBox = 70;
+                    thisObj.yBox = 70;
+                    thisObj.friction = .2;
+                    thisObj.collide = function(target) {
+                        //collision from above
+                        if (target.ypos == this.ypos + this.yBox - 1 && 
+                                (
+                                    (
+                                        (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)
+                                    ) 
+                                    || 
+                                    (
+                                        (target.xpos < this.xpos+this.xBox-1) && (target.xpos >= this.xpos)
+                                    )
+                                )
+                           ) {
+                            target.yspeed = 0;
+                            target.airborne = false;
+                            if (target.xspeed >= this.friction) {
+                                target.xspeed -= this.friction;
+                            }
+                            else if (target.xspeed <= -1 * this.friction) {
+                                target.xspeed += this.friction;
+                            }
+                            else 
+                                target.xspeed = 0;
+                        } 
+                        //update debug menu
+                        updateDebug();
                     }
-                    else 
-                        target.xspeed = 0;
-                }    
-                //update debug menu
-                updateDebug();
+                    objects.push(thisObj);
+                }
             }
-            objects.push(thisObj);
-        }
-        else {
-            thisTile="";
-        }
     }
 }
 
