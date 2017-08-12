@@ -32,6 +32,7 @@ toDo:
             <div class="block" id = "0" onClick="toggleGrid()">grid</div>
             <br>
             <script>
+                
                 var gridShow = false;
                 function toggleGrid() {
                     if (gridShow) {
@@ -55,6 +56,7 @@ toDo:
         </div>
         <div class="grid" id="grid"> </div>
         <script>
+            
             grid.vals = [
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
@@ -82,7 +84,7 @@ toDo:
             //create grid layout
             for (y = 0; y < 20; y++) {
                 for (x = 0; x < 30; x++) {
-                    $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (200+ x * 70) + "px' onclick='changeBG(this)'></div>");
+                    $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (200+ x * 70) + "px' onmousedown='changeBG(this)'></div>");
                 }
             }
             
@@ -91,6 +93,13 @@ toDo:
                 grid.vals[parseInt(box.dataset.y)][parseInt(box.dataset.x)] = selection;
             }
             
+            $("#grid").mousedown(function() {
+                $(".gridBox").mouseover(function() {changeBG(this)});
+            });
+            
+            $("#grid").mouseup(function() {
+                $(".gridBox").off("mouseover");
+            });
         </script>
     </body>
 </html>

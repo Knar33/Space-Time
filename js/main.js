@@ -45,12 +45,12 @@ player.animate = function() {
         $("#box")[0].style.backgroundPosition = "-423px 0px";
     }
     //standing
-    else if (player.yspeed == 0 && player.xspeed == 0) {
+    else if (rightDown == false && leftDown == false) {
         player.animFrame = 0;
         $("#box")[0].style.backgroundPosition = "-67px -190px";
     }
     //run
-    else if (Math.abs(player.xspeed) > 0) {
+    else if ((rightDown == true || leftDown == true) && this.airborne == false) {
         if (player.animFrame == 30) {
             player.animFrame = 0;
             $("#box")[0].style.background = "url('../images/p2_spritesheet.png') 0 0;";
