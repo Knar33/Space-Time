@@ -1,15 +1,3 @@
-//TODO: 
-//      add bottom collision to objects
-//      add reverse animations to player
-//      add win condition
-//      add more block types
-//          spring
-//          ice
-//          coin (after win condition added)
-//          spike (after loss condition added)
-//      add fun down animation
-//      general animation function to loop through all objects that need to animate
-
 //physics variables
 var gravity = .7;
 var windResistance = .08;
@@ -141,14 +129,14 @@ function checkCollision(obj1, obj2) {
 }
 
 function updateDebug() {
-    $("#debug")[0].innerHTML="xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2) + "<br>airborne: " + player.airborne;
+    $("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2) + "<br>airborne: " + player.airborne;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------main runtime function--------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
 
-//main running event - 60fps
+//main running loop - 60fps
 setInterval(function() { 
 
     //gravity

@@ -8,8 +8,8 @@ for (y = 0; y < grid.height; y++) {
             $("body").append("<div class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; background: url(" + thisTile + ");'></div>");
 
             switch(grid.vals[y][x]) {
+                //spring
                 case "41":
-                    //spring
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = y * 70;
@@ -18,7 +18,8 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.friction = .2;
                     thisObj.collide = function(target) {
                         //collision from above
-                        if (target.ypos == this.ypos + this.yBox - 1 && 
+                        if (target.ypos == this.ypos + this.yBox - 1 
+                                && 
                                 (
                                     (
                                         (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)
@@ -45,9 +46,9 @@ for (y = 0; y < grid.height; y++) {
                     }
                     objects.push(thisObj);
                     break;
-                    
+                
+                //basic ground object
                 default:
-                    //basic ground object
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = y * 70;
@@ -56,7 +57,8 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.friction = .2;
                     thisObj.collide = function(target) {
                         //collision from above
-                        if (target.ypos == this.ypos + this.yBox - 1 && 
+                        if (target.ypos == this.ypos + this.yBox - 1 
+                                && 
                                 (
                                     (
                                         (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)

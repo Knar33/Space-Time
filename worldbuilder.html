@@ -1,24 +1,3 @@
-<!-- 
-tile panel floating left
-    onclick a tile -> set selection = this.tileCode
-    default = empty tile
-create an array of divs (generated using while statement) custom properties: tileCode, xPos, yPos
-    javascript array of tile codes, all 0 (empty) by default
-    onclick a div -> set this.tileCode = currentTile and change backgroud image, update array at [this.xPo], [this.yPos]
-save button
-    serialize array and store to new file
-
-on world load:
-    accept a tile array object
-    create divs and js elements for each object in the array
-        case 0: do nothing
-        case 1: create object inheriting from ____
-        case 2: ......
-    
-toDo:
-    creat prototype classes
-    
--->
 <!doctype html>
 <html>
     <head>
@@ -48,9 +27,9 @@ toDo:
                     tool.style.border='3px solid black'; document.getElementById(selection).style.border='none'; selection = tool.id;
                 }
                 
-                for(i = 1; i < 44; i++) {
-                    var imageBG = "url(images/" + i + ".png)";
-                    $("#toolbar").append("<div class='block' id='" + i + "' onClick='clickTool(this)' style='background-image: " + imageBG + "'></div>");
+                for(i = 1; i < 48; i++) {
+                    var imageBG = "images/" + i + ".png";
+                    $("#toolbar").append("<img class='block' id='" + i + "' onClick='clickTool(this)' src='" + imageBG + "'></div>");
                 }
             </script>
         </div>
@@ -84,17 +63,24 @@ toDo:
             //create grid layout
             for (y = 0; y < 20; y++) {
                 for (x = 0; x < 30; x++) {
-                    $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (200+ x * 70) + "px' onmousedown='changeBG(this)'></div>");
+                    $("#grid").append("<img class='gridLayer1' id='" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (220+ x * 70) + "px'></div>");
                 }
             }
             
-            function changeBG(box) {
-                box.style.backgroundImage = "url('images/" + selection + ".png')";
-                grid.vals[parseInt(box.dataset.y)][parseInt(box.dataset.x)] = selection;
+            for (y = 0; y < 20; y++) {
+                for (x = 0; x < 30; x++) {
+                    $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (220 + x * 70) + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
+                }
+            }
+            
+            function changeBG(x, y) {
+                box = "#" + x.toString() + "-" + y.toString();
+                $(box)[0].src = "images/" + selection + ".png";
+                grid.vals[y][x] = selection;
             }
             
             $("#grid").mousedown(function() {
-                $(".gridBox").mouseover(function() {changeBG(this)});
+                $(".gridBox").mouseover(function() {changeBG(this.dataset.x, this.dataset.y)});
             });
             
             $("#grid").mouseup(function() {
