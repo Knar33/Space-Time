@@ -21,7 +21,7 @@ body {
     background-color: white;
     background: url("../images/p2_spritesheet.png");
     background-position: 0px 0px;
-    z-index: 100;
+    z-index: 4;
 }
 .debug {
     background-color: rgba(0,0,0,.5);
@@ -139,7 +139,7 @@ body {
     min-width: 70px;
     min-height: 70px;
     display: inline-block;
-    z-index: 4;
+    z-index: 5;
 }
 
 .gridBox {
@@ -147,7 +147,7 @@ body {
     width: 70px;
     height: 70px;
     display: inline-block;
-    z-index: 5;
+    z-index: 6;
     box-sizing: border-box;
 }
 
