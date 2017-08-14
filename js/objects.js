@@ -1,10 +1,12 @@
 var objects = [];
+var collectibles = [];
+var collected = 0;
 
 //create background layer 1 images
 for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
-        if (grid.vals1[y][x] != 0) {
-            thisTile = "images/" + grid.vals1[y][x] + ".png";
+        if (grid.vals[1][y][x] != 0) {
+            thisTile = "images/" + grid.vals[1][y][x] + ".png";
             $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 1;' src='" + thisTile + "'>");
         }
     }
@@ -13,8 +15,8 @@ for (y = 0; y < grid.height; y++) {
 //create background layer 2 images
 for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
-        if (grid.vals2[y][x] != 0) {
-            thisTile = "images/" + grid.vals2[y][x] + ".png";
+        if (grid.vals[2][y][x] != 0) {
+            thisTile = "images/" + grid.vals[2][y][x] + ".png";
             $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
         }
     }
@@ -23,9 +25,9 @@ for (y = 0; y < grid.height; y++) {
 //create foreground layer images
 for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
-        if (grid.vals4[y][x] != 0) {
-            thisTile = "images/" + grid.vals4[y][x] + ".png";
-            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 5;' src='" + thisTile + "'>");
+        if (grid.vals[4][y][x] != 0) {
+            thisTile = "images/" + grid.vals[4][y][x] + ".png";
+            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 4;' src='" + thisTile + "'>");
         }
     }
 }
@@ -33,11 +35,11 @@ for (y = 0; y < grid.height; y++) {
 //create player level objects from grid array
 for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
-        if (grid.vals3[y][x] != 0) {
-            thisTile = "images/" + grid.vals3[y][x] + ".png";
+        if (grid.vals[3][y][x] != 0) {
+            thisTile = "images/" + grid.vals[3][y][x] + ".png";
             $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 3;' src='" + thisTile + "'>");
 
-            switch(grid.vals3[y][x]) {
+            switch(grid.vals[3][y][x]) {
                 //spring
                 case "41":
                     var thisObj = new Object();
@@ -46,21 +48,10 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.xBox = 70;
                     thisObj.yBox = 50;
                     thisObj.friction = .2;
-                    thisObj.collide = function(target) {
+                    thisObj.collide = function(target, direction) {
                         //collision from above
-                        if (target.ypos == this.ypos + this.yBox - 1 
-                                && 
-                                (
-                                    (
-                                        (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)
-                                    ) 
-                                    || 
-                                    (
-                                        (target.xpos < this.xpos+this.xBox-1) && (target.xpos >= this.xpos)
-                                    )
-                                )
-                           ) {
-                            target.yspeed = 33;
+                        if (direction == "top") {
+                            target.yspeed = 25;
                             target.airborne = true;
                             if (target.xspeed >= this.friction) {
                                 target.xspeed -= this.friction;
@@ -77,6 +68,21 @@ for (y = 0; y < grid.height; y++) {
                     objects.push(thisObj);
                     break;
                 
+                //collectible object
+                case "44":
+                    var thisObj = new Object();
+                    thisObj.xpos = x * 70;
+                    thisObj.ypos = y * 70;
+                    thisObj.xBox = 70;
+                    thisObj.yBox = 70;
+                    thisObj.collide = function(target, direction) {
+                        collected++;
+                        //destroy thisObj
+                    }
+                    objects.push(thisObj);
+                    collectibles.push(thisObj);
+                    break;    
+                    
                 //basic ground object
                 default:
                     var thisObj = new Object();
@@ -85,20 +91,8 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.xBox = 70;
                     thisObj.yBox = 70;
                     thisObj.friction = .2;
-                    thisObj.collide = function(target) {
-                        //collision from above
-                        if (target.ypos == this.ypos + this.yBox - 1 
-                                && 
-                                (
-                                    (
-                                        (target.xpos+target.xBox-1 > this.xpos) && (target.xpos+target.xBox-1 <= this.xpos+this.xBox-1)
-                                    ) 
-                                    || 
-                                    (
-                                        (target.xpos < this.xpos+this.xBox-1) && (target.xpos >= this.xpos)
-                                    )
-                                )
-                           ) {
+                    thisObj.collide = function(target, direction) {
+                        if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
                             if (target.xspeed >= this.friction) {
@@ -109,11 +103,25 @@ for (y = 0; y < grid.height; y++) {
                             }
                             else 
                                 target.xspeed = 0;
+                            player.ypos++;
+                        } 
+                        if (direction == "bottom") {
+                            player.ypos--;
+                            player.yspeed = 0;
+                        } 
+                        if (direction == "left") {
+                            player.xpos--;
+                            player.xspeed = 0;
+                        } 
+                        if (direction == "right") {
+                            player.xpos++;
+                            player.xspeed = 0;
                         } 
                         //update debug menu
                         updateDebug();
                     }
                     objects.push(thisObj);
+                    break;
                 }
             }
     }

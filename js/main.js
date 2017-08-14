@@ -177,51 +177,26 @@ setInterval(function() {
     //horizontal movement
     for (i = 0; i < Math.abs(player.xspeed); i++) {
         if (player.xspeed > 0) {
-            var collisions = 0;
             player.xpos++;
-
             //array of all objects with x values that could potentially collide
             var returnedObjects = objects.filter(function(obj) {return  player.xpos + player.xBox - 1 == obj.xpos;});
-            
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
-                    collisions++;
-                    object.collide(player);
-                    player.xspeed = 0;
+                    object.collide(player, "left");
                 }
             });
-
-            if (collisions > 0) {
-                player.xpos--;
-                break;
-            } else {
-                $("#box")[0].style.left = player.xpos + "px";
-            }
-
+            $("#box")[0].style.left = player.xpos + "px";
             updateDebug();
         } else if (player.xspeed < 0) {
-            
-            var collisions = 0;
             player.xpos--;
-
             //array of all objects with x values that could potentially collide
             var returnedObjects = objects.filter(function(obj) {return  player.xpos == obj.xpos + obj.xBox - 1;});
-            
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
-                    collisions++;
-                    object.collide(player);
-                    player.xspeed = 0;
+                    object.collide(player, "right");
                 }
             });
-
-            if (collisions > 0) {
-                player.xpos++;
-                break;
-            } else {
-                $("#box")[0].style.left = player.xpos + "px";
-            }
-
+            $("#box")[0].style.left = player.xpos + "px";
             updateDebug();
         }
     }
@@ -230,57 +205,38 @@ setInterval(function() {
     for (i = 0; i < Math.abs(player.yspeed); i++) {
         
         if (player.yspeed > 0) {
-
-            var collisions = 0;
             player.ypos++;
-
             //array of all objects with y values that could potentially collide
             var returnedObjects = objects.filter(function(obj) {return  player.ypos + player.yBox - 1 == obj.ypos;});
             
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
-                    collisions++;
-                    object.collide(player);
+                    object.collide(player, "bottom");
                 }
             });
-
-            if (collisions > 0) {
-                player.ypos--;
-                break;
-            } else {
-                $("#box")[0].style.bottom = player.ypos + "px";
-            }
-
-            //update debug menu
+            $("#box")[0].style.bottom = player.ypos + "px";
             updateDebug();
         } else if (player.yspeed < 0) {
-
-            var collisions = 0;
             player.ypos--;
-
             //array of all objects with y values that could potentially collide
             var returnedObjects = objects.filter(function(obj) {return  player.ypos == obj.ypos + obj.yBox - 1;});
             
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
-                    collisions++;
-                    object.collide(player);
+                    object.collide(player, "top");
                 }
             });
-
-            if (collisions > 0) {
-                player.ypos++;
-                break;
-            } else {
-                $("#box")[0].style.bottom = player.ypos + "px";
-            }
-
-            //update debug menu
+            $("#box")[0].style.bottom = player.ypos + "px";
             updateDebug();
         }
     }
     
     player.animate();
-            updateDebug();
+    updateDebug();
+    
+    //basic win condition
+    if (collected == collectibles.length) {
+        $("body")[0].style.backgroundColor = "black";
+    }
     
 }, 17);

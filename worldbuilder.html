@@ -142,36 +142,15 @@
             var selection = 0;
             //create grid layout
             
-            //layer 1 (background layer)
-            for (y = 0; y < 20; y++) {
-                for (x = 0; x < 30; x++) {
-                    $("#grid").append("<img class='gridLayer1' id='1-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
+            for (i = 1; i < 5; i++) {
+                for (y = 0; y < 20; y++) {
+                    for (x = 0; x < 30; x++) {
+                        $("#grid").append("<img class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
+                    }
                 }
             }
             
-            //layer 2 (background layer)
-            for (y = 0; y < 20; y++) {
-                for (x = 0; x < 30; x++) {
-                    $("#grid").append("<img class='gridLayer2' id='2-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
-                }
-            }
-            
-            //layer 3 (player layer)            
-            for (y = 0; y < 20; y++) {
-                for (x = 0; x < 30; x++) {
-                    $("#grid").append("<img class='gridLayer3' id='3-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
-                }
-            }
-            
-            
-            //layer 4 (foreground layer)            
-            for (y = 0; y < 20; y++) {
-                for (x = 0; x < 30; x++) {
-                    $("#grid").append("<img class='gridLayer4' id='4-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
-                }
-            }
-            
-            //layer 5 (worldbuilder interaction layer)
+            //top interaction layer
             for (y = 0; y < 20; y++) {
                 for (x = 0; x < 30; x++) {
                     $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420 + x * 70) + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
