@@ -9,13 +9,10 @@
         <div class="toolbar" id="toolbar">
             <div class="layer" id = "layer1" onClick="clickLayer(this, 1)" style="border: 3px solid black;">bg layer 1</div>
             <div class="layer" id = "layer2" onClick="clickLayer(this, 2)" style="border: none;">bg layer 2</div>
-            <br>
-            <div class="layer" id = "layer3" onClick="clickLayer(this, 3)" style="border: none;">foreground</div>
-            <br>
-            <div class="tool" id = "0" onClick="toggleGrid()">grid</div>
-            <br>
-            <div class="tool" id = "0" onClick="clickTool(this)" style="border: 3px solid black;">eraser</div>
-            <br>
+            <div class="layer" id = "layer3" onClick="clickLayer(this, 3)" style="border: none;">player layer</div>
+            <div class="layer" id = "layer4" onClick="clickLayer(this, 4)" style="border: none;">foreground layer</div>
+            <div class="toptool" id = "0" onClick="toggleGrid()" style="width: 70px; height: 70px;">show/hide grid</div>
+            <div class="toptool" id = "0" onClick="clickTool(this)" style="border: 3px solid black;">eraser</div>
             
             <script>
                 
@@ -33,6 +30,7 @@
                 //TODO: add second array for background layer
                 function clickTool(tool) {
                     $(".tool").css("border", "none");
+                    $(".toptool").css("border", "none");
                     tool.style.border='3px solid black';
                     selection = tool.id;
                 }
@@ -45,7 +43,7 @@
                 
                 for(i = 1; i < 111; i++) {
                     var imageBG = "images/" + i + ".png";
-                    $("#toolbar").append("<img class='tool' id='" + i + "' onClick='clickTool(this)' src='" + imageBG + "'></div>");
+                    $("#toolbar").append("<img class='tool' id='" + i + "' onClick='clickTool(this)' src='" + imageBG + "'>");
                 }
             </script>
         </div>
@@ -118,6 +116,28 @@
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
                 ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]
             ];
+            grid.vals[4] = [
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]
+            ];
             
             var selection = 0;
             //create grid layout
@@ -125,28 +145,36 @@
             //layer 1 (background layer)
             for (y = 0; y < 20; y++) {
                 for (x = 0; x < 30; x++) {
-                    $("#grid").append("<img class='gridLayer1' id='1-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (220+ x * 70) + "px'>");
+                    $("#grid").append("<img class='gridLayer1' id='1-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
                 }
             }
             
             //layer 2 (background layer)
             for (y = 0; y < 20; y++) {
                 for (x = 0; x < 30; x++) {
-                    $("#grid").append("<img class='gridLayer2' id='2-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (220+ x * 70) + "px'>");
+                    $("#grid").append("<img class='gridLayer2' id='2-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
                 }
             }
             
-            //layer 3 (foreground layer)            
+            //layer 3 (player layer)            
             for (y = 0; y < 20; y++) {
                 for (x = 0; x < 30; x++) {
-                    $("#grid").append("<img class='gridLayer3' id='3-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (220+ x * 70) + "px'>");
+                    $("#grid").append("<img class='gridLayer3' id='3-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
                 }
             }
             
-            //layer 4 (worldbuilder interaction layer)
+            
+            //layer 4 (foreground layer)            
             for (y = 0; y < 20; y++) {
                 for (x = 0; x < 30; x++) {
-                    $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (220 + x * 70) + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
+                    $("#grid").append("<img class='gridLayer4' id='4-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
+                }
+            }
+            
+            //layer 5 (worldbuilder interaction layer)
+            for (y = 0; y < 20; y++) {
+                for (x = 0; x < 30; x++) {
+                    $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420 + x * 70) + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
                 }
             }
             

@@ -66,7 +66,7 @@ body {
 
 .toolbar {
     height: 100%;
-    width: 210px;
+    width: 420px;
     background-color: rgba(0,0,0,.5);
     position: fixed;
     top: 0;
@@ -77,6 +77,16 @@ body {
 }
 
 .tool {
+    min-width: 70px;
+    min-height: 70px;
+    margin: 10px;
+    background-color: white;
+    display: inline-block;
+    box-sizing: border-box;
+    z-index: 8;
+}
+
+.toptool {
     width: 70px;
     height: 70px;
     margin: 10px;
@@ -85,6 +95,7 @@ body {
     box-sizing: border-box;
     background-size: cover;
     z-index: 8;
+    float: left;
 }
 
 .layer {
@@ -96,6 +107,7 @@ body {
     box-sizing: border-box;
     background-size: cover;
     z-index: 8;
+    float: left;
 }
 
 .gridLayer1 {
@@ -122,12 +134,20 @@ body {
     z-index: 3;
 }
 
+.gridLayer4 {
+    position: absolute;
+    min-width: 70px;
+    min-height: 70px;
+    display: inline-block;
+    z-index: 4;
+}
+
 .gridBox {
     position: absolute;
     width: 70px;
     height: 70px;
     display: inline-block;
-    z-index: 4;
+    z-index: 5;
     box-sizing: border-box;
 }
 

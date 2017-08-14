@@ -20,7 +20,17 @@ for (y = 0; y < grid.height; y++) {
     }
 }
 
-//create foreground objects from grid array
+//create foreground layer images
+for (y = 0; y < grid.height; y++) {
+    for (x = 0; x < grid.width; x++) {
+        if (grid.vals4[y][x] != 0) {
+            thisTile = "images/" + grid.vals4[y][x] + ".png";
+            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px;' src='" + thisTile + "'>");
+        }
+    }
+}
+
+//create player level objects from grid array
 for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals3[y][x] != 0) {
