@@ -1,5 +1,7 @@
 
 //TODO: 
+//      add more objects to worldbuilder
+//      sort objects and show/hide them depending which layer is selected
 //      add win condition
 //          collect objects (array of objects to collect)
 //          return to spaceship after collecting all objects
@@ -8,8 +10,6 @@
 //          ice
 //          coin (after win condition added)
 //          spike (after loss condition added)
-//      add second layer to worldbuilder for background
-//          show/hide layer controls
 //      add save function to worldbuilder
 //      add reverse animations to player
 //      add bottom collision to objects

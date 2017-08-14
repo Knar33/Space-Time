@@ -1,13 +1,33 @@
 var objects = [];
 
-//create objects from grid array
+//create background layer 1 images
 for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
-        if (grid.vals[y][x] != 0) {
-            thisTile = "images/" + grid.vals[y][x] + ".png";
-            $("body").append("<div class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; background: url(" + thisTile + ");'></div>");
+        if (grid.vals1[y][x] != 0) {
+            thisTile = "images/" + grid.vals1[y][x] + ".png";
+            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px;' src='" + thisTile + "'>");
+        }
+    }
+}
 
-            switch(grid.vals[y][x]) {
+//create background layer 2 images
+for (y = 0; y < grid.height; y++) {
+    for (x = 0; x < grid.width; x++) {
+        if (grid.vals2[y][x] != 0) {
+            thisTile = "images/" + grid.vals2[y][x] + ".png";
+            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px;' src='" + thisTile + "'>");
+        }
+    }
+}
+
+//create foreground objects from grid array
+for (y = 0; y < grid.height; y++) {
+    for (x = 0; x < grid.width; x++) {
+        if (grid.vals3[y][x] != 0) {
+            thisTile = "images/" + grid.vals3[y][x] + ".png";
+            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px;' src='" + thisTile + "'>");
+
+            switch(grid.vals3[y][x]) {
                 //spring
                 case "41":
                     var thisObj = new Object();
