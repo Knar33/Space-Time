@@ -15,7 +15,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals2[y][x] != 0) {
             thisTile = "images/" + grid.vals2[y][x] + ".png";
-            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 6;' src='" + thisTile + "'>");
+            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
         }
     }
 }
