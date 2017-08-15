@@ -86,6 +86,47 @@ for (y = 0; y < grid.height; y++) {
                     collectibles.push(thisObj);
                     $(".ui").append("<img src='" + thisTile + "' id='" + x + "-" + y + "-gui'>");
                     break;    
+                
+                //Spaceship
+                case "48":
+                    var thisObj = new Object();
+                    thisObj.xpos = x * 70;
+                    thisObj.ypos = y * 70;
+                    thisObj.xBox = 70;
+                    thisObj.yBox = 70;
+                    thisObj.friction = .2;
+                    thisObj.collide = function(target, direction) {
+                        if (collected == collectibles.length) {
+                            alert("You win!");
+                        }
+                        if (direction == "top") {
+                            target.yspeed = 0;
+                            target.airborne = false;
+                            if (target.xspeed >= this.friction) {
+                                target.xspeed -= this.friction;
+                            }
+                            else if (target.xspeed <= -1 * this.friction) {
+                                target.xspeed += this.friction;
+                            }
+                            else 
+                                target.xspeed = 0;
+                            player.ypos++;
+                        } 
+                        if (direction == "bottom") {
+                            player.ypos--;
+                            player.yspeed = 0;
+                        } 
+                        if (direction == "left") {
+                            player.xpos--;
+                            player.xspeed = 0;
+                        } 
+                        if (direction == "right") {
+                            player.xpos++;
+                            player.xspeed = 0;
+                        } 
+                    }
+                    objects.push(thisObj);
+                    break; 
                     
                 //basic ground object
                 default:

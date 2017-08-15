@@ -235,8 +235,7 @@ setInterval(function() {
     
     //basic win condition
     if (collected == collectibles.length) {
-        $("body")[0].style.backgroundColor = "black";
-        $(".ui")[0].style.display = "none";
+        $(".padded")[0].innerHTML = "Return to the ship!";
     }
     
 }, 17);
