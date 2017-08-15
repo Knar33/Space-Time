@@ -37,7 +37,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals[3][y][x] != 0) {
             thisTile = "images/" + grid.vals[3][y][x] + ".png";
-            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 3;' src='" + thisTile + "'>");
+            $("body").append("<img class='tile' id='" + x + "-" + y + "' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 3;' src='" + thisTile + "'>");
 
             switch(grid.vals[3][y][x]) {
                 //spring
@@ -75,12 +75,16 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = y * 70;
                     thisObj.xBox = 70;
                     thisObj.yBox = 70;
+                    thisObj.id = x + "-" + y;
                     thisObj.collide = function(target, direction) {
                         collected++;
-                        //destroy thisObj
+                        this.xpos = -1000;
+                        $("#" + this.id)[0].style.display = "none";
+                        $("#" + this.id + "-gui")[0].style.display = "none";
                     }
                     objects.push(thisObj);
                     collectibles.push(thisObj);
+                    $(".ui").append("<img src='" + thisTile + "' id='" + x + "-" + y + "-gui'>");
                     break;    
                     
                 //basic ground object
@@ -134,7 +138,16 @@ blockLeft.xpos = -2;
 blockLeft.ypos = 0;
 blockLeft.xBox = 2;
 blockLeft.yBox = 5000;
-blockLeft.collide = function(target) {};
+blockLeft.collide = function(target, direction) {
+    if (direction == "left") {
+        player.xpos--;
+        player.xspeed = 0;
+    } 
+    if (direction == "right") {
+        player.xpos++;
+        player.xspeed = 0;
+    } 
+};
 objects.push(blockLeft);
 
 //right boundry
@@ -144,5 +157,14 @@ blockRight.xpos = grid.width * 70;
 blockRight.ypos = 0;
 blockRight.xBox = 2;
 blockRight.yBox = 5000;
-blockRight.collide = function(target) {};
+blockRight.collide = function(target, direction) {
+    if (direction == "left") {
+        player.xpos--;
+        player.xspeed = 0;
+    } 
+    if (direction == "right") {
+        player.xpos++;
+        player.xspeed = 0;
+    } 
+};
 objects.push(blockRight);

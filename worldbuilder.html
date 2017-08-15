@@ -1,3 +1,4 @@
+<!-- I use inline javascript and css here because this is a quickly thrown together tool just to build levels -->
 <!doctype html>
 <html>
     <head>
@@ -16,7 +17,7 @@
             
             <script>
                 
-                var gridShow = false;
+                var gridShow = true;
                 var selectedLayer = 1;
                 function toggleGrid() {
                     if (gridShow) {
@@ -141,11 +142,10 @@
             
             var selection = 0;
             //create grid layout
-            
             for (i = 1; i < 5; i++) {
                 for (y = 0; y < 20; y++) {
                     for (x = 0; x < 30; x++) {
-                        $("#grid").append("<img class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
+                        $("#grid").append("<img src='' class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px'>");
                     }
                 }
             }
@@ -159,7 +159,11 @@
             
             function changeBG(x, y) {
                 box = "#" + selectedLayer + "-" + x.toString() + "-" + y.toString();
-                $(box)[0].src = "images/" + selection + ".png";
+                if (selection != 0) {
+                    $(box)[0].src = "images/" + selection + ".png";
+                } else {
+                    $(box)[0].src = "";
+                }
                 grid.vals[selectedLayer][y][x] = selection;
             }
             

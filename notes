@@ -1,20 +1,20 @@
-
 //TODO: 
-//      add more objects to worldbuilder
-//      sort objects and show/hide them depending which layer is selected
+//   x  remove objects from gameworld when you collide
+//   x  add UI with objects left to collect
+//      in worldbuilder, if selected = 0 dont put 0.png
+//      add rounded edged to blocks
+//      let builder select where alien goes
 //      add win condition
-//          collect objects (array of objects to collect)
+//       x   collect objects (array of objects to collect)
 //          return to spaceship after collecting all objects
 //      add more block types
-//          spring
 //          ice
-//          coin (after win condition added)
-//          spike (after loss condition added)
+//          spike
 //      add save function to worldbuilder
 //      add reverse animations to player
-//      add bottom collision to objects
-//      add fun down animation
+//      add player down animation
 //      general animation function to loop through all objects that need to animate
+//      choose background color in worldbuilder
 
 
 
@@ -27,3 +27,12 @@ stream.once('open', function(fd) {
   stream.write("My second row\n");
   stream.end();
 });
+
+
+johnRemoved = someArray.filter(function(el) {
+    return el.name !== "John";
+})
+
+collectibles = collectibles.filter(function(col) {
+    return col.
+})
