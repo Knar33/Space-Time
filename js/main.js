@@ -4,6 +4,17 @@ var windResistance = .08;
 var terminalVelocity = -20;
 
 //----------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------camera object----------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------
+
+var camera = new Object();
+camera.xPos = window.innerWidth / 2;
+camera.yPos = window.innerHeight / 2;
+camera.scroll = function() {
+    window.scrollTo(camera.xPos - (window.innerWidth / 2), (grid.height * 70) - camera.yPos - (window.innerHeight / 2));
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------player object----------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
 
@@ -128,8 +139,13 @@ function checkCollision(obj1, obj2) {
 }
 
 function updateDebug() {
-    $("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2) + "<br>airborne: " + player.airborne;
+    $("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2);
 }
+
+$("document").ready(function(){
+    camera.scroll();
+    $("body").css("background", backgroundColor);
+});
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------main runtime function--------------------------------------------------
@@ -185,6 +201,12 @@ setInterval(function() {
                 }
             });
             $("#box")[0].style.left = player.xpos + "px";
+            //if player is to the right of the camera (center of screen) and the camera x position is less than the center of screen at the right edge of the map, pan camera to the right and scroll to the right
+            if (    player.xpos+35 > camera.xPos 
+                    && camera.xPos < (grid.width * 70)-(window.innerWidth/2)+35) {
+                camera.xPos++;
+                camera.scroll();
+            }
             updateDebug();
         } else if (player.xspeed < 0) {
             player.xpos--;
@@ -196,36 +218,51 @@ setInterval(function() {
                 }
             });
             $("#box")[0].style.left = player.xpos + "px";
+            //if player is to the right of the camera, and the camera position is greater than the starting camera position, and player is to the left of the center of screen at the right edge of the map
+            if (    player.xpos+35 > camera.xPos-2 
+                    && camera.xPos > window.innerWidth / 2 
+                    && player.xpos < (grid.width * 70)-(window.innerWidth/2)) {
+                camera.xPos--;
+                camera.scroll();
+            }
             updateDebug();
         }
     }
 
     //vertical movement
     for (i = 0; i < Math.abs(player.yspeed); i++) {
-        
         if (player.yspeed > 0) {
             player.ypos++;
             //array of all objects with y values that could potentially collide
             var returnedObjects = objects.filter(function(obj) {return  player.ypos + player.yBox - 1 == obj.ypos;});
-            
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
                     object.collide(player, "bottom");
                 }
             });
             $("#box")[0].style.bottom = player.ypos + "px";
+            if (    player.ypos+35 > camera.yPos 
+                    && camera.yPos < (grid.height * 70)-(window.innerHeight/2)) {
+                camera.yPos++;
+                camera.scroll();
+            }
             updateDebug();
         } else if (player.yspeed < 0) {
             player.ypos--;
             //array of all objects with y values that could potentially collide
             var returnedObjects = objects.filter(function(obj) {return  player.ypos == obj.ypos + obj.yBox - 1;});
-            
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
                     object.collide(player, "top");
                 }
             });
             $("#box")[0].style.bottom = player.ypos + "px";
+            if (    player.ypos+35 < camera.yPos 
+                    && camera.yPos > (window.innerHeight / 2)-35 
+                    && player.ypos < (grid.height * 70)-(window.innerHeight/2)) {
+                camera.yPos--;
+                camera.scroll();
+            }
             updateDebug();
         }
     }

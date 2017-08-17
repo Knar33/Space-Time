@@ -6,7 +6,6 @@ body {
     margin: 0;
     padding: 0;
     background-attachment: fixed;
-    background-color: #b3f0ff;
 }
 
 /* Objects */
@@ -41,7 +40,7 @@ body {
 .boxright {
     position: absolute;
     bottom: 0px;
-    left: 5000px;
+    right: 0;
     height: 5000px;
     width: 1px;
 }
@@ -64,6 +63,7 @@ body {
     min-width: 70px;
     box-sizing: border-box;
     background-size: cover;
+    display: inline-block;
 }
 
 /*worldBuilder*/

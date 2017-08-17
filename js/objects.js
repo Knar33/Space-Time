@@ -1,3 +1,5 @@
+$("body").append("<div id='objdiv' style='position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70 - 2) + "px;'><div id='box' class='box'></div></div>");
+
 var objects = [];
 var collectibles = [];
 var collected = 0;
@@ -7,7 +9,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals[1][y][x] != 0) {
             thisTile = "images/" + grid.vals[1][y][x] + ".png";
-            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 1;' src='" + thisTile + "'>");
+            $("#objdiv").append("<img class='tile' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 1;' src='" + thisTile + "'>");
         }
     }
 }
@@ -17,7 +19,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals[2][y][x] != 0) {
             thisTile = "images/" + grid.vals[2][y][x] + ".png";
-            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
+            $("#objdiv").append("<img class='tile' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
         }
     }
 }
@@ -27,7 +29,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals[4][y][x] != 0) {
             thisTile = "images/" + grid.vals[4][y][x] + ".png";
-            $("body").append("<img class='tile' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 4;' src='" + thisTile + "'>");
+            $("#objdiv").append("<img class='tile' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 4;' src='" + thisTile + "'>");
         }
     }
 }
@@ -37,7 +39,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals[3][y][x] != 0) {
             thisTile = "images/" + grid.vals[3][y][x] + ".png";
-            $("body").append("<img class='tile' id='" + x + "-" + y + "' style='left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 3;' src='" + thisTile + "'>");
+            $("#objdiv").append("<img class='tile' id='" + x + "-" + y + "' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 3;' src='" + thisTile + "'>");
 
             switch(grid.vals[3][y][x]) {
                 //spring
@@ -97,7 +99,11 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.friction = .2;
                     thisObj.collide = function(target, direction) {
                         if (collected == collectibles.length) {
-                            alert("You win!");
+                            if (level == maxLevels) {
+                                window.location = "win.html";
+                            } else {
+                                window.location = "level_" + parseInt(level+1) + ".html";
+                            }
                         }
                         if (direction == "top") {
                             target.yspeed = 0;
@@ -174,7 +180,6 @@ for (y = 0; y < grid.height; y++) {
 
 //left boundry
 var blockLeft = new Object();
-blockLeft.myID = boxleft;
 blockLeft.xpos = -2;
 blockLeft.ypos = 0;
 blockLeft.xBox = 2;
@@ -193,7 +198,6 @@ objects.push(blockLeft);
 
 //right boundry
 var blockRight = new Object();
-blockRight.myID = boxright;
 blockRight.xpos = grid.width * 70;
 blockRight.ypos = 0;
 blockRight.xBox = 2;

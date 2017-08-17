@@ -1,20 +1,34 @@
-//TODO: 
-//   x  remove objects from gameworld when you collide
-//   x  add UI with objects left to collect
-//      in worldbuilder, if selected = 0 dont put 0.png
-//      add rounded edged to blocks
-//      let builder select where alien goes
-//      add win condition
-//       x   collect objects (array of objects to collect)
-//          return to spaceship after collecting all objects
-//      add more block types
-//          ice
-//          spike
-//      add save function to worldbuilder
-//      add reverse animations to player
-//      add player down animation
-//      general animation function to loop through all objects that need to animate
-//      choose background color in worldbuilder
+TODO: 
+x    remove objects from gameworld when you collide
+x    add UI with objects left to collect
+x    in worldbuilder, if selected = 0 dont put 0.png
+x    let builder select where alien goes
+x    add win condition
+x       collect objects (array of objects to collect)
+x       return to spaceship after collecting all objects
+x   add scrolling, up and sideways
+x       fix scrolling!  
+x    add big div to worldbuilder so you can scroll up
+x    make browser scroll to bottom at load
+x    have player go to next level if they win. If player is at last level, show win screen then return to index
+     choose background color in worldbuilder
+     let builder specify height and width of world
+     let builder place player starting position
+     add save function to worldbuilder
+     add more block types
+        fix spaceship collision
+        ice
+        sand
+        spike
+        round edges
+     add reverse animations to player
+     show/hide blocks in worldbuilder depending on which layer is selected
+     add tool icons to make them more clear
+     add player down animation
+     apply friction at endstep, not at collision
+     clean up and refactor code
+     general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
+
 
 
 
@@ -36,3 +50,7 @@ johnRemoved = someArray.filter(function(el) {
 collectibles = collectibles.filter(function(col) {
     return col.
 })
+
+scrollBy(x,y)
+
+window.innerHeight, window.innerWidth
