@@ -16,8 +16,6 @@ body {
 
 .box {
     position: absolute;
-    bottom: 500px;
-    left: 300px;
     height: 92px;
     width: 70px;
     box-sizing: border-box;
@@ -34,21 +32,6 @@ body {
     z-index: 100;
     color: white;
 }
-.boxleft {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 5000px;
-    width: 2px;
-}
-.boxright {
-    position: absolute;
-    bottom: 0px;
-    right: 0;
-    height: 5000px;
-    width: 1px;
-}
-
 .ui {
     position: fixed;
     top: 0;

@@ -11,26 +11,33 @@ x       fix scrolling!
 x    add big div to worldbuilder so you can scroll up
 x    make browser scroll to bottom at load
 x    have player go to next level if they win. If player is at last level, show win screen then return to index
-     add death event (warp back to beginning of level)
-     choose background color in worldbuilder (implemented on backend already)
-     let builder specify height and width of world
-     let builder place player starting position
-     add save function to worldbuilder
-     revamp index page
-     revamp win page
-     revamp worldbuilder page to include instructions
+x    add death event (warp back to beginning of level)
+x    add reverse animations to player
+x    add player down animation
+     
+BUGS AND MECHANICS
      add more block types
         fix spaceship collision
         ice
-        spike (death)
+x       spike (death)
         water (death)
         round edges
-x    add reverse animations to player
-     show/hide blocks in worldbuilder depending on which layer is selected
-     add tool icons to make them more clear
-     add player down animation
      apply friction at endstep, not at collision
      clean up and refactor code
      general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
      fix bug with screen being too small and camera default pos
      screen going over max width
+     when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
+     
+WORLD BUILDER
+     add save function to worldbuilder
+         choose background color in worldbuilder (implemented on backend already)
+         let builder specify height and width of world
+         let builder place player starting position
+     revamp worldbuilder page to include instructions
+     show/hide blocks in worldbuilder depending on which layer is selected
+     add tool icons to make them more clear
+     
+FRONT END VISUALSs
+     revamp index page
+     revamp win page

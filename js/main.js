@@ -23,8 +23,8 @@ var player = new Object();
 player.myID = box;
 player.xspeed = 0;
 player.yspeed = 0;
-player.xpos = 300;
-player.ypos = 500;
+player.xpos = startXPos;
+player.ypos = startYPos;
 player.xBox = 70;
 player.yBox = 92;
 player.animFrame = 0;
@@ -50,6 +50,15 @@ player.animate = function() {
             $("#box")[0].style.backgroundPosition = "-423px 0px";
         } else if (player.xFace == "left") {
             $("#box")[0].style.backgroundPosition = "493px 0px";
+        }
+    }
+    //crouching
+    else if (downDown && !rightDown && !leftDown) {
+        player.animFrame = 0;
+        if (player.xFace == "right") {
+            $("#box")[0].style.backgroundPosition = "-352px -94px";
+        } else if (player.xFace == "left") {
+            $("#box")[0].style.backgroundPosition = "423px -94px";
         }
     }
     //standing
@@ -82,6 +91,7 @@ player.animate = function() {
         }
     }
 }
+$("#box").css({"left": startXPos, "bottom": startYPos})
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------player control---------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -107,6 +117,7 @@ function keyPressDown(key) {
             break;
         case 83:
             downDown = true;
+            player.yBox = 35;
             break;
     }
 }
@@ -125,6 +136,7 @@ function keyPressUp(key) {
             break;
         case 83:
             downDown = false;
+            player.yBox = 70;
             break;
     }
 } 
@@ -205,7 +217,7 @@ setInterval(function() {
         }
     }
     if (downDown) {
-        //nothing here yet
+        //nothing here yet - add down animation in future
     }
 
     //if player yspeed isnt one, it means they are airborne

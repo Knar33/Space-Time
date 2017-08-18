@@ -69,8 +69,42 @@ for (y = 0; y < grid.height; y++) {
                     }
                     objects.push(thisObj);
                     break;
-                
-                //collectible object
+                    
+                //spikes
+                case "42":
+                    var thisObj = new Object();
+                    thisObj.xpos = x * 70;
+                    thisObj.ypos = y * 70;
+                    thisObj.xBox = 70;
+                    thisObj.yBox = 35;
+                    thisObj.collide = function(target, direction) {
+                        if (direction == "top") {
+                            player.ypos = startYPos;
+                            player.xpos = startXPos;
+                            $("#box").css({"bottom": player.ypos, "left": player.xpos})
+                        } 
+                        if (direction == "bottom") {
+                            player.ypos--;
+                            player.yspeed = 0;
+                        } 
+                        if (direction == "left") {
+                            player.xpos--;
+                            player.xspeed = 0;
+                        } 
+                        if (direction == "right") {
+                            player.xpos++;
+                            player.xspeed = 0;
+                        } 
+                        //update debug menu
+                        updateDebug();
+                        
+                        camera.xPos = window.innerWidth / 2;
+                        camera.yPos = window.innerHeight / 2;
+                    }
+                    objects.push(thisObj);
+                    break;
+                    
+                //collectible objects
                 case "44":
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
