@@ -2,7 +2,7 @@ var level = 3;
 var maxLevels = 3;
 
 var startYPos = 140;
-var startXPos = 70;
+var startXPos = 0;
 
 var backgroundColor = "linear-gradient(#000000, #666666)";
 
