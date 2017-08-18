@@ -32,6 +32,7 @@ player.jumpStrength = 20;
 player.airborne = true;
 player.moveSpeed = 1;
 player.xFace = "right";
+player.dead = false;
 player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
 player.animate = function() {
     //jump
@@ -312,4 +313,10 @@ setInterval(function() {
         $(".padded")[0].innerHTML = "Return to the ship!";
     }
     
+    if (player.dead) {
+        player.ypos = startYPos;
+        player.xpos = startXPos;
+        $("#box").css({"bottom": player.ypos, "left": player.xpos});
+        player.dead = false;
+    }
 }, 17);

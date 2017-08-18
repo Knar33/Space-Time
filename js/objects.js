@@ -79,9 +79,8 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.yBox = 35;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
-                            player.ypos = startYPos;
-                            player.xpos = startXPos;
-                            $("#box").css({"bottom": player.ypos, "left": player.xpos})
+                            $("#objdiv").append("<div class='bloodSpikes' style='left: " + this.xpos + "px; bottom: " + this.ypos + "px;'></div>");
+                            player.dead = true;
                         } 
                         if (direction == "bottom") {
                             player.ypos--;
