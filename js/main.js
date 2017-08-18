@@ -1,6 +1,6 @@
 //physics variables
 var gravity = .7;
-var windResistance = .08;
+var windResistance = .1;
 var terminalVelocity = -20;
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -31,25 +31,38 @@ player.animFrame = 0;
 player.jumpStrength = 20;
 player.airborne = true;
 player.moveSpeed = 1;
+player.xFace = "right";
 player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
 player.animate = function() {
     //jump
-    if (player.yspeed > 0) {
+    if (player.yspeed > 0 && player.airborne) {
         player.animFrame = 0;
-        $("#box")[0].style.backgroundPosition = "-423px -95px";
+        if (player.xFace == "right") {
+            $("#box")[0].style.backgroundPosition = "-423px -95px";
+        } else if (player.xFace == "left") {
+            $("#box")[0].style.backgroundPosition = "493px -95px";
+        }
     }
     //falling
-    else if (player.yspeed < 0) {
-        player.animFrame = 0;
-        $("#box")[0].style.backgroundPosition = "-423px 0px";
+    else if (player.yspeed < 0 && player.airborne) {
+        player.animFrame = 0
+        if (player.xFace == "right") {
+            $("#box")[0].style.backgroundPosition = "-423px 0px";
+        } else if (player.xFace == "left") {
+            $("#box")[0].style.backgroundPosition = "493px 0px";
+        }
     }
     //standing
-    else if (rightDown == false && leftDown == false) {
+    else if (!rightDown && !leftDown) {
         player.animFrame = 0;
-        $("#box")[0].style.backgroundPosition = "-67px -190px";
+        if (player.xFace == "right") {
+            $("#box")[0].style.backgroundPosition = "-67px -190px";
+        } else if (player.xFace == "left") {
+            $("#box")[0].style.backgroundPosition = "137px -190px";
+        }
     }
     //run
-    else if ((rightDown == true || leftDown == true) && this.airborne == false) {
+    else if (rightDown && !this.airborne) {
         if (player.animFrame == 30) {
             player.animFrame = 0;
             $("#box")[0].style.background = "url('../images/p2_spritesheet.png') 0 0;";
@@ -57,6 +70,15 @@ player.animate = function() {
         else {
             player.animFrame++;
             $("#box")[0].style.backgroundPosition = "-" + player.walk[Math.floor(player.animFrame/3)][0] + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px";
+        }
+    } else if (leftDown && !this.airborne) {
+        if (player.animFrame == 30) {
+            player.animFrame = 0;
+            $("#box")[0].style.background = "url('../images/p2_spritesheet.png') 0 0;";
+        }
+        else {
+            player.animFrame++;
+            $("#box")[0].style.backgroundPosition = (player.walk[Math.floor(player.animFrame/3)][0] + 70) + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px";
         }
     }
 }
@@ -74,9 +96,11 @@ function keyPressDown(key) {
     switch(thisKey) {
         case 65: 
             leftDown = true;
+            player.xFace = "left";
             break;
         case 68:
             rightDown = true;
+            player.xFace = "right";
             break;
         case 87:
             upDown = true;
@@ -139,7 +163,7 @@ function checkCollision(obj1, obj2) {
 }
 
 function updateDebug() {
-    $("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2);
+//    $("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2);
 }
 
 $("document").ready(function(){
@@ -202,6 +226,7 @@ setInterval(function() {
             });
             $("#box")[0].style.left = player.xpos + "px";
             //if player is to the right of the camera (center of screen) and the camera x position is less than the center of screen at the right edge of the map, pan camera to the right and scroll to the right
+            //set player.xpos+35 and (grid.width * 70)-(window.innerWidth/2)+35 for perfectly centered camera, but odd side effects when screen is too large
             if (    player.xpos+35 > camera.xPos 
                     && camera.xPos < (grid.width * 70)-(window.innerWidth/2)+35) {
                 camera.xPos++;

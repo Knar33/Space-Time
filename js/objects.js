@@ -1,4 +1,4 @@
-$("body").append("<div id='objdiv' style='position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70 - 2) + "px;'><div id='box' class='box'></div></div>");
+$("body").append("<div id='objdiv' style='overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div id='box' class='box'></div></div>");
 
 var objects = [];
 var collectibles = [];

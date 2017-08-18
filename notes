@@ -11,46 +11,26 @@ x       fix scrolling!
 x    add big div to worldbuilder so you can scroll up
 x    make browser scroll to bottom at load
 x    have player go to next level if they win. If player is at last level, show win screen then return to index
-     choose background color in worldbuilder
+     add death event (warp back to beginning of level)
+     choose background color in worldbuilder (implemented on backend already)
      let builder specify height and width of world
      let builder place player starting position
      add save function to worldbuilder
+     revamp index page
+     revamp win page
+     revamp worldbuilder page to include instructions
      add more block types
         fix spaceship collision
         ice
-        sand
-        spike
+        spike (death)
+        water (death)
         round edges
-     add reverse animations to player
+x    add reverse animations to player
      show/hide blocks in worldbuilder depending on which layer is selected
      add tool icons to make them more clear
      add player down animation
      apply friction at endstep, not at collision
      clean up and refactor code
      general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
-
-
-
-
-
-
-var fs = require('fs');
-var stream = fs.createWriteStream("my_file.txt");
-stream.once('open', function(fd) {
-  stream.write("My first row\n");
-  stream.write("My second row\n");
-  stream.end();
-});
-
-
-johnRemoved = someArray.filter(function(el) {
-    return el.name !== "John";
-})
-
-collectibles = collectibles.filter(function(col) {
-    return col.
-})
-
-scrollBy(x,y)
-
-window.innerHeight, window.innerWidth
+     fix bug with screen being too small and camera default pos
+     screen going over max width

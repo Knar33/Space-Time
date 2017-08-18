@@ -8,6 +8,10 @@ body {
     background-attachment: fixed;
 }
 
+.hiddenOverflow {
+    overflow: hidden;
+}
+
 /* Objects */
 
 .box {
@@ -163,4 +167,5 @@ body {
 
 .padded {
     padding: 10px;
+    color: white;
 }
