@@ -313,10 +313,13 @@ setInterval(function() {
         $(".padded")[0].innerHTML = "Return to the ship!";
     }
     
+    //player death check
     if (player.dead) {
         player.ypos = startYPos;
         player.xpos = startXPos;
         $("#box").css({"bottom": player.ypos, "left": player.xpos});
         player.dead = false;
+        player.xspeed = 0;
+        player.yspeed = 0;
     }
 }, 17);

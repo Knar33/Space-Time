@@ -30,7 +30,7 @@ x       spike (death)
      when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
      
 WORLD BUILDER
-     add save function to worldbuilder
+     add save function to worldbuilder connected to firebase or c#/php api
          choose background color in worldbuilder (implemented on backend already)
          let builder specify height and width of world
          let builder place player starting position
