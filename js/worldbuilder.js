@@ -58,7 +58,7 @@ var selection = 0;
 for (i = 1; i < 5; i++) {
     for (y = 0; y < 20; y++) {
         for (x = 0; x < 30; x++) {
-            $("#grid").append(grid.vals[i][y][x] != 0 ? "<img src='images/" + grid.vals[i][y][x] + ".png' class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px' draggable='false'>" : "<img class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px' draggable='false'>");
+            $("#grid").append("<img " + (grid.vals[i][y][x] != 0 ? "src='images/" + grid.vals[i][y][x] + ".png'" : "") + " class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px' draggable='false'>");
         }
     }
 }
