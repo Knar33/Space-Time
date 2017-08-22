@@ -17,7 +17,7 @@ x    add player down animation
      
 BUGS AND MECHANICS
      add more block types
-        fix spaceship collision
+x       fix spaceship collision
         ice
 x       spike (death)
         water (death)
@@ -25,9 +25,9 @@ x       spike (death)
      apply friction at endstep, not at collision
      clean up and refactor code
      general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
-     fix bug with screen being too small and camera default pos
-     screen going over max width
-     when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
+?    fix bug with screen being too small and camera default pos
+?   screen going over max width
+x    when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
      
 WORLD BUILDER
      add save function to worldbuilder connected to firebase or c#/php api
@@ -35,9 +35,15 @@ WORLD BUILDER
          let builder specify height and width of world
          let builder place player starting position
      revamp worldbuilder page to include instructions
-     show/hide blocks in worldbuilder depending on which layer is selected
-     add tool icons to make them more clear
+x    show/hide blocks in worldbuilder depending on which layer is selected
+     add tool icons to make them more clear (eraser/grid)
      
 FRONT END VISUALSs
      revamp index page
      revamp win page
+     
+     
+     
+     
+     
+     IN PROGRESS: FIX WORLDBUILDER BUTTONS

@@ -34,6 +34,7 @@ player.moveSpeed = 1;
 player.xFace = "right";
 player.dead = false;
 player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
+//player animations
 player.animate = function() {
     //jump
     if (player.yspeed > 0 && player.airborne) {
@@ -50,7 +51,7 @@ player.animate = function() {
         if (player.xFace == "right") {
             $("#box")[0].style.backgroundPosition = "-423px 0px";
         } else if (player.xFace == "left") {
-            $("#box")[0].style.backgroundPosition = "493px 0px";
+            $("#box")[0].style.backgroundPosition = "494px 0px";
         }
     }
     //crouching

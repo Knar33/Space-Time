@@ -3,18 +3,23 @@
 <html>
     <head>
     <title>test</title>
-        <link rel="stylesheet" type="text/css" href="css/main.css">
         <script src="js/jquery-3.2.1.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body style="background-color: #b3f0ff">
         <div class="toolbar" id="toolbar">
-            <div class="layer" id = "layer1" onClick="clickLayer(this, 1)" style="border: 3px solid black;">bg layer 1</div>
-            <div class="layer" id = "layer2" onClick="clickLayer(this, 2)" style="border: none;">bg layer 2</div>
-            <div class="layer" id = "layer3" onClick="clickLayer(this, 3)" style="border: none;">player layer</div>
-            <div class="layer" id = "layer4" onClick="clickLayer(this, 4)" style="border: none;">foreground layer</div>
-            <div class="toptool" id = "0" onClick="toggleGrid()" style="width: 70px; height: 70px;">show/hide grid</div>
-            <div class="toptool" id = "0" onClick="clickTool(this)" style="border: 3px solid black;">eraser</div>
+            <div style="display: inline-block;">
+                <button class="btn layer" type="button" onClick="clickLayer(this, 1)">Background layer 1</button>
+                <button class="btn layer" type="button" onClick="clickLayer(this, 2)">Background layer 2</button>
+                <button class="btn layer" type="button" onClick="clickLayer(this, 3)">Player layer (only layer with collision)</button>
+                <button class="btn layer" type="button" onClick="clickLayer(this, 4)">Foreground Layer</button>
+                <div class="toptool" id = "0" onClick="toggleGrid()" style="width: 70px; height: 70px;">show/hide grid</div>
+                <div class="toptool" id = "0" onClick="clickTool(this)" style="border: 3px solid black;">eraser</div><br>
+            </div>
         </div>
+        
         <script src="js/level_0.js"></script>
         <script src="js/worldbuilder.js"></script>
     </body>

@@ -94,18 +94,6 @@ body {
     float: left;
 }
 
-.layer {
-    width: 70px;
-    height: 70px;
-    margin: 10px;
-    background-color: white;
-    display: inline-block;
-    box-sizing: border-box;
-    background-size: cover;
-    z-index: 8;
-    float: left;
-}
-
 .gridLayer1 {
     position: absolute;
     min-width: 70px;
@@ -161,4 +149,8 @@ body {
     bottom: 0;
     left: 0;
     z-index: 100;
+}
+.btn {
+    width: 100%;
+    margin: 5px 0;
 }

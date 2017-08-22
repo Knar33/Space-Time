@@ -29,10 +29,25 @@ function clickLayer(box, layer) {
 //-----------------------------------------------------------toolbar----------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
 
-for(i = 1; i < 111; i++) {
-    var imageBG = "images/" + i + ".png";
-    $("#toolbar").append("<img class='tool' id='" + i + "' onClick='clickTool(this)' src='" + imageBG + "'>");
-}
+var playerBlockList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 48];
+var backgroundBlockList = [43, 46, 47, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110];
+
+inputHTML = "";
+
+inputHTML += "<button class='btn' type='button' data-toggle='collapse' data-target='#layer3' aria-expanded='false' aria-controls='layer3'>Objects with collision</button><div class='collapse' id='layer3'><br>";
+for(i = 0; i < playerBlockList.length; i++) {
+    var imageBG = "images/" + playerBlockList[i] + ".png";
+    inputHTML += "<img class='tool' id='" + playerBlockList[i] + "' onClick='clickTool(this)' src='" + imageBG + "'>";
+};
+
+inputHTML += "</div><button class='btn' type='button' data-toggle='collapse' data-target='#layer1' aria-expanded='false' aria-controls='layer1'>Objects without collision (background/scenery)</button><div class='collapse' id='layer1'><br>";
+for(i = 0; i < backgroundBlockList.length; i++) {
+    var imageBG = "images/" + backgroundBlockList[i] + ".png";
+    inputHTML += "<img class='tool' id='" + backgroundBlockList[i] + "' onClick='clickTool(this)' src='" + imageBG + "'>";
+};
+
+inputHTML += "</div>";
+$("#toolbar").append(inputHTML);
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------Grid layout------------------------------------------------------------
