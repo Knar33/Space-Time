@@ -8,13 +8,25 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body style="background-color: #b3f0ff">
+    <body>
         <div class="toolbar" id="toolbar">
             <div style="display: inline-block;">
+                <h3>Change background color</h3>
+                Starting Color: <input type="text" id="bgColor1" value="#b3f0ff"><br>
+                Ending Color: <input type="text" id="bgColor2" value="#49daff"><br>
+                <button class="btn" onclick="changebgColor()">Submit</button>
+                
+                <h3>Change Player starting position</h3>
+                X: <input type="text" id="startXPos" value="70"><br>
+                Y: <input type="text" id="startYPos" value="70"><br>
+                <button class="btn" onclick="changeStartingPos()">Submit</button>
+                
+                <h3>Select Layer</h3>
                 <button class="btn layer" type="button" onClick="clickLayer(this, 1)">Background layer 1</button>
                 <button class="btn layer" type="button" onClick="clickLayer(this, 2)">Background layer 2</button>
                 <button class="btn layer" type="button" onClick="clickLayer(this, 3)">Player layer (only layer with collision)</button>
                 <button class="btn layer" type="button" onClick="clickLayer(this, 4)">Foreground Layer</button>
+                <h3>Tools</h3>
                 <div class="toptool" id = "0" onClick="toggleGrid()" style="width: 70px; height: 70px;">show/hide grid</div>
                 <div class="toptool" id = "0" onClick="clickTool(this)" style="border: 3px solid black;">eraser</div><br>
             </div>

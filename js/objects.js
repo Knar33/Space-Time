@@ -127,8 +127,8 @@ for (y = 0; y < grid.height; y++) {
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = y * 70;
-                    thisObj.xBox = 122;
-                    thisObj.yBox = 90;
+                    thisObj.xBox = 120;
+                    thisObj.yBox = 70;
                     thisObj.friction = .2;
                     thisObj.collide = function(target, direction) {
                         if (collected == collectibles.length) {

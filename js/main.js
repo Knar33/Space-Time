@@ -23,8 +23,8 @@ var player = new Object();
 player.myID = box;
 player.xspeed = 0;
 player.yspeed = 0;
-player.xpos = startXPos;
-player.ypos = startYPos;
+player.xpos = grid.startXPos;
+player.ypos = grid.startYPos;
 player.xBox = 70;
 player.yBox = 92;
 player.animFrame = 0;
@@ -93,7 +93,7 @@ player.animate = function() {
         }
     }
 }
-$("#box").css({"left": startXPos, "bottom": startYPos})
+$("#box").css({"left": grid.startXPos, "bottom": grid.startYPos})
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------player control---------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ function updateDebug() {
 
 $("document").ready(function(){
     camera.scroll();
-    $("body").css("background", backgroundColor);
+    $("body").css("background", grid.bgColor);
 });
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -316,8 +316,8 @@ setInterval(function() {
     
     //player death check
     if (player.dead) {
-        player.ypos = startYPos;
-        player.xpos = startXPos;
+        player.ypos = grid.startYPos;
+        player.xpos = grid.startXPos;
         $("#box").css({"bottom": player.ypos, "left": player.xpos});
         player.dead = false;
         player.xspeed = 0;

@@ -25,6 +25,17 @@ function clickLayer(box, layer) {
     selectedLayer = layer;
 }
 
+function changebgColor() {
+    grid.bgColor = "linear-gradient(" + $('#bgColor1')[0].value + ", " + $('#bgColor2')[0].value + ")";
+    $("body").css("background", "linear-gradient(" + $('#bgColor1')[0].value + ", " + $('#bgColor2')[0].value + ")");
+}
+
+function changeStartingPos() {
+    grid.startXPos = parseInt($("#startXPos")[0].value);
+    grid.startYPos = parseInt($("#startYPos")[0].value);
+    $("#player").css({"bottom": grid.startYPos + "px", "left": (420 + grid.startXPos) + "px"});
+}
+
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------toolbar----------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +69,7 @@ var selection = 0;
 for (i = 1; i < 5; i++) {
     for (y = 0; y < 20; y++) {
         for (x = 0; x < 30; x++) {
-            $("#grid").append("<img " + (grid.vals[i][y][x] != 0 ? "src='images/" + grid.vals[i][y][x] + ".png'" : "") + " class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420+ x * 70) + "px' draggable='false'>");
+            $("#grid").append("<img src='images/" + (grid.vals[i][y][x] != 0 ? grid.vals[i][y][x] : "blank") + ".png' class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420 + x * 70) + "px' draggable='false'>");
         }
     }
 }
@@ -69,6 +80,9 @@ for (y = 0; y < 20; y++) {
         $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420 + x * 70) + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
     }
 }
+
+//need to change image
+$("#grid").append("<img src='images/player.png' class='gridLayer3' id='player' style='position: absolute; bottom: " + grid.startYPos + "px; left: " + (420 + grid.startXPos) + "px' draggable='false'>");
 
 function changeBG(x, y) {
     box = "#" + selectedLayer + "-" + x.toString() + "-" + y.toString();
@@ -90,3 +104,7 @@ $("#grid").mouseup(function() {
 
 //prevents user from dragging images
 window.ondragstart = function() { return false; } 
+
+$("document").ready(function(){
+    $("body").css("background", grid.bgColor);
+});
