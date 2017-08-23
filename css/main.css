@@ -54,6 +54,16 @@ body {
     display: inline-block;
 }
 
+.bloodSpikes {
+    width: 70px;
+    height: 70px;
+    background: url("../images/42_blood.png");
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
 /*worldBuilder*/
 
 .gameWindow {
@@ -73,6 +83,7 @@ body {
     overflow-x: hidden;
     color: lightgray;
     text-shadow: 2px 2px 8px #000000;
+    padding-bottom: 50px;
 }
 
 .tool {
@@ -145,15 +156,6 @@ body {
     color: white;
 }
 
-.bloodSpikes {
-    width: 70px;
-    height: 70px;
-    background: url("../images/42_blood.png");
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-}
 .btn {
     margin: 5px 0;
     color: black;
@@ -161,6 +163,7 @@ body {
 
 .layer {
     width: 100%;
+    margin-bottom: 0;
 }
 
 input {

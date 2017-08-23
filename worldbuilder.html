@@ -12,14 +12,18 @@
         <div class="toolbar" id="toolbar">
             <div style="display: inline-block;">
                 <h3>Change background color</h3>
-                Starting Color: <input type="text" id="bgColor1" value="#b3f0ff"><br>
-                Ending Color: <input type="text" id="bgColor2" value="#49daff"><br>
-                <button class="btn" onclick="changebgColor()">Submit</button>
+                <form onsubmit="changebgColor(); return false;">
+                    Starting Color: <input type="text" id="bgColor1" value="#b3f0ff"><br>
+                    Ending Color: <input type="text" id="bgColor2" value="#49daff"><br>
+                    <input type="submit" class="btn">
+                </form>
                 
                 <h3>Change Player starting position</h3>
-                X: <input type="text" id="startXPos" value="70"><br>
-                Y: <input type="text" id="startYPos" value="70"><br>
-                <button class="btn" onclick="changeStartingPos()">Submit</button>
+                <form onsubmit="changeStartingPos(); return false;">
+                    X: <input type="text" id="startXPos" value="70"><br>
+                    Y: <input type="text" id="startYPos" value="70"><br>
+                    <input type="submit" class="btn">
+                </form>
                 
                 <h3>Select Layer</h3>
                 <button class="btn layer" type="button" onClick="clickLayer(this, 1)">Background layer 1</button>

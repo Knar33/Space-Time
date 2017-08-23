@@ -18,17 +18,22 @@ x    add player down animation
 BUGS AND MECHANICS
      add more block types
 x       fix spaceship collision
-        ice
+x       ice
 x       spike (death)
         water (death)
-        round edges
+x       non-square tiles
+        more collectible object types
+x       Make default tile no hitbox (after formatting all tiles in collidable tile pool)
      apply friction at endstep, not at collision
      clean up and refactor code
      general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
-?    fix bug with screen being too small and camera default pos
-?   screen going over max width
+     select which world to edit from drop-down, or create new
+x    fix bug with screen being too small and camera default pos
+x    screen going over max width
 x    when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
-    Fix camera so it pans to player when viewport size changes
+x    Fix camera so it pans to player when viewport size changes
+x    Change camera defaut position to be based on player start position
+     arrow buttons that are visible on smaller screens for mobile users
      
 WORLD BUILDER
      add save function to worldbuilder connected to firebase or c#/php api
@@ -43,8 +48,8 @@ FRONT END VISUALSs
      revamp index page
      revamp win page
      
-     
-     
-     
-     
-     IN PROGRESS: FIX WORLDBUILDER BUTTONS
+OPTIONAL FEATURES FOR THE FUTURE
+    + and - symbols for x/y starting pos in worldbuilder
+    select player skin
+    enemies
+    items

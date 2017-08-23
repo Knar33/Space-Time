@@ -1,4 +1,4 @@
-$("body").append("<div class='grid' id='grid' style='position: relative; top: 0; left: 0; height: " + grid.height * 70 + "px; width: " + grid.width  * 70 + "px;'></div>");
+$("body").append("<div class='grid' id='grid' style='position: relative; top: 0; left: 0; margin-left: 420px; height: " + grid.height * 70 + "px; width: " + grid.width  * 70 + "px;'></div>");
 
 var gridShow = true;
 var selectedLayer = 1;
@@ -33,7 +33,7 @@ function changebgColor() {
 function changeStartingPos() {
     grid.startXPos = parseInt($("#startXPos")[0].value);
     grid.startYPos = parseInt($("#startYPos")[0].value);
-    $("#player").css({"bottom": grid.startYPos + "px", "left": (420 + grid.startXPos) + "px"});
+    $("#player").css({"bottom": grid.startYPos + "px", "left": grid.startXPos + "px"});
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -45,13 +45,13 @@ var backgroundBlockList = [43, 46, 47, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 5
 
 inputHTML = "";
 
-inputHTML += "<button class='btn' type='button' data-toggle='collapse' data-target='#layer3' aria-expanded='false' aria-controls='layer3'>Objects with collision</button><div class='collapse' id='layer3'><br>";
+inputHTML += "<button class='btn layer' type='button' data-toggle='collapse' data-target='#layer3' aria-expanded='false' aria-controls='layer3'>Objects with collision</button><div class='collapse' id='layer3'>";
 for(i = 0; i < playerBlockList.length; i++) {
     var imageBG = "images/" + playerBlockList[i] + ".png";
     inputHTML += "<img class='tool' id='" + playerBlockList[i] + "' onClick='clickTool(this)' src='" + imageBG + "'>";
 };
 
-inputHTML += "</div><button class='btn' type='button' data-toggle='collapse' data-target='#layer1' aria-expanded='false' aria-controls='layer1'>Objects without collision (background/scenery)</button><div class='collapse' id='layer1'><br>";
+inputHTML += "</div><button class='btn layer' type='button' data-toggle='collapse' data-target='#layer1' aria-expanded='false' aria-controls='layer1'>Objects without collision (background/scenery)</button><div class='collapse' id='layer1'>";
 for(i = 0; i < backgroundBlockList.length; i++) {
     var imageBG = "images/" + backgroundBlockList[i] + ".png";
     inputHTML += "<img class='tool' id='" + backgroundBlockList[i] + "' onClick='clickTool(this)' src='" + imageBG + "'>";
@@ -69,7 +69,7 @@ var selection = 0;
 for (i = 1; i < 5; i++) {
     for (y = 0; y < 20; y++) {
         for (x = 0; x < 30; x++) {
-            $("#grid").append("<img src='images/" + (grid.vals[i][y][x] != 0 ? grid.vals[i][y][x] : "blank") + ".png' class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420 + x * 70) + "px' draggable='false'>");
+            $("#grid").append("<img src='images/" + (grid.vals[i][y][x] != 0 ? grid.vals[i][y][x] : "blank") + ".png' class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + x * 70 + "px' draggable='false'>");
         }
     }
 }
@@ -77,12 +77,12 @@ for (i = 1; i < 5; i++) {
 //top interaction layer
 for (y = 0; y < 20; y++) {
     for (x = 0; x < 30; x++) {
-        $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + (420 + x * 70) + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
+        $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + x * 70 + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
     }
 }
 
-//need to change image
-$("#grid").append("<img src='images/player.png' class='gridLayer3' id='player' style='position: absolute; bottom: " + grid.startYPos + "px; left: " + (420 + grid.startXPos) + "px' draggable='false'>");
+//player image
+$("#grid").append("<img src='images/player.png' class='gridLayer3' id='player' style='position: absolute; bottom: " + grid.startYPos + "px; left: " + grid.startXPos + "px' draggable='false'>");
 
 function changeBG(x, y) {
     box = "#" + selectedLayer + "-" + x.toString() + "-" + y.toString();

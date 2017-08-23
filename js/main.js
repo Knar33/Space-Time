@@ -8,8 +8,8 @@ var terminalVelocity = -20;
 //----------------------------------------------------------------------------------------------------------------------------------
 
 var camera = new Object();
-camera.xPos = window.innerWidth / 2;
-camera.yPos = window.innerHeight / 2;
+camera.xPos = grid.startXPos;
+camera.yPos = grid.startYPos;
 camera.scroll = function() {
     window.scrollTo(camera.xPos - (window.innerWidth / 2), (grid.height * 70) - camera.yPos - (window.innerHeight / 2));
 }
@@ -308,6 +308,7 @@ setInterval(function() {
     
     player.animate();
     updateDebug();
+    camera.scroll();
     
     //basic win condition
     if (collected == collectibles.length) {
