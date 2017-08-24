@@ -38,8 +38,7 @@ x    screen going over max width
 x    when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
 x    Fix camera so it pans to player when viewport size changes
 x    Change camera defaut position to be based on player start position
-x    arrow buttons that are always visible (make visible only on smaller screens for mobile users?)
-     optional use of arrow keys instead of wasd
+x    optional use of arrow keys instead of wasd
 ~    turn around time on frictioned surfaces (harder to change direction on ice etc)
      
 WORLD BUILDER

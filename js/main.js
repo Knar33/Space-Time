@@ -115,6 +115,7 @@ function leftKey(keyDown) {
     
 }
 
+//these are here for the option to have alternative control schemes, like on-screen buttons for mobile
 function rightKey(keyDown) {
     if (keyDown) {
         rightDown = true;
@@ -145,15 +146,19 @@ function downKey(keyDown) {
 function keyPressDown(key) {
     var thisKey = key.keyCode? key.keyCode : key.charCode;
     switch(thisKey) {
+        case 37:
         case 65: 
             leftKey(true);
             break;
+        case 39:
         case 68:
             rightKey(true);
             break;
+        case 38:
         case 87:
             upKey(true);
             break;
+        case 40:
         case 83:
             downKey(true);
             break;
@@ -163,15 +168,19 @@ function keyPressDown(key) {
 function keyPressUp(key) {
     var thisKey = key.keyCode? key.keyCode : key.charCode;
     switch(thisKey) {
+        case 37:
         case 65: 
             leftKey(false);
             break;
+        case 39:
         case 68:
             rightKey(false);
             break;
+        case 38:
         case 87:
             upKey(false);
             break;
+        case 40:
         case 83:
             downKey(false);
             break;
@@ -218,9 +227,6 @@ function updateDebug() {
 $("document").ready(function(){
     camera.scroll();
     $("body").css("background", grid.bgColor);
-    
-    //alternative controls for mobile -- dirty
-    $("body").append("<div class='mobileControl'><a oncontextmenu='return false;' ontouchstart='upKey(true); this.preventDefault()' ontouchend='upKey(false); this.preventDefault()' onmousedown='upKey(true)' onmouseup='upKey(false)' class='mobileButton centeredButton'></span><a oncontextmenu='return false;' ontouchstart='leftKey(true); this.preventDefault()' ontouchend='leftKey(false)' onmousedown='leftKey(true); this.preventDefault()' onmouseup='leftKey(false)' onclick='' class='mobileButton'></span><a oncontextmenu='return false;' ontouchstart='downKey(true); this.preventDefault()' ontouchend='downKey(false); this.preventDefault()' onmousedown='downKey(true)' onmouseup='downKey(false)' onclick='' class='mobileButton'></span><a oncontextmenu='return false;' ontouchstart='rightKey(true); this.preventDefault()' ontouchend='rightKey(false); this.preventDefault()' onmousedown='rightKey(true)' onmouseup='rightKey(false)' onclick='' class='mobileButton'></span></div>")
 });
 
 function applyFriction(obj) {
