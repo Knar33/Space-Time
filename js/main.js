@@ -1,6 +1,6 @@
 //physics variables
 var gravity = .7;
-var windResistance = .1;
+var windResistance = .05;
 var terminalVelocity = -20;
 
 //----------------------------------------------------------------------------------------------------------------------------------

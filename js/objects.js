@@ -629,6 +629,7 @@ for (y = 0; y < grid.height; y++) {
                         if (direction == "top") {
                             target.yspeed = 25;
                             target.airborne = true;
+                            player.friction = 0;
                         } 
                         //update debug menu
                         updateDebug();
@@ -666,12 +667,12 @@ for (y = 0; y < grid.height; y++) {
                     break;
 
 //water top
-                case "111":
+                case "112":
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = y * 70;
                     thisObj.xBox = 70;
-                    thisObj.yBox = 35;
+                    thisObj.yBox = 20;
                     thisObj.collide = function(target, direction) {
                         player.dead = true;
                         updateDebug();
@@ -680,7 +681,7 @@ for (y = 0; y < grid.height; y++) {
                     break;
                     
 //water body
-                case "112": 
+                case "111": 
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = y * 70;

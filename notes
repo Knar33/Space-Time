@@ -24,7 +24,7 @@ BUGS AND MECHANICS
 x       fix spaceship collision
 x       ice
 x       spike (death)
-        water (death)
+x       water (death)
 x       non-square tiles
         more collectible object types
 x       Make default tile no hitbox (after formatting all tiles in collidable tile pool)
@@ -44,7 +44,7 @@ x    optional use of arrow keys instead of wasd
 WORLD BUILDER
      add save function to worldbuilder connected to firebase or c#/php api
 x        choose background color in worldbuilder (implemented on backend already)
-         let builder specify height and width of world
+         let builder specify height and width of world (need to be able to reload page grid)
 x        let builder choose player starting position
      revamp worldbuilder page to include instructions
 x    show/hide blocks in worldbuilder depending on which layer is selected
