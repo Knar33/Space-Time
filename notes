@@ -1,5 +1,9 @@
+IN PROGRESS:
+main.js and objects.js
+changing how friction works, adding wind-up to changing x direction on friction surface
+
 TODO: 
-x    remove objects from gameworld when you collide
+x    remove collectible objects from gameworld when you collide
 x    add UI with objects left to collect
 x    in worldbuilder, if selected = 0 dont put 0.png
 x    let builder select where alien goes
@@ -24,16 +28,19 @@ x       spike (death)
 x       non-square tiles
         more collectible object types
 x       Make default tile no hitbox (after formatting all tiles in collidable tile pool)
-     apply friction at endstep, not at collision
+x    apply friction at endstep of horizontal movement, not on collision (multiple collisions were bring applied)
      clean up and refactor code
      general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
      select which world to edit from drop-down, or create new
+     test current world in editor
 x    fix bug with screen being too small and camera default pos
 x    screen going over max width
 x    when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
 x    Fix camera so it pans to player when viewport size changes
 x    Change camera defaut position to be based on player start position
-     arrow buttons that are visible on smaller screens for mobile users
+x    arrow buttons that are always visible (make visible only on smaller screens for mobile users?)
+     optional use of arrow keys instead of wasd
+~    turn around time on frictioned surfaces (harder to change direction on ice etc)
      
 WORLD BUILDER
      add save function to worldbuilder connected to firebase or c#/php api
@@ -49,6 +56,7 @@ FRONT END VISUALSs
      revamp win page
      
 OPTIONAL FEATURES FOR THE FUTURE
+    add drop shadows to background items to make them seem further away
     + and - symbols for x/y starting pos in worldbuilder
     select player skin
     enemies

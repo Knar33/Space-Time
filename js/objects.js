@@ -54,19 +54,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 42;
                     thisObj.xBox = 7;
                     thisObj.yBox = 28;
-                    thisObj.friction = .4;
+                    thisObj.friction = .1;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -124,19 +117,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 42;
                     thisObj.xBox = 7;
                     thisObj.yBox = 28;
-                    thisObj.friction = .03;
+                    thisObj.friction = .01;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -198,19 +184,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 52;
                     thisObj.xBox = 15;
                     thisObj.yBox = 18;
-                    thisObj.friction = .4;
+                    thisObj.friction = .1;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -262,19 +241,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 52;
                     thisObj.xBox = 10;
                     thisObj.yBox = 18;
-                    thisObj.friction = .03;
+                    thisObj.friction = .01;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -327,19 +299,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 4;
                     thisObj.xBox = 23;
                     thisObj.yBox = 66;
-                    thisObj.friction = .4;
+                    thisObj.friction = .1;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -396,19 +361,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 4;
                     thisObj.xBox = 23;
                     thisObj.yBox = 66;
-                    thisObj.friction = .03;
+                    thisObj.friction = .01;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -468,19 +426,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 51;
                     thisObj.xBox = 19;
                     thisObj.yBox = 19;
-                    thisObj.friction = .4;
+                    thisObj.friction = .1;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -532,19 +483,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = (y * 70) + 51;
                     thisObj.xBox = 19;
                     thisObj.yBox = 18;
-                    thisObj.friction = .03;
+                    thisObj.friction = .01;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -611,19 +555,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = y * 70;
                     thisObj.xBox = 70;
                     thisObj.yBox = 70;
-                    thisObj.friction = .4;
+                    thisObj.friction = .7;
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -654,19 +591,12 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = y * 70;
                     thisObj.xBox = 70;
                     thisObj.yBox = 70;
-                    thisObj.friction = .03;
+                    thisObj.friction = .05
                     thisObj.collide = function(target, direction) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -694,20 +624,11 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = y * 70;
                     thisObj.xBox = 70;
                     thisObj.yBox = 50;
-                    thisObj.friction = .2;
                     thisObj.collide = function(target, direction) {
                         //collision from above
                         if (direction == "top") {
                             target.yspeed = 25;
                             target.airborne = true;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
                         } 
                         //update debug menu
                         updateDebug();
@@ -739,11 +660,35 @@ for (y = 0; y < grid.height; y++) {
                             player.xpos++;
                             player.xspeed = 0;
                         } 
-                        //update debug menu
                         updateDebug();
-                        
-                        camera.xPos = window.innerWidth / 2;
-                        camera.yPos = window.innerHeight / 2;
+                    }
+                    objects.push(thisObj);
+                    break;
+
+//water top
+                case "111":
+                    var thisObj = new Object();
+                    thisObj.xpos = x * 70;
+                    thisObj.ypos = y * 70;
+                    thisObj.xBox = 70;
+                    thisObj.yBox = 35;
+                    thisObj.collide = function(target, direction) {
+                        player.dead = true;
+                        updateDebug();
+                    }
+                    objects.push(thisObj);
+                    break;
+                    
+//water body
+                case "112": 
+                    var thisObj = new Object();
+                    thisObj.xpos = x * 70;
+                    thisObj.ypos = y * 70;
+                    thisObj.xBox = 70;
+                    thisObj.yBox = 70;
+                    thisObj.collide = function(target, direction) {
+                        player.dead = true;
+                        updateDebug();
                     }
                     objects.push(thisObj);
                     break;
@@ -775,7 +720,7 @@ for (y = 0; y < grid.height; y++) {
                     thisObj.ypos = y * 70;
                     thisObj.xBox = 120;
                     thisObj.yBox = 70;
-                    thisObj.friction = .2;
+                    thisObj.friction = .1;
                     thisObj.collide = function(target, direction) {
                         if (collected == collectibles.length) {
                             if (level == maxLevels) {
@@ -787,14 +732,7 @@ for (y = 0; y < grid.height; y++) {
                         if (direction == "top") {
                             target.yspeed = 0;
                             target.airborne = false;
-                            if (target.xspeed >= this.friction) {
-                                target.xspeed -= this.friction;
-                            }
-                            else if (target.xspeed <= -1 * this.friction) {
-                                target.xspeed += this.friction;
-                            }
-                            else 
-                                target.xspeed = 0;
+                            target.friction = this.friction;
                             player.ypos++;
                         } 
                         if (direction == "bottom") {
@@ -832,7 +770,7 @@ for (y = 0; y < grid.height; y++) {
 //left boundry
 var blockLeft = new Object();
 blockLeft.xpos = -2;
-blockLeft.ypos = 0;
+blockLeft.ypos = -500;
 blockLeft.xBox = 2;
 blockLeft.yBox = 10000;
 blockLeft.collide = function(target, direction) {
@@ -850,7 +788,7 @@ objects.push(blockLeft);
 //right boundry
 var blockRight = new Object();
 blockRight.xpos = grid.width * 70;
-blockRight.ypos = 0;
+blockRight.ypos = -500;
 blockRight.xBox = 2;
 blockRight.yBox = 10000;
 blockRight.collide = function(target, direction) {

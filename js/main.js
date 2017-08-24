@@ -30,10 +30,11 @@ player.yBox = 92;
 player.animFrame = 0;
 player.jumpStrength = 20;
 player.airborne = true;
-player.moveSpeed = 1;
+player.moveSpeed = .5;
 player.xFace = "right";
 player.dead = false;
 player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
+player.friction = 0;
 //player animations
 player.animate = function() {
     //jump
@@ -103,23 +104,58 @@ var leftDown = false;
 var upDown = false;
 var downDown = false;
 
+
+function leftKey(keyDown) {
+    if (keyDown) {
+        leftDown = true;
+        player.xFace = "left";
+    } else {
+        leftDown = false;
+    }
+    
+}
+
+function rightKey(keyDown) {
+    if (keyDown) {
+        rightDown = true;
+        player.xFace = "right";
+    } else {
+        rightDown = false;
+    }
+}
+
+function upKey(keyDown) {
+    if (keyDown) {
+        upDown = true;
+    } else {
+        upDown = false;
+    }
+}
+
+function downKey(keyDown) {
+    if (keyDown) {
+        downDown = true;
+        player.yBox = 35;
+    } else {
+        downDown = false;
+        player.yBox = 70;
+    }
+}true
+
 function keyPressDown(key) {
     var thisKey = key.keyCode? key.keyCode : key.charCode;
     switch(thisKey) {
         case 65: 
-            leftDown = true;
-            player.xFace = "left";
+            leftKey(true);
             break;
         case 68:
-            rightDown = true;
-            player.xFace = "right";
+            rightKey(true);
             break;
         case 87:
-            upDown = true;
+            upKey(true);
             break;
         case 83:
-            downDown = true;
-            player.yBox = 35;
+            downKey(true);
             break;
     }
 }
@@ -128,17 +164,16 @@ function keyPressUp(key) {
     var thisKey = key.keyCode? key.keyCode : key.charCode;
     switch(thisKey) {
         case 65: 
-            leftDown = false;
+            leftKey(false);
             break;
         case 68:
-            rightDown = false;
+            rightKey(false);
             break;
         case 87:
-            upDown = false;
+            upKey(false);
             break;
         case 83:
-            downDown = false;
-            player.yBox = 70;
+            downKey(false);
             break;
     }
 } 
@@ -177,13 +212,27 @@ function checkCollision(obj1, obj2) {
 }
 
 function updateDebug() {
-//    $("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2);
+    //$("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2);
 }
 
 $("document").ready(function(){
     camera.scroll();
     $("body").css("background", grid.bgColor);
+    
+    //alternative controls for mobile -- dirty
+    $("body").append("<div class='mobileControl'><a oncontextmenu='return false;' ontouchstart='upKey(true); this.preventDefault()' ontouchend='upKey(false); this.preventDefault()' onmousedown='upKey(true)' onmouseup='upKey(false)' class='mobileButton centeredButton'></span><a oncontextmenu='return false;' ontouchstart='leftKey(true); this.preventDefault()' ontouchend='leftKey(false)' onmousedown='leftKey(true); this.preventDefault()' onmouseup='leftKey(false)' onclick='' class='mobileButton'></span><a oncontextmenu='return false;' ontouchstart='downKey(true); this.preventDefault()' ontouchend='downKey(false); this.preventDefault()' onmousedown='downKey(true)' onmouseup='downKey(false)' onclick='' class='mobileButton'></span><a oncontextmenu='return false;' ontouchstart='rightKey(true); this.preventDefault()' ontouchend='rightKey(false); this.preventDefault()' onmousedown='rightKey(true)' onmouseup='rightKey(false)' onclick='' class='mobileButton'></span></div>")
 });
+
+function applyFriction(obj) {
+    if (obj.xspeed >= obj.friction) {
+        obj.xspeed -= obj.friction;
+    }
+    else if (obj.xspeed <= -1 * obj.friction) {
+        obj.xspeed += obj.friction;
+    } else {
+        obj.xspeed = 0;
+    }
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------main runtime function--------------------------------------------------
@@ -206,15 +255,16 @@ setInterval(function() {
     //check what player is pressing
     if (rightDown) {
         if (player.xspeed < 10)
-            player.xspeed += player.moveSpeed;
+            player.xspeed += player.moveSpeed + player.friction;
     }
     if (leftDown) {
         if (player.xspeed > -10)
-            player.xspeed -= player.moveSpeed;
+            player.xspeed -= player.moveSpeed + player.friction;
     }
     if (upDown) {
         if (player.airborne == false) {
             player.yspeed += player.jumpStrength;
+            player.friction = 0;
             player.airborne = true;
         }
     }
@@ -222,7 +272,7 @@ setInterval(function() {
         //nothing here yet - add down animation in future
     }
 
-    //if player yspeed isnt one, it means they are airborne
+    //if player yspeed isnt 0, it means they are airborne
     if (player.yspeed != 0) {
         player.airborne = true;
     }
@@ -307,6 +357,7 @@ setInterval(function() {
     }
     
     player.animate();
+    applyFriction(player);
     updateDebug();
     camera.scroll();
     
@@ -323,5 +374,8 @@ setInterval(function() {
         player.dead = false;
         player.xspeed = 0;
         player.yspeed = 0;
+        camera.xPos = grid.startXPos;
+        camera.yPos = grid.startYPos;
+        camera.scroll();
     }
 }, 17);
