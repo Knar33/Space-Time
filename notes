@@ -20,13 +20,13 @@ x    add reverse animations to player
 x    add player down animation
      
 BUGS AND MECHANICS
-     add more block types
+x    add more block types
 x       fix spaceship collision
 x       ice
 x       spike (death)
 x       water (death)
 x       non-square tiles
-        more collectible object types
+x       more collectible object types
 x       Make default tile no hitbox (after formatting all tiles in collidable tile pool)
 x    apply friction at endstep of horizontal movement, not on collision (multiple collisions were bring applied)
      clean up and refactor code
@@ -60,3 +60,4 @@ OPTIONAL FEATURES FOR THE FUTURE
     select player skin
     enemies
     items
+    add double jump

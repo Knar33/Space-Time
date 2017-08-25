@@ -87,8 +87,6 @@ body {
 }
 
 .tool {
-    min-width: 70px;
-    min-height: 70px;
     margin: 10px;
     background-color: white;
     display: inline-block;
@@ -111,32 +109,24 @@ body {
 
 .gridLayer1 {
     position: absolute;
-    min-width: 70px;
-    min-height: 70px;
     display: inline-block;
     z-index: 1;
 }
 
 .gridLayer2 {
     position: absolute;
-    min-width: 70px;
-    min-height: 70px;
     display: inline-block;
     z-index: 2;
 }
 
 .gridLayer3 {
     position: absolute;
-    min-width: 70px;
-    min-height: 70px;
     display: inline-block;
     z-index: 3;
 }
 
 .gridLayer4 {
     position: absolute;
-    min-width: 70px;
-    min-height: 70px;
     display: inline-block;
     z-index: 5;
 }

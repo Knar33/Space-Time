@@ -40,24 +40,18 @@ function changeStartingPos() {
 //-----------------------------------------------------------toolbar----------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
 
-var playerBlockList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 48, 111, 112];
-var backgroundBlockList = [43, 46, 47, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110];
-
 inputHTML = "";
+var prefixes = [["basic_background", 88], ["basic_interact", 83], ["collectible", 145], ["house_background", 50], ["house_interact", 39], ["industrial_background", 45], ["industrial_interact", 35], ["mideival_background", 99], ["mideival_interact", 169], ["mushroom_background",  14], ["mushroom_interact",  32], ["clouds", 9]];
 
-inputHTML += "<button class='btn layer' type='button' data-toggle='collapse' data-target='#layer3' aria-expanded='false' aria-controls='layer3'>Objects with collision</button><div class='collapse' id='layer3'>";
-for(i = 0; i < playerBlockList.length; i++) {
-    var imageBG = "images/" + playerBlockList[i] + ".png";
-    inputHTML += "<img class='tool' id='" + playerBlockList[i] + "' onClick='clickTool(this)' src='" + imageBG + "'>";
-};
+for (i = 0; i < prefixes.length; i++) {
+    inputHTML += "<button class='btn layer' type='button' data-toggle='collapse' data-target='#" + prefixes[i][0] + "' aria-expanded='false' aria-controls='" + prefixes[i][0] + "'>" + prefixes[i][0] + "</button><div class='collapse' id='" + prefixes[i][0] + "'>";
+    for(j = 1; j <= prefixes[i][1]; j++) {
+        var imageBG = prefixes[i][0] + " (" + j + ")";
+        inputHTML += "<img class='tool' id='" + imageBG + "' onClick='clickTool(this)' src='images/" + imageBG + ".png'>";
+    };
+    inputHTML += "</div>";
+}
 
-inputHTML += "</div><button class='btn layer' type='button' data-toggle='collapse' data-target='#layer1' aria-expanded='false' aria-controls='layer1'>Objects without collision (background/scenery)</button><div class='collapse' id='layer1'>";
-for(i = 0; i < backgroundBlockList.length; i++) {
-    var imageBG = "images/" + backgroundBlockList[i] + ".png";
-    inputHTML += "<img class='tool' id='" + backgroundBlockList[i] + "' onClick='clickTool(this)' src='" + imageBG + "'>";
-};
-
-inputHTML += "</div>";
 $("#toolbar").append(inputHTML);
 
 //----------------------------------------------------------------------------------------------------------------------------------
