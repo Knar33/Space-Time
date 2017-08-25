@@ -230,13 +230,15 @@ $("document").ready(function(){
 });
 
 function applyFriction(obj) {
-    if (obj.xspeed >= obj.friction) {
-        obj.xspeed -= obj.friction;
-    }
-    else if (obj.xspeed <= -1 * obj.friction) {
-        obj.xspeed += obj.friction;
-    } else {
-        obj.xspeed = 0;
+    if (!player.airborne) {
+        if (obj.xspeed >= obj.friction) {
+            obj.xspeed -= obj.friction;
+        }
+        else if (obj.xspeed <= -1 * obj.friction) {
+            obj.xspeed += obj.friction;
+        } else {
+            obj.xspeed = 0;
+        }
     }
 }
 
@@ -372,6 +374,9 @@ setInterval(function() {
         $(".padded")[0].innerHTML = "Return to the ship!";
     }
     
+    if (player.ypos < -200) {
+        player.dead = true;
+    }
     //player death check
     if (player.dead) {
         player.ypos = grid.startYPos;

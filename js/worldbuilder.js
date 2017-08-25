@@ -41,7 +41,7 @@ function changeStartingPos() {
 //----------------------------------------------------------------------------------------------------------------------------------
 
 inputHTML = "";
-var prefixes = [["basic_background", 88], ["basic_interact", 83], ["collectible", 145], ["house_background", 50], ["house_interact", 39], ["industrial_background", 45], ["industrial_interact", 35], ["mideival_background", 99], ["mideival_interact", 169], ["mushroom_background",  14], ["mushroom_interact",  32], ["clouds", 9]];
+var prefixes = [["basic_background", 88], ["basic_interact", 83], ["collectible", 145], ["house_background", 50], ["house_interact", 39], ["industrial_background", 45], ["industrial_interact", 35], ["mideival_background", 99], ["mideival_interact", 169], ["mushroom_background",  14], ["mushroom_interact",  32], ["candy_interact",  39], ["candy_background",  44], ["clouds", 9]];
 
 for (i = 0; i < prefixes.length; i++) {
     inputHTML += "<button class='btn layer' type='button' data-toggle='collapse' data-target='#" + prefixes[i][0] + "' aria-expanded='false' aria-controls='" + prefixes[i][0] + "'>" + prefixes[i][0] + "</button><div class='collapse' id='" + prefixes[i][0] + "'>";
@@ -61,16 +61,16 @@ $("#toolbar").append(inputHTML);
 var selection = 0;
 //create grid layout
 for (i = 1; i < 5; i++) {
-    for (y = 0; y < 20; y++) {
-        for (x = 0; x < 30; x++) {
+    for (y = 0; y < grid.height; y++) {
+        for (x = 0; x < grid.width; x++) {
             $("#grid").append("<img src='images/" + (grid.vals[i][y][x] != 0 ? grid.vals[i][y][x] : "blank") + ".png' class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + x * 70 + "px' draggable='false'>");
         }
     }
 }
 
 //top interaction layer
-for (y = 0; y < 20; y++) {
-    for (x = 0; x < 30; x++) {
+for (y = 0; y < grid.height; y++) {
+    for (x = 0; x < grid.width; x++) {
         $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + x * 70 + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
     }
 }

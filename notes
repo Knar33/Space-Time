@@ -40,6 +40,7 @@ x    Fix camera so it pans to player when viewport size changes
 x    Change camera defaut position to be based on player start position
 x    optional use of arrow keys instead of wasd
 ~    turn around time on frictioned surfaces (harder to change direction on ice etc)
+x    further back objects are darker
      
 WORLD BUILDER
      add save function to worldbuilder connected to firebase or c#/php api

@@ -9,7 +9,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals[1][y][x] != 0) {
             thisTile = "images/" + grid.vals[1][y][x] + ".png";
-            $("#objdiv").append("<img class='tile' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 1;' src='" + thisTile + "'>");
+            $("#objdiv").append("<img class='tile shadowed1' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 1;' src='" + thisTile + "'>");
         }
     }
 }
@@ -19,7 +19,7 @@ for (y = 0; y < grid.height; y++) {
     for (x = 0; x < grid.width; x++) {
         if (grid.vals[2][y][x] != 0) {
             thisTile = "images/" + grid.vals[2][y][x] + ".png";
-            $("#objdiv").append("<img class='tile' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
+            $("#objdiv").append("<img class='tile shadowed2' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
         }
     }
 }
@@ -51,6 +51,8 @@ for (y = 0; y < grid.height; y++) {
                 case "basic_interact (42)": 
                 case "basic_interact (50)": 
                 case "basic_interact (57)": 
+                case "candy_interact (13)": 
+                case "candy_interact (34)": 
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = (y * 70) + 42;
@@ -182,6 +184,8 @@ for (y = 0; y < grid.height; y++) {
                 case "basic_interact (35)": 
                 case "basic_interact (43)": 
                 case "basic_interact (51)": 
+                case "candy_interact (14)": 
+                case "candy_interact (35)": 
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = (y * 70) + 52;
@@ -299,6 +303,8 @@ for (y = 0; y < grid.height; y++) {
                 case "basic_interact (20)": 
                 case "basic_interact (36)": 
                 case "basic_interact (44)": 
+                case "candy_interact (15)": 
+                case "candy_interact (36)": 
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = (y * 70) + 4;
@@ -426,6 +432,8 @@ for (y = 0; y < grid.height; y++) {
                 case "basic_interact (35)": 
                 case "basic_interact (43)": 
                 case "basic_interact (51)": 
+                case "candy_interact (16)": 
+                case "candy_interact (37)": 
                     var thisObj = new Object();
                     thisObj.xpos = (x * 70) + 51;
                     thisObj.ypos = (y * 70) + 51;
@@ -806,6 +814,18 @@ for (y = 0; y < grid.height; y++) {
                 case "mideival_interact (166)": 
                 case "mideival_interact (167)": 
                 case "mideival_interact (168)": 
+                case "candy_interact (7)": 
+                case "candy_interact (8)": 
+                case "candy_interact (9)": 
+                case "candy_interact (10)": 
+                case "candy_interact (11)": 
+                case "candy_interact (12)": 
+                case "candy_interact (25)": 
+                case "candy_interact (26)": 
+                case "candy_interact (27)": 
+                case "candy_interact (31)": 
+                case "candy_interact (32)": 
+                case "candy_interact (33)": 
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = y * 70;
@@ -925,6 +945,25 @@ for (y = 0; y < grid.height; y++) {
                 case "industrial_interact (33)": 
                 case "industrial_interact (34)": 
                 case "industrial_interact (35)": 
+                case "candy_interact (1)": 
+                case "candy_interact (2)": 
+                case "candy_interact (3)": 
+                case "candy_interact (4)": 
+                case "candy_interact (5)": 
+                case "candy_interact (6)": 
+                case "candy_interact (17)": 
+                case "candy_interact (18)": 
+                case "candy_interact (19)": 
+                case "candy_interact (20)": 
+                case "candy_interact (21)": 
+                case "candy_interact (22)": 
+                case "candy_interact (23)": 
+                case "candy_interact (24)": 
+                case "candy_interact (28)": 
+                case "candy_interact (29)": 
+                case "candy_interact (30)": 
+                case "candy_interact (38)": 
+                case "candy_interact (39)": 
                     var thisObj = new Object();
                     thisObj.xpos = x * 70;
                     thisObj.ypos = (y * 70) + 30;
