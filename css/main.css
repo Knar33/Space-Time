@@ -88,7 +88,6 @@ body {
 
 .tool {
     margin: 10px;
-    background-color: white;
     display: inline-block;
     box-sizing: border-box;
     z-index: 8;
@@ -133,8 +132,8 @@ body {
     position: absolute;
     display: inline-block;
     z-index: 5;
-    -webkit-filter: brightness(110%);
-    filter:         brightness(110%);
+    -webkit-filter: blur(1.5px);
+    filter:         blue(1.5px);
 }
 
 .gridBox {
@@ -177,6 +176,6 @@ input {
 }
 
 .shadowed3 {
-    -webkit-filter: brightness(110%);
-    filter:         brightness(110%);
+    -webkit-filter: blur(1.5px);
+    filter:         blue(1.5px);
 }

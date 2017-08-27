@@ -1,3 +1,5 @@
+createObjects();
+
 //physics variables
 var gravity = .7;
 var windResistance = .05;
@@ -8,10 +10,8 @@ var terminalVelocity = -20;
 //----------------------------------------------------------------------------------------------------------------------------------
 
 var camera = new Object();
-camera.xPos = grid.startXPos;
-camera.yPos = grid.startYPos;
 camera.scroll = function() {
-    window.scrollTo(camera.xPos - (window.innerWidth / 2), (grid.height * 70) - camera.yPos - (window.innerHeight / 2));
+    window.scrollTo(player.xpos - (window.innerWidth / 2) + 35, (grid.height * 70) - player.ypos - (window.innerHeight / 2) - 35);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -297,14 +297,8 @@ setInterval(function() {
                 }
             });
             $("#box")[0].style.left = player.xpos + "px";
-            //if player is to the right of the camera (center of screen) and the camera x position is less than the center of screen at the right edge of the map, pan camera to the right and scroll to the right
-            //set player.xpos+35 and (grid.width * 70)-(window.innerWidth/2)+35 for perfectly centered camera, but odd side effects when screen is too large
-            if (    player.xpos+35 > camera.xPos 
-                    && camera.xPos < (grid.width * 70)-(window.innerWidth/2)+35) {
-                camera.xPos++;
-                camera.scroll();
-            }
             updateDebug();
+            camera.scroll();
         } else if (player.xspeed < 0) {
             player.xpos--;
             //array of all objects with x values that could potentially collide
@@ -315,14 +309,8 @@ setInterval(function() {
                 }
             });
             $("#box")[0].style.left = player.xpos + "px";
-            //if player is to the right of the camera, and the camera position is greater than the starting camera position, and player is to the left of the center of screen at the right edge of the map
-            if (    player.xpos+35 > camera.xPos-2 
-                    && camera.xPos > window.innerWidth / 2 
-                    && player.xpos < (grid.width * 70)-(window.innerWidth/2)) {
-                camera.xPos--;
-                camera.scroll();
-            }
             updateDebug();
+            camera.scroll();
         }
     }
 
@@ -338,12 +326,8 @@ setInterval(function() {
                 }
             });
             $("#box")[0].style.bottom = player.ypos + "px";
-            if (    player.ypos+35 > camera.yPos 
-                    && camera.yPos < (grid.height * 70)-(window.innerHeight/2)) {
-                camera.yPos++;
-                camera.scroll();
-            }
             updateDebug();
+            camera.scroll();
         } else if (player.yspeed < 0) {
             player.ypos--;
             //array of all objects with y values that could potentially collide
@@ -354,13 +338,8 @@ setInterval(function() {
                 }
             });
             $("#box")[0].style.bottom = player.ypos + "px";
-            if (    player.ypos+35 < camera.yPos 
-                    && camera.yPos > (window.innerHeight / 2)-35 
-                    && player.ypos < (grid.height * 70)-(window.innerHeight/2)) {
-                camera.yPos--;
-                camera.scroll();
-            }
             updateDebug();
+            camera.scroll();
         }
     }
     
@@ -385,8 +364,5 @@ setInterval(function() {
         player.dead = false;
         player.xspeed = 0;
         player.yspeed = 0;
-        camera.xPos = grid.startXPos;
-        camera.yPos = grid.startYPos;
-        camera.scroll();
     }
 }, 17);
