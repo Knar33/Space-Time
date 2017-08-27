@@ -1,7 +1,11 @@
+var grid = level[0];
+
 $("body").append("<div class='grid' id='grid' style='position: relative; top: 0; left: 0; margin-left: 420px; height: " + grid.height * 70 + "px; width: " + grid.width  * 70 + "px;'></div>");
 
 var gridShow = true;
 var selectedLayer = 1;
+var selection = 0;
+
 function toggleGrid() {
     if (gridShow) {
         $(".gridBox").css("border", "none");
@@ -26,8 +30,9 @@ function clickLayer(box, layer) {
 }
 
 function changebgColor() {
-    grid.bgColor = "linear-gradient(" + $('#bgColor1')[0].value + ", " + $('#bgColor2')[0].value + ")";
-    $("body").css("background", "linear-gradient(" + $('#bgColor1')[0].value + ", " + $('#bgColor2')[0].value + ")");
+    grid.bgColor1 = $('#bgColor1')[0].value;
+    grid.bgColor1 = $('#bgColor2')[0].value;
+    $("body").css("background", "linear-gradient(" + grid.bgColor1 + ", " + grid.bgColor2 + ")");
 }
 
 function changeStartingPos() {
@@ -72,7 +77,6 @@ $("#toolbar").append(inputHTML);
 function createLayout() {
     $("#grid").css({"height": ((grid.height * 70) + "px"), "width": ((grid.width  * 70) + "px")})
     $("#grid")[0].innerHTML = "";
-    var selection = 0;
     //create grid layout
     for (i = 1; i < 5; i++) {
         for (y = 0; y < grid.height; y++) {
@@ -92,7 +96,12 @@ function createLayout() {
     //player image
     $("#grid").append("<img src='images/player.png' class='gridLayer3' id='player' style='position: absolute; bottom: " + grid.startYPos + "px; left: " + grid.startXPos + "px' draggable='false'>");
 
-    $("body").css("background", grid.bgColor);
+    $("body").css("background", "linear-gradient(" + grid.bgColor1 + ", " + grid.bgColor2 + ")");
+ 
+    $("#bgColor1")[0].value = grid.bgColor1;
+    $("#bgColor2")[0].value = grid.bgColor2;
+    $("#startXPos")[0].value = grid.startXPos;
+    $("#startXPos")[0].value = grid.startYPos;
 }
 createLayout();
 

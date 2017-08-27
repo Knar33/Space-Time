@@ -1,0 +1,21 @@
+1) go to knar33.github.io/box-game/worldbuilder.html
+
+2) use the world editor to build your world. There are 2 background layers that have no collision with the player, one layer where the player is on where he collides with any object in an _interact tab, and a fourth layer which is in front of the player which also has no collision. The only layer that really matters is the player layer: this is where you need to put your blocks that the player will walk on, obstacles, collectible objects, and the spaceship the player uses to exit a level. the other 3 layers are just for decoration. tabs marked _background will never have collision, even if they are put on the player layer. For example, if you place a tree on the player layer, the player will walk right through it.
+
+3)When you are done building your world, you need to save it. There is no save function yet, so you have to manually do it. 
+
+    Press f12 to open the console
+    type this into the console, and hit enter: 
+        JSON.stringify(grid);
+    copy and everything inside the quotes (but don't include the quotes) and past and save it in a text editor. It should all be contained in curly braces {}. This is your level.
+
+4) to test your level, go to knar33.github.io/box-game/game.html
+    
+    press f12 to open the console
+    type this into the console, and hit enter:
+        grid = paste your level here
+    then type this into the console and hit enter:
+        BuildWorld();
+    exit the console (hit f12 or press the x)
+    
+5) test your world, then go back to the worldbuilder and repeat all the steps :D

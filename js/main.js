@@ -1,100 +1,5 @@
-createObjects();
+buildWorld();
 
-//physics variables
-var gravity = .7;
-var windResistance = .05;
-var terminalVelocity = -20;
-
-//----------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------camera object----------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------------------
-
-var camera = new Object();
-camera.scroll = function() {
-    window.scrollTo(player.xpos - (window.innerWidth / 2) + 35, (grid.height * 70) - player.ypos - (window.innerHeight / 2) - 35);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------player object----------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------------------
-
-//player object
-var player = new Object();
-player.myID = box;
-player.xspeed = 0;
-player.yspeed = 0;
-player.xpos = grid.startXPos;
-player.ypos = grid.startYPos;
-player.xBox = 70;
-player.yBox = 92;
-player.animFrame = 0;
-player.jumpStrength = 20;
-player.airborne = true;
-player.moveSpeed = .5;
-player.xFace = "right";
-player.dead = false;
-player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
-player.friction = 0;
-//player animations
-player.animate = function() {
-    //jump
-    if (player.yspeed > 0 && player.airborne) {
-        player.animFrame = 0;
-        if (player.xFace == "right") {
-            $("#box")[0].style.backgroundPosition = "-423px -95px";
-        } else if (player.xFace == "left") {
-            $("#box")[0].style.backgroundPosition = "493px -95px";
-        }
-    }
-    //falling
-    else if (player.yspeed < 0 && player.airborne) {
-        player.animFrame = 0
-        if (player.xFace == "right") {
-            $("#box")[0].style.backgroundPosition = "-423px 0px";
-        } else if (player.xFace == "left") {
-            $("#box")[0].style.backgroundPosition = "494px 0px";
-        }
-    }
-    //crouching
-    else if (downDown && !rightDown && !leftDown) {
-        player.animFrame = 0;
-        if (player.xFace == "right") {
-            $("#box")[0].style.backgroundPosition = "-352px -94px";
-        } else if (player.xFace == "left") {
-            $("#box")[0].style.backgroundPosition = "423px -94px";
-        }
-    }
-    //standing
-    else if (!rightDown && !leftDown) {
-        player.animFrame = 0;
-        if (player.xFace == "right") {
-            $("#box")[0].style.backgroundPosition = "-67px -190px";
-        } else if (player.xFace == "left") {
-            $("#box")[0].style.backgroundPosition = "137px -190px";
-        }
-    }
-    //run
-    else if (rightDown && !this.airborne) {
-        if (player.animFrame == 30) {
-            player.animFrame = 0;
-            $("#box")[0].style.background = "url('../images/p2_spritesheet.png') 0 0;";
-        }
-        else {
-            player.animFrame++;
-            $("#box")[0].style.backgroundPosition = "-" + player.walk[Math.floor(player.animFrame/3)][0] + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px";
-        }
-    } else if (leftDown && !this.airborne) {
-        if (player.animFrame == 30) {
-            player.animFrame = 0;
-            $("#box")[0].style.background = "url('../images/p2_spritesheet.png') 0 0;";
-        }
-        else {
-            player.animFrame++;
-            $("#box")[0].style.backgroundPosition = (player.walk[Math.floor(player.animFrame/3)][0] + 70) + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px";
-        }
-    }
-}
-$("#box").css({"left": grid.startXPos, "bottom": grid.startYPos})
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------player control---------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +8,6 @@ var rightDown = false;
 var leftDown = false;
 var upDown = false;
 var downDown = false;
-
 
 function leftKey(keyDown) {
     if (keyDown) {
@@ -136,10 +40,8 @@ function upKey(keyDown) {
 function downKey(keyDown) {
     if (keyDown) {
         downDown = true;
-        player.yBox = 35;
     } else {
         downDown = false;
-        player.yBox = 70;
     }
 }true
 
@@ -226,7 +128,7 @@ function updateDebug() {
 
 $("document").ready(function(){
     camera.scroll();
-    $("body").css("background", grid.bgColor);
+    $("body").css("background", "linear-gradient(" + grid.bgColor1 + ", " + grid.bgColor2 + ")");
 });
 
 function applyFriction(obj) {

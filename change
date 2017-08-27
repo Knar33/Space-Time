@@ -1,0 +1,7 @@
+how it works now:
+
+each level has its own json file that creates the grid object
+each level has its own html file that calls javascript files in this order
+    level.js
+    objects.js
+    main.js

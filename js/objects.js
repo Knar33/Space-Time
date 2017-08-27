@@ -1,13 +1,128 @@
+//this script builds (and rebuilds on command) the gameworld, and defines all of the objects within the gameworld
+
 var objects = [];
 var collectibles = [];
 var collected = 0;
 
-function createObjects() {
-    $("body").append("<div id='objdiv' style='overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div id='box' class='box'></div></div>");
+var grid = level[1];
+var currentLevel = 1;
 
+var player = new Object();
+player.xBox = 70;
+player.yBox = 92;
+player.jumpStrength = 20;
+player.moveSpeed = .5;
+player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
+player.animate = function() {
+        //jump
+        if (player.yspeed > 0 && player.airborne) {
+            player.animFrame = 0;
+            if (player.xFace == "right") {
+                $("#box")[0].style.backgroundPosition = "-423px -95px";
+            } else if (player.xFace == "left") {
+                $("#box")[0].style.backgroundPosition = "493px -95px";
+            }
+        }
+        //falling
+        else if (player.yspeed < 0 && player.airborne) {
+            player.animFrame = 0
+            if (player.xFace == "right") {
+                $("#box")[0].style.backgroundPosition = "-423px 0px";
+            } else if (player.xFace == "left") {
+                $("#box")[0].style.backgroundPosition = "494px 0px";
+            }
+        }
+        //crouching
+        else if (downDown && !rightDown && !leftDown) {
+            player.animFrame = 0;
+            if (player.xFace == "right") {
+                $("#box")[0].style.backgroundPosition = "-352px -94px";
+            } else if (player.xFace == "left") {
+                $("#box")[0].style.backgroundPosition = "423px -94px";
+            }
+        }
+        //standing
+        else if (!rightDown && !leftDown) {
+            player.animFrame = 0;
+            if (player.xFace == "right") {
+                $("#box")[0].style.backgroundPosition = "-67px -190px";
+            } else if (player.xFace == "left") {
+                $("#box")[0].style.backgroundPosition = "137px -190px";
+            }
+        }
+        //run
+        else if (rightDown && !this.airborne) {
+            if (player.animFrame == 30) {
+                player.animFrame = 0;
+                $("#box")[0].style.background = "url('../images/p2_spritesheet.png') 0 0;";
+            }
+            else {
+                player.animFrame++;
+                $("#box")[0].style.backgroundPosition = "-" + player.walk[Math.floor(player.animFrame/3)][0] + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px";
+            }
+        } else if (leftDown && !this.airborne) {
+            if (player.animFrame == 30) {
+                player.animFrame = 0;
+                $("#box")[0].style.background = "url('../images/p2_spritesheet.png') 0 0;";
+            }
+            else {
+                player.animFrame++;
+                $("#box")[0].style.backgroundPosition = (player.walk[Math.floor(player.animFrame/3)][0] + 70) + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px";
+            }
+        }
+    }
+
+//----------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------camera object----------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------
+
+var camera = new Object();
+camera.scroll = function() {
+    window.scrollTo(player.xpos - (window.innerWidth / 2) + 35, (grid.height * 70) - player.ypos - (window.innerHeight / 2) - 35);
+}
+    
+//physics variables
+    var gravity = .7;
+    var windResistance = .05;
+    var terminalVelocity = -20;
+
+//----------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------function that builds/rebuilds world----------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------
+
+function buildWorld() {
+    camera.scroll();
+    $("body").css("background", "linear-gradient(" + grid.bgColor1 + ", " + grid.bgColor2 + ")");
+    
+    $("body")[0].innerHTML = "<div id='objdiv' style='overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div id='box' class='box'></div></div><div class='debug' id='debug'></div><div class='ui'><div class='padded''>Objects to collect:</div></div>";
+    
     objects = [];
     collectibles = [];
     collected = 0;
+    
+//----------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------player object----------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------
+
+    //player object
+    player.myID = box;
+    player.xspeed = 0;
+    player.yspeed = 0;
+    player.xpos = grid.startXPos;
+    player.ypos = grid.startYPos;
+    player.animFrame = 0;
+    player.airborne = true;
+    player.xFace = "right";
+    player.dead = false;
+    player.friction = 0;
+    //player animations
+    
+    $("#box").css({"left": grid.startXPos, "bottom": grid.startYPos})
+    
+
+//----------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------Gameworld objects------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------
 
     //create background layer 1 images
     for (y = 0; y < grid.height; y++) {
@@ -1322,10 +1437,12 @@ function createObjects() {
                         thisObj.friction = .1;
                         thisObj.collide = function(target, direction) {
                             if (collected == collectibles.length) {
-                                if (level == maxLevels) {
+                                if (currentLevel == 2) {
                                     window.location = "win.html";
                                 } else {
-                                    window.location = "level_" + parseInt(level+1) + ".html";
+                                    currentLevel++;
+                                    grid = level[currentLevel];
+                                    buildWorld();
                                 }
                             }
                             if (direction == "top") {
