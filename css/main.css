@@ -143,7 +143,7 @@ body {
     display: inline-block;
     z-index: 6;
     box-sizing: border-box;
-    border: 1px solid gray;
+    border: 1px solid rgba(100, 100, 100, 0.2);
 }
 
 .padded {
