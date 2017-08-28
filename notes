@@ -36,7 +36,6 @@ x    further back objects are darker
 x    walking into objects from the left causes camera to slowly pan to the left
 x    add more collectibles
 x    make sure all objects correspond to the correct image
-     clean up code
      
 WORLD BUILDER
 x        choose background color in worldbuilder (implemented on backend already)
@@ -44,20 +43,22 @@ x        let builder specify height and width of world (need to be able to reloa
 x        let builder choose player starting position
 x    show/hide blocks in worldbuilder depending on which layer is selected
 x    add tool icons to make them more clear (eraser/grid)
-     revamp worldbuilder page to include instructions
-     add save function to worldbuilder connected to firebase or c#/php api (in progress)
+     revamp worldbuilder page to include instructions (popup)
+     add save function to worldbuilder connected c# database api (in progress)
      function to test current world in editor (waiting for database saves to do this - save level to database, then play it in game.html)
+     resize collectibles to 70x70 max
      
 FRONT END VISUALSs
      revamp index page
      revamp win page
      
 OPTIONAL FEATURES FOR THE FUTURE
-x   add drop shadows to background items to make them seem further away
+    clean up code
+    add drop shadows to background items to make them seem further away
     turn around time on frictioned surfaces (harder to change direction on ice etc)
     + and - symbols for x/y starting pos in worldbuilder
     select player skin
     enemies
-    items
-    add double jump
+    equippable items
+    double jump
     general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
