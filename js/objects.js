@@ -1,11 +1,12 @@
 //this script builds (and rebuilds on command) the gameworld, and defines all of the objects within the gameworld
-
 var objects = [];
 var collectibles = [];
 var collected = 0;
 
 var grid = level[1];
 var currentLevel = 1;
+
+var maxLevel = 2;
 
 var player = new Object();
 player.xBox = 70;
@@ -547,11 +548,11 @@ function buildWorld() {
                         break;
 
     //right facing cliff edge
-                    case "basic_interact (58)": 
-                    case "basic_interact (19)": 
+                    case "basic_interact (2)": 
+                    case "basic_interact (21)": 
                     case "basic_interact (37)": 
-                    case "basic_interact (43)": 
-                    case "basic_interact (51)": 
+                    case "basic_interact (45)": 
+                    case "basic_interact (60)": 
                     case "candy_interact (16)": 
                     case "candy_interact (37)": 
                         var thisObj = new Object();
@@ -1410,6 +1411,48 @@ function buildWorld() {
                         case "collectible (139)": 
                         case "collectible (140)": 
                         case "collectible (141)": 
+                        case "collectible (146)": 
+                        case "collectible (147)": 
+                        case "collectible (148)": 
+                        case "collectible (149)": 
+                        case "collectible (150)": 
+                        case "collectible (151)": 
+                        case "collectible (152)": 
+                        case "collectible (153)": 
+                        case "collectible (154)": 
+                        case "collectible (155)": 
+                        case "collectible (156)": 
+                        case "collectible (157)": 
+                        case "collectible (158)": 
+                        case "collectible (159)": 
+                        case "collectible (160)": 
+                        case "collectible (161)": 
+                        case "collectible (162)": 
+                        case "collectible (163)": 
+                        case "collectible (164)": 
+                        case "collectible (165)": 
+                        case "collectible (166)": 
+                        case "collectible (167)": 
+                        case "collectible (168)": 
+                        case "collectible (169)": 
+                        case "collectible (170)": 
+                        case "collectible (171)": 
+                        case "collectible (172)": 
+                        case "collectible (173)": 
+                        case "collectible (174)": 
+                        case "collectible (175)": 
+                        case "collectible (176)": 
+                        case "collectible (177)": 
+                        case "collectible (178)": 
+                        case "collectible (179)": 
+                        case "collectible (180)": 
+                        case "collectible (181)": 
+                        case "collectible (182)": 
+                        case "collectible (183)": 
+                        case "collectible (184)": 
+                        case "collectible (185)": 
+                        case "collectible (186)": 
+                        case "collectible (187)": 
                         var thisObj = new Object();
                         thisObj.xpos = x * 70;
                         thisObj.ypos = y * 70;
@@ -1437,7 +1480,7 @@ function buildWorld() {
                         thisObj.friction = .1;
                         thisObj.collide = function(target, direction) {
                             if (collected == collectibles.length) {
-                                if (currentLevel == 2) {
+                                if (currentLevel == maxLevel) {
                                     window.location = "win.html";
                                 } else {
                                     currentLevel++;

@@ -11,6 +11,22 @@
     <body>
         <div class="toolbar" id="toolbar">
             <div style="display: inline-block;">
+                <h3>Create blank level</h3>
+                <form onsubmit="blankLevel($('#xTiles')[0].value, $('#yTiles')[0].value); createLayout(); return false;">
+                    width (tiles): <input type="text" id="xTiles" name="xTiles" value="100"><br>
+                    height (tiles): <input type="text" id="yTiles" name="yTiles" value="20"><br>
+                    <input type="submit" class="btn">
+                </form>
+                
+                <h3>Choose level to edit</h3>
+                <form onsubmit="changeLevel(); return false;">
+                    <select id="levelSelect" name="levelSelect" style="color: black; height: 30px;">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                    </select>
+                    <input type="submit" class="btn">
+                </form>
+                
                 <h3>Change background color</h3>
                 <form onsubmit="changebgColor(); return false;">
                     Starting Color: <input type="text" id="bgColor1" value="#b3f0ff"><br>
@@ -26,13 +42,15 @@
                 </form>
                 
                 <h3>Select Layer</h3>
-                <button class="btn layer" type="button" onClick="clickLayer(this, 1)" style="border: 2px solid black;">Background layer 1</button>
-                <button class="btn layer" type="button" onClick="clickLayer(this, 2)">Background layer 2</button>
-                <button class="btn layer" type="button" onClick="clickLayer(this, 3)">Player layer (only layer with collision)</button>
-                <button class="btn layer" type="button" onClick="clickLayer(this, 4)">Foreground Layer</button>
+                <button class="butn layer" type="button" onClick="clickLayer(this, 1)" style="border: 2px solid white;">Background layer 1</button>
+                <button class="butn layer" type="button" onClick="clickLayer(this, 2)">Background layer 2</button>
+                <button class="butn layer" type="button" onClick="clickLayer(this, 3)">Player layer (only layer with collision)</button>
+                <button class="butn layer" type="button" onClick="clickLayer(this, 4)">Foreground Layer</button>
                 <h3>Tools</h3>
-                <div class="toptool" id = "0" onClick="toggleGrid()" style="width: 70px; height: 70px;">show/hide grid</div>
-                <div class="toptool" id = "0" onClick="clickTool(this)" style="border: 3px solid black;">eraser</div><br>
+                <!-- Icon made by https://www.flaticon.com/authors/freepik-->
+                <div class="toptool" id = "0" onClick="toggleGrid()" style="color: white; width: 70px; height: 70px; background: url('images/grid.png') no-repeat">Toggle grid</div>
+                <!-- Icon made by https://www.flaticon.com/authors/pixel-buddha-->
+                <div class="toptool text-center" id = "0" onClick="clickTool(this)" style="color: white; border: 3px solid white; background: url('images/eraser.png') no-repeat">eraser</div><br>
             </div>
         </div>
         

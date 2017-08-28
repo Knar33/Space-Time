@@ -74,7 +74,7 @@ body {
 .toolbar {
     height: 100%;
     width: 420px;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.8);
     position: fixed;
     top: 0;
     left: 0;
@@ -110,16 +110,20 @@ body {
     position: absolute;
     display: inline-block;
     z-index: 1;
+    /*
     -webkit-filter: brightness(80%);
     filter:         brightness(80%);
+    */
 }
 
 .gridLayer2 {
     position: absolute;
     display: inline-block;
     z-index: 2;
+    /*
     -webkit-filter: brightness(90%);
     filter:         brightness(90%);
+    */
 }
 
 .gridLayer3 {
@@ -132,8 +136,6 @@ body {
     position: absolute;
     display: inline-block;
     z-index: 5;
-    -webkit-filter: blur(1.5px);
-    filter:         blue(1.5px);
 }
 
 .gridBox {
@@ -151,9 +153,20 @@ body {
     color: white;
 }
 
-.btn {
+.butn {
     margin: 5px 0;
-    color: black;
+    color: white;
+    background-color: darkslategray;
+    height: 30px;
+    box-shadow: none;
+    border: none;   
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.btn:hover, .btn:active, .btn:focus, .btn:visited {
+    color: white;
+    background-color: darkslategray;
 }
 
 .layer {
@@ -166,16 +179,19 @@ input {
 }
 
 .shadowed1 {
+    /* 
     -webkit-filter: brightness(80%);
-    filter:         brightness(80%);
+    filter:         brightness(80%); 
+    */
 }
 
 .shadowed2 {
+    /* 
     -webkit-filter: brightness(90%);
     filter:         brightness(90%);
+    */
 }
 
-.shadowed3 {
-    -webkit-filter: blur(1.5px);
-    filter:         blue(1.5px);
+.text-center {
+    text-align: center;
 }

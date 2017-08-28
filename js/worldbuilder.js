@@ -1,10 +1,16 @@
-var grid = level[0];
+blankLevel(100, 20);
 
 $("body").append("<div class='grid' id='grid' style='position: relative; top: 0; left: 0; margin-left: 420px; height: " + grid.height * 70 + "px; width: " + grid.width  * 70 + "px;'></div>");
 
 var gridShow = true;
 var selectedLayer = 1;
 var selection = 0;
+
+function changeLevel() {
+    selectedLevel = $("#levelSelect")[0].value;
+    grid = level[selectedLevel];
+    createLayout()
+}
 
 function toggleGrid() {
     if (gridShow) {
@@ -19,19 +25,20 @@ function toggleGrid() {
 function clickTool(tool) {
     $(".tool").css("border", "none");
     $(".toptool").css("border", "none");
-    tool.style.border='3px solid black';
+    tool.style.border='3px solid white';
     selection = tool.id;
 }
 
 function clickLayer(box, layer) {
     $(".layer").css("border", "none");
-    box.style.border='3px solid black';
+    box.style.border='3px solid white';
+    box.style.border='3px solid white';
     selectedLayer = layer;
 }
 
 function changebgColor() {
     grid.bgColor1 = $('#bgColor1')[0].value;
-    grid.bgColor1 = $('#bgColor2')[0].value;
+    grid.bgColor2 = $('#bgColor2')[0].value;
     $("body").css("background", "linear-gradient(" + grid.bgColor1 + ", " + grid.bgColor2 + ")");
 }
 
@@ -55,11 +62,11 @@ function changeBG(x, y) {
 //-----------------------------------------------------------toolbar----------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
 
-inputHTML = "";
-var prefixes = [["basic_background", 88], ["basic_interact", 83], ["collectible", 145], ["house_background", 50], ["house_interact", 39], ["industrial_background", 45], ["industrial_interact", 35], ["mideival_background", 99], ["mideival_interact", 169], ["mushroom_background",  14], ["mushroom_interact",  32], ["candy_interact",  39], ["candy_background",  44], ["clouds", 9]];
+inputHTML = "<h3>Tile Sets</h3>";
+var prefixes = [["basic_background", 88], ["basic_interact", 83], ["collectible", 187], ["house_background", 50], ["house_interact", 39], ["industrial_background", 45], ["industrial_interact", 35], ["mideival_background", 99], ["mideival_interact", 169], ["mushroom_background",  14], ["mushroom_interact",  32], ["candy_interact",  39], ["candy_background",  44], ["clouds", 9]];
 
 for (i = 0; i < prefixes.length; i++) {
-    inputHTML += "<button class='btn layer' type='button' data-toggle='collapse' data-target='#" + prefixes[i][0] + "' aria-expanded='false' aria-controls='" + prefixes[i][0] + "'>" + prefixes[i][0] + "</button><div class='collapse' id='" + prefixes[i][0] + "'>";
+    inputHTML += "<button class='butn layer' type='button' data-toggle='collapse' data-target='#" + prefixes[i][0] + "' aria-expanded='false' aria-controls='" + prefixes[i][0] + "'>" + prefixes[i][0] + "</button><div class='collapse' id='" + prefixes[i][0] + "'>";
     for(j = 1; j <= prefixes[i][1]; j++) {
         var imageBG = prefixes[i][0] + " (" + j + ")";
         inputHTML += "<img class='tool' id='" + imageBG + "' onClick='clickTool(this)' src='images/" + imageBG + ".png'>";
@@ -111,6 +118,10 @@ $("#grid").mousedown(function() {
 });
 
 $("#grid").mouseup(function() {
+    $(".gridBox").off("mouseover");
+});
+
+$("#grid").mouseleave(function() {
     $(".gridBox").off("mouseover");
 });
 

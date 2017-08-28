@@ -1,7 +1,3 @@
-IN PROGRESS:
-main.js and objects.js
-changing how friction works, adding wind-up to changing x direction on friction surface
-
 TODO: 
 x    remove collectible objects from gameworld when you collide
 x    add UI with objects left to collect
@@ -29,38 +25,39 @@ x       non-square tiles
 x       more collectible object types
 x       Make default tile no hitbox (after formatting all tiles in collidable tile pool)
 x    apply friction at endstep of horizontal movement, not on collision (multiple collisions were bring applied)
-     clean up and refactor code
-     general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
-     select which world to edit from drop-down, or create new
-     test current world in editor
+x    select which world to edit from drop-down, or create new
 x    fix bug with screen being too small and camera default pos
 x    screen going over max width
 x    when player dies, move camera back to starting position (dynamically define starting position based on player starting position)
 x    Fix camera so it pans to player when viewport size changes
 x    Change camera defaut position to be based on player start position
 x    optional use of arrow keys instead of wasd
-~    turn around time on frictioned surfaces (harder to change direction on ice etc)
 x    further back objects are darker
 x    walking into objects from the left causes camera to slowly pan to the left
-     make sure all objects correspond to the correct image
+x    add more collectibles
+x    make sure all objects correspond to the correct image
+     clean up code
      
 WORLD BUILDER
-     add save function to worldbuilder connected to firebase or c#/php api
 x        choose background color in worldbuilder (implemented on backend already)
-         let builder specify height and width of world (need to be able to reload page grid)
+x        let builder specify height and width of world (need to be able to reload page grid)
 x        let builder choose player starting position
-     revamp worldbuilder page to include instructions
 x    show/hide blocks in worldbuilder depending on which layer is selected
-     add tool icons to make them more clear (eraser/grid)
+x    add tool icons to make them more clear (eraser/grid)
+     revamp worldbuilder page to include instructions
+     add save function to worldbuilder connected to firebase or c#/php api (in progress)
+     function to test current world in editor (waiting for database saves to do this - save level to database, then play it in game.html)
      
 FRONT END VISUALSs
      revamp index page
      revamp win page
      
 OPTIONAL FEATURES FOR THE FUTURE
-    add drop shadows to background items to make them seem further away
+x   add drop shadows to background items to make them seem further away
+    turn around time on frictioned surfaces (harder to change direction on ice etc)
     + and - symbols for x/y starting pos in worldbuilder
     select player skin
     enemies
     items
     add double jump
+    general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
