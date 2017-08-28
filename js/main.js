@@ -252,7 +252,7 @@ setInterval(function() {
     
     //basic win condition
     if (collected == collectibles.length) {
-        $(".padded")[0].innerHTML = "Return to the ship!";
+        $(".padded")[0].innerHTML = "Return to the ship!<br><img src='images/basic_interact (4).png'>";
     }
     
     if (player.ypos < -200) {

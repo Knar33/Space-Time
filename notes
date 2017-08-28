@@ -43,10 +43,10 @@ x        let builder specify height and width of world (need to be able to reloa
 x        let builder choose player starting position
 x    show/hide blocks in worldbuilder depending on which layer is selected
 x    add tool icons to make them more clear (eraser/grid)
+x    resize collectibles to 70x70 max
      revamp worldbuilder page to include instructions (popup)
      add save function to worldbuilder connected c# database api (in progress)
      function to test current world in editor (waiting for database saves to do this - save level to database, then play it in game.html)
-     resize collectibles to 70x70 max
      
 FRONT END VISUALSs
      revamp index page
