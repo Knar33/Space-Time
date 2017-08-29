@@ -36,6 +36,7 @@ x    further back objects are darker
 x    walking into objects from the left causes camera to slowly pan to the left
 x    add more collectibles
 x    make sure all objects correspond to the correct image
+     backjump glitch (moonjump)
      
 WORLD BUILDER
 x        choose background color in worldbuilder (implemented on backend already)
@@ -44,20 +45,18 @@ x        let builder choose player starting position
 x    show/hide blocks in worldbuilder depending on which layer is selected
 x    add tool icons to make them more clear (eraser/grid)
 x    resize collectibles to 70x70 max
-     revamp worldbuilder page to include instructions (popup)
-     add save function to worldbuilder connected c# database api (in progress)
+     add save function to worldbuilder connected c# database (in progress)
      function to test current world in editor (waiting for database saves to do this - save level to database, then play it in game.html)
      
 FRONT END VISUALSs
-     revamp index page
-     revamp win page
+x     revamp index page
+x     revamp win page
      
-OPTIONAL FEATURES FOR THE FUTURE
-    clean up code
+OPTIONAL FEATURES FOR THE FUTURE AFTER RELEASE
+    select player skin
     add drop shadows to background items to make them seem further away
     turn around time on frictioned surfaces (harder to change direction on ice etc)
     + and - symbols for x/y starting pos in worldbuilder
-    select player skin
     enemies
     equippable items
     double jump

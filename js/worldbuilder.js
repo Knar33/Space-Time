@@ -63,7 +63,7 @@ function changeBG(x, y) {
 //----------------------------------------------------------------------------------------------------------------------------------
 
 inputHTML = "<h3>Tile Sets</h3>";
-var prefixes = [["basic_background", 88], ["basic_interact", 83], ["collectible", 187], ["house_background", 50], ["house_interact", 39], ["industrial_background", 45], ["industrial_interact", 35], ["mideival_background", 99], ["mideival_interact", 169], ["mushroom_background",  14], ["mushroom_interact",  32], ["candy_interact",  39], ["candy_background",  44], ["clouds", 9]];
+var prefixes = [["basic_background", 88], ["basic_interact", 83], ["collectible", 187], ["house_background", 50], ["house_interact", 39], ["industrial_background", 45], ["industrial_interact", 35], ["medieval_background", 99], ["medieval_interact", 169], ["mushroom_background",  14], ["mushroom_interact",  32], ["candy_interact",  39], ["candy_background",  44], ["clouds", 9]];
 
 for (i = 0; i < prefixes.length; i++) {
     inputHTML += "<button class='butn layer' type='button' data-toggle='collapse' data-target='#" + prefixes[i][0] + "' aria-expanded='false' aria-controls='" + prefixes[i][0] + "'>" + prefixes[i][0] + "</button><div class='collapse' id='" + prefixes[i][0] + "'>";

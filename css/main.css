@@ -195,3 +195,31 @@ input {
 .text-center {
     text-align: center;
 }
+
+.home {
+    background: linear-gradient(#b3f0ff, #49daff);
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+}
+
+a, a:focus, a:active {
+    font-size: 50px;
+    text-shadow: 0 0 10px #000000;
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkslategray;
+}
+
+h1 {
+    color: white;
+    margin-top: 2em;
+    font-size: 75px;
+    text-shadow: 0 0  10px #000000;
+}
+
+* {
+    font-family: sans-serif;
+}
