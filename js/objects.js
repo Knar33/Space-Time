@@ -18,18 +18,18 @@ player.animate = function() {
         //jump
         if (player.yspeed > 0 && player.airborne) {
             player.animFrame = 0;
-            if (player.xspeed > 0 || player.xFace == "right") {
+            if (player.xFace == "right") {
                 $(".box").css("backgroundPosition", "-423px -95px");
-            } else if (player.xspeed < 0 || player.xFace == "left") {
+            } else if (player.xFace == "left") {
                 $(".box").css("backgroundPosition", "493px -95px");
             }
         }
         //falling
         else if (player.yspeed < 0 && player.airborne) {
-            player.animFrame = 0
-            if (player.xspeed > 0 || player.xFace == "right") {
+            player.animFrame = 0;
+            if (player.xFace == "right") {
                 $(".box").css("backgroundPosition", "-423px 0px");
-            } else if (player.xspeed < 0 || player.xFace == "left") {
+            } else if (player.xFace == "left") {
                 $(".box").css("backgroundPosition", "494px 0px");
             }
         }
@@ -128,8 +128,8 @@ function buildWorld() {
         //create background layer 1 images
         for (y = 0; y < grid.height; y++) {
             for (x = 0; x < grid.width; x++) {
-                if (grid.vals[1][y][x] != 0) {
-                    thisTile = "images/" + grid.vals[1][y][x] + ".png";
+                if (level[i].vals[1][y][x] != 0) {
+                    thisTile = "images/" + level[i].vals[1][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile shadowed1' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 1;' src='" + thisTile + "'>");
                 }
             }
@@ -138,8 +138,8 @@ function buildWorld() {
         //create background layer 2 images
         for (y = 0; y < grid.height; y++) {
             for (x = 0; x < grid.width; x++) {
-                if (grid.vals[2][y][x] != 0) {
-                    thisTile = "images/" + grid.vals[2][y][x] + ".png";
+                if (level[i].vals[2][y][x] != 0) {
+                    thisTile = "images/" + level[i].vals[2][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile shadowed2' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
                 }
             }
@@ -148,8 +148,8 @@ function buildWorld() {
         //create foreground layer images
         for (y = 0; y < grid.height; y++) {
             for (x = 0; x < grid.width; x++) {
-                if (grid.vals[4][y][x] != 0) {
-                    thisTile = "images/" + grid.vals[4][y][x] + ".png";
+                if (level[i].vals[4][y][x] != 0) {
+                    thisTile = "images/" + level[i].vals[4][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 4;' src='" + thisTile + "'>");
                 }
             }
@@ -158,12 +158,12 @@ function buildWorld() {
         //create player level objects from grid array
         for (y = 0; y < grid.height; y++) {
             for (x = 0; x < grid.width; x++) {
-                if (grid.vals[3][y][x] != 0) {
-                    thisTile = "images/" + grid.vals[3][y][x] + ".png";
+                if (level[i].vals[3][y][x] != 0) {
+                    thisTile = "images/" + level[i].vals[3][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile' id='" + x + "-" + y + "-" + i + "' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 3;' src='" + thisTile + "'>");
 
 
-                    switch(grid.vals[3][y][x]) {
+                    switch(level[i].vals[3][y][x]) {
 
         //left facing rounded bottom edges
                         case "industrial_interact (12)": 

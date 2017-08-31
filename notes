@@ -39,6 +39,7 @@ x    make sure all objects correspond to the correct image
 x    backjump glitch (moonjump) - The way I solved this makes the mid-air left/right button presses seem less responsive. 
         It may not be worth keeping this change in, need to play around with it or find another solution
     fix phasing into objects
+    add invisible blocks
      
 WORLD BUILDER
 x        choose background color in worldbuilder (implemented on backend already)

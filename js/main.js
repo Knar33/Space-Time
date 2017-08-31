@@ -56,6 +56,7 @@ function downKey(keyDown) {
 function keyPressDown(key) {
     var thisKey = key.keyCode? key.keyCode : key.charCode;
     switch(thisKey) {
+        //E
         case 69:
             if (layer < 5) {
                 layer++;
@@ -68,6 +69,7 @@ function keyPressDown(key) {
                 }
             }
             break;
+        //Q
         case 81:
             if (layer > 1) {
                 layer--;
