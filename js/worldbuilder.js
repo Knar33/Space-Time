@@ -2,12 +2,32 @@ blankLevel(100, 20);
 
 $("body").append("<div class='grid' id='grid' style='position: relative; top: 0; left: 0; margin-left: 420px; height: " + grid.height * 70 + "px; width: " + grid.width  * 70 + "px;'></div>");
 
+var layer = 1;
+
+function keyPressDown(key) {
+    var thisKey = key.keyCode? key.keyCode : key.charCode;
+    switch(thisKey) {
+        case 69:
+            if (layer < 5) {
+                layer++;
+                changeLevel();
+            }
+            break;
+        case 81:
+            if (layer > 1) {
+                layer--;
+                changeLevel();
+            }
+            break;
+    }
+}
+
 var gridShow = true;
 var selectedLayer = 1;
 var selection = 0;
 
 function changeLevel() {
-    selectedLevel = $("#levelSelect")[0].value;
+    selectedLevel = layer;
     grid = level[selectedLevel];
     createLayout()
 }

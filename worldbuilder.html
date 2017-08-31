@@ -8,22 +8,13 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body>
+    <body onkeydown="keyPressDown(event)">
         <div class="toolbar" id="toolbar">
             <div style="display: inline-block;">
                 <h3>Create blank level</h3>
                 <form onsubmit="blankLevel($('#xTiles')[0].value, $('#yTiles')[0].value); createLayout(); return false;">
                     width (tiles): <input type="text" id="xTiles" name="xTiles" value="100"><br>
                     height (tiles): <input type="text" id="yTiles" name="yTiles" value="20"><br>
-                    <input type="submit" class="btn">
-                </form>
-                
-                <h3>Choose level to edit</h3>
-                <form onsubmit="changeLevel(); return false;">
-                    <select id="levelSelect" name="levelSelect" style="color: black; height: 30px;">
-                        <option value="1">Level 1</option>
-                        <option value="2">Level 2</option>
-                    </select>
                     <input type="submit" class="btn">
                 </form>
                 
@@ -55,8 +46,7 @@
         </div>
         
         <script src="js/level_0.js"></script>
-        <script src="js/level_1.js"></script>
-        <script src="js/level_2.js"></script>
+        <script src="js/level.js"></script>
         <script src="js/worldbuilder.js"></script>
     </body>
 </html>
