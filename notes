@@ -38,6 +38,7 @@ x    add more collectibles
 x    make sure all objects correspond to the correct image
 x    backjump glitch (moonjump) - The way I solved this makes the mid-air left/right button presses seem less responsive. 
         It may not be worth keeping this change in, need to play around with it or find another solution
+    fix phasing into objects
      
 WORLD BUILDER
 x        choose background color in worldbuilder (implemented on backend already)
@@ -46,10 +47,6 @@ x        let builder choose player starting position
 x    show/hide blocks in worldbuilder depending on which layer is selected
 x    add tool icons to make them more clear (eraser/grid)
 x    resize collectibles to 70x70 max
-     add save function to worldbuilder connected c# database
-     function to test current world in editor (waiting for database saves to do this - save level to database, then play it in game.html)
-        I Attempted to put the main.js file into the worldbuilder to test a level live and it ended up being very laggy
-        could have been caused by the huge worldbuilder div still being displayed, need to try this again and hide the worldbuilder div
      
 FRONT END VISUALSs
 x     revamp index page
