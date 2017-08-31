@@ -18,18 +18,18 @@ player.animate = function() {
         //jump
         if (player.yspeed > 0 && player.airborne) {
             player.animFrame = 0;
-            if (player.xFace == "right") {
+            if (player.xspeed > 0 || player.xFace == "right") {
                 $("#box")[0].style.backgroundPosition = "-423px -95px";
-            } else if (player.xFace == "left") {
+            } else if (player.xspeed < 0 || player.xFace == "left") {
                 $("#box")[0].style.backgroundPosition = "493px -95px";
             }
         }
         //falling
         else if (player.yspeed < 0 && player.airborne) {
             player.animFrame = 0
-            if (player.xFace == "right") {
+            if (player.xspeed > 0 || player.xFace == "right") {
                 $("#box")[0].style.backgroundPosition = "-423px 0px";
-            } else if (player.xFace == "left") {
+            } else if (player.xspeed < 0 || player.xFace == "left") {
                 $("#box")[0].style.backgroundPosition = "494px 0px";
             }
         }
