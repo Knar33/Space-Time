@@ -1,12 +1,4 @@
-TODO: 
-x    remove collectible objects from gameworld when you collide
-x    add UI with objects left to collect
-x    in worldbuilder, if selected = 0 dont put 0.png
-x    let builder select where alien goes
-x    add win condition
-x       collect objects (array of objects to collect)
-x       return to spaceship after collecting all objects
-x   add scrolling, up and sideways
+
 x       fix scrolling!  
 x    add big div to worldbuilder so you can scroll up
 x    make browser scroll to bottom at load
