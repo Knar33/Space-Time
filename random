@@ -1,0 +1,19 @@
+var running = true;
+var nextFrameDelay = 17;
+var frameTime = 0;
+var frameStart = window.performance.now();
+var isPaused = true;
+
+setInterval(function() {
+    frameTime = window.performance.now();
+    if ((frameTime - frameStart) < 17) {
+        isPaused = true;
+    } else {
+        isPaused = false;
+    }
+    if (!isPaused) {
+        console.log("17ms has elapsed");
+        frameStart = window.performance.now();
+        isPaused = false;
+    }
+}, 1);
