@@ -1,4 +1,12 @@
 buildWorld();
+layer = 1;
+for (i = 1; i <= 5; i++) {
+    if (i == layer) {
+        $("#objdiv" + i).css("display", "block");
+    } else {
+        $("#objdiv" + i).css("display", "none");
+    }
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------player control---------------------------------------------------------
@@ -48,6 +56,30 @@ function downKey(keyDown) {
 function keyPressDown(key) {
     var thisKey = key.keyCode? key.keyCode : key.charCode;
     switch(thisKey) {
+        case 69:
+            if (layer < 5) {
+                layer++;
+                for (i = 1; i <= 5; i++) {
+                    if (i == layer) {
+                        $("#objdiv" + i).css("display", "block");
+                    } else {
+                        $("#objdiv" + i).css("display", "none");
+                    }
+                }
+            }
+            break;
+        case 81:
+            if (layer > 1) {
+                layer--;
+                for (i = 1; i <= 5; i++) {
+                    if (i == layer) {
+                        $("#objdiv" + i).css("display", "block");
+                    } else {
+                        $("#objdiv" + i).css("display", "none");
+                    }
+                }
+            }
+            break;
         case 37:
         case 65: 
             leftKey(true);
@@ -128,7 +160,6 @@ function updateDebug() {
 
 $("document").ready(function(){
     camera.scroll();
-    $("body").css("background", "linear-gradient(" + grid.bgColor1 + ", " + grid.bgColor2 + ")");
 });
 
 function applyFriction(obj) {
@@ -192,25 +223,25 @@ setInterval(function() {
         if (player.xspeed > 0) {
             player.xpos++;
             //array of all objects with x values that could potentially collide
-            var returnedObjects = objects.filter(function(obj) {return  player.xpos + player.xBox - 1 == obj.xpos;});
+            var returnedObjects = objects[layer].filter(function(obj) {return  player.xpos + player.xBox - 1 == obj.xpos;});
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
                     object.collide(player, "left");
                 }
             });
-            $("#box")[0].style.left = player.xpos + "px";
+            $(".box").css("left", player.xpos + "px");
             updateDebug();
             camera.scroll();
         } else if (player.xspeed < 0) {
             player.xpos--;
             //array of all objects with x values that could potentially collide
-            var returnedObjects = objects.filter(function(obj) {return  player.xpos == obj.xpos + obj.xBox - 1;});
+            var returnedObjects = objects[layer].filter(function(obj) {return  player.xpos == obj.xpos + obj.xBox - 1;});
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
                     object.collide(player, "right");
                 }
             });
-            $("#box")[0].style.left = player.xpos + "px";
+            $(".box").css("left", player.xpos + "px");
             updateDebug();
             camera.scroll();
         }
@@ -221,25 +252,25 @@ setInterval(function() {
         if (player.yspeed > 0) {
             player.ypos++;
             //array of all objects with y values that could potentially collide
-            var returnedObjects = objects.filter(function(obj) {return  player.ypos + player.yBox - 1 == obj.ypos;});
+            var returnedObjects = objects[layer].filter(function(obj) {return  player.ypos + player.yBox - 1 == obj.ypos;});
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
                     object.collide(player, "bottom");
                 }
             });
-            $("#box")[0].style.bottom = player.ypos + "px";
+            $(".box").css("bottom", player.ypos + "px");
             updateDebug();
             camera.scroll();
         } else if (player.yspeed < 0) {
             player.ypos--;
             //array of all objects with y values that could potentially collide
-            var returnedObjects = objects.filter(function(obj) {return  player.ypos == obj.ypos + obj.yBox - 1;});
+            var returnedObjects = objects[layer].filter(function(obj) {return  player.ypos == obj.ypos + obj.yBox - 1;});
             returnedObjects.forEach(function(object) {
                 if (checkCollision(player, object) || checkCollision(object, player)) {
                     object.collide(player, "top");
                 }
             });
-            $("#box")[0].style.bottom = player.ypos + "px";
+            $(".box").css("bottom", player.ypos + "px");
             updateDebug();
             camera.scroll();
         }
@@ -262,7 +293,7 @@ setInterval(function() {
     if (player.dead) {
         player.ypos = grid.startYPos;
         player.xpos = grid.startXPos;
-        $("#box").css({"bottom": player.ypos, "left": player.xpos});
+        $(".box").css({"bottom": player.ypos, "left": player.xpos});
         player.dead = false;
         player.xspeed = 0;
         player.yspeed = 0;
