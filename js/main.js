@@ -85,7 +85,7 @@ function keyPressDown(key) {
                             clearInterval(myVar);
                         }
                         var1++;
-                    },50);
+                    },100);
                     
                     /*
                     //only updates DOM at end of while loop
@@ -145,7 +145,7 @@ function keyPressDown(key) {
                             clearInterval(myVar);
                         }
                         var1++;
-                    },50);
+                    },100);
                     
                     /*
                     var var1 = 0;
