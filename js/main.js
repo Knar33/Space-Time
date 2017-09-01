@@ -1,5 +1,6 @@
 buildWorld();
 layer = 1;
+
 for (i = 1; i <= 5; i++) {
     if (i == layer) {
         $("#objdiv" + i).css("display", "block");
@@ -8,6 +9,8 @@ for (i = 1; i <= 5; i++) {
     }
 }
 
+//keeps track of whether or not the player is currently phasing through time
+var changing = false;
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------player control---------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -59,26 +62,103 @@ function keyPressDown(key) {
         //E
         case 69:
             if (layer < 5) {
-                layer++;
-                for (i = 1; i <= 5; i++) {
-                    if (i == layer) {
-                        $("#objdiv" + i).css("display", "block");
-                    } else {
-                        $("#objdiv" + i).css("display", "none");
+                if (!changing) {
+                    changing = true;
+                    layer++;
+                    $("#objdiv" + 1).css("display", "none");
+                    $("#objdiv" + 2).css("display", "none");
+                    $("#objdiv" + 3).css("display", "none");
+                    $("#objdiv" + 4).css("display", "none");
+                    $("#objdiv" + 5).css("display", "none");
+                    $("#objdiv" + (layer-1)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
+                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50", "opacity":"0"});
+                    
+                    var start = window.performance.now();
+                    var end = start;
+                    var myVar = setInterval(function(){ 
+                        end = window.performance.now();
+                        if (end < start + 300) {
+                            $("#objdiv" + (layer)).css("opacity", ((end - start) / 500));
+                        } else {
+                            $("#objdiv" + (layer)).css("opacity", "1");
+                            changing = false;
+                            clearInterval(myVar);
+                        }
+                        var1++;
+                    },50);
+                    
+                    /*
+                    //only updates DOM at end of while loop
+                    opacity = 1;
+                    var start = window.performance.now();
+                    var end = window.performance.now();
+                    
+                    for (i = 1; i <=100; i++) {
+                        while (end < start + (5 * i)) {
+                            end = window.performance.now();
+                        }
+                        $("#objdiv" + layer).css("opacity", (i/100));
                     }
+                    changing = false;
+                    */
+                    
+                    /*
+                    //works but slowly depending on other functions
+                    var var1 = 0;
+                    var myVar = setInterval(function(){ 
+                        if (var1 < 100) {
+                            $("#objdiv" + (layer)).css("opacity", (var1/100));
+                        } else {
+                            clearInterval(myVar);
+                            changing = false;
+                        }
+                        var1++;
+                    },1);
+                    */
                 }
             }
             break;
         //Q
         case 81:
             if (layer > 1) {
-                layer--;
-                for (i = 1; i <= 5; i++) {
-                    if (i == layer) {
-                        $("#objdiv" + i).css("display", "block");
-                    } else {
-                        $("#objdiv" + i).css("display", "none");
-                    }
+                if (!changing) {
+                    changing = true;
+                    layer--;
+                    $("#objdiv" + 1).css("display", "none");
+                    $("#objdiv" + 2).css("display", "none");
+                    $("#objdiv" + 3).css("display", "none");
+                    $("#objdiv" + 4).css("display", "none");
+                    $("#objdiv" + 5).css("display", "none");
+                    $("#objdiv" + (layer+1)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
+                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50", "opacity":"0"});
+                    
+                    
+                    var start = window.performance.now();
+                    var end = start;
+                    var myVar = setInterval(function(){ 
+                        end = window.performance.now();
+                        if (end < start + 300) {
+                            $("#objdiv" + layer).css("opacity", ((end - start) / 500));
+                        } else {
+                            $("#objdiv" + layer).css("opacity", "1");
+                            changing = false;
+                            clearInterval(myVar);
+                        }
+                        var1++;
+                    },50);
+                    
+                    /*
+                    var var1 = 0;
+                    var myVar = setInterval(function(){ 
+                        if (var1 < 100) {
+                            $("#objdiv" + (layer)).css("opacity", (var1/100));
+                        } else {
+                            clearInterval(myVar);
+                            changing = false;
+                        }
+                        var1++;
+                    },1);
+                    */
                 }
             }
             break;
@@ -181,8 +261,9 @@ function applyFriction(obj) {
 //-----------------------------------------------------------main runtime function--------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
 
+//smooth frame timing
 var running = true;
-var timePerFrame = 17;
+var timePerFrame = (1000/60);
 var frameEnd = 0;
 var frameStart = window.performance.now();
 var lastFrameTime = 0;
@@ -191,6 +272,7 @@ var pauseTimer = 0;
 var pauseStart = window.performance.now();
 
 setInterval(function() {
+    //timing
     pauseTimer = window.performance.now();
     if ((lastFrameTime + (pauseTimer - pauseStart)) < timePerFrame) {
         isPaused = true;
