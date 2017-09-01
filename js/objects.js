@@ -15,63 +15,63 @@ player.jumpStrength = 20;
 player.moveSpeed = .5;
 player.walk = [[0, 0], [71, 0], [142, 0], [0, 95], [71, 95], [142, 95], [213, 0], [284, 0], [213, 95], [355, 0], [284, 95]];
 player.animate = function() {
-        //jump
-        if (player.yspeed > 0 && player.airborne) {
-            player.animFrame = 0;
-            if (player.xFace == "right") {
-                $(".box").css("backgroundPosition", "-423px -95px");
-            } else if (player.xFace == "left") {
-                $(".box").css("backgroundPosition", "493px -95px");
-            }
-        }
-        //falling
-        else if (player.yspeed < 0 && player.airborne) {
-            player.animFrame = 0;
-            if (player.xFace == "right") {
-                $(".box").css("backgroundPosition", "-423px 0px");
-            } else if (player.xFace == "left") {
-                $(".box").css("backgroundPosition", "494px 0px");
-            }
-        }
-        //crouching
-        else if (downDown && !rightDown && !leftDown) {
-            player.animFrame = 0;
-            if (player.xFace == "right") {
-                $(".box").css("backgroundPosition", "-352px -94px");
-            } else if (player.xFace == "left") {
-                $(".box").css("backgroundPosition", "423px -94px");
-            }
-        }
-        //standing
-        else if (!rightDown && !leftDown) {
-            player.animFrame = 0;
-            if (player.xFace == "right") {
-                $(".box").css("backgroundPosition", "-67px -190px");
-            } else if (player.xFace == "left") {
-                $(".box").css("backgroundPosition", "137px -190px");
-            }
-        }
-        //run
-        else if (rightDown && !this.airborne) {
-            if (player.animFrame == 30) {
-                player.animFrame = 0;
-                $(".box").css("background", "url('../images/p2_spritesheet.png') 0 0;");
-            }
-            else {
-                player.animFrame++;
-                $(".box").css("backgroundPosition", "-" + player.walk[Math.floor(player.animFrame/3)][0] + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px");
-            }
-        } else if (leftDown && !this.airborne) {
-            if (player.animFrame == 30) {
-                player.animFrame = 0;
-                $(".box").css("background", "url('../images/p2_spritesheet.png') 0 0;");
-            }
-            else {
-                player.animFrame++;
-                $(".box").css("backgroundPosition", (player.walk[Math.floor(player.animFrame/3)][0] + 70) + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px");
-            }
+    //jump
+    if (player.yspeed > 0 && player.airborne) {
+        player.animFrame = 0;
+        if (player.xFace == "right") {
+            $(".box").css("backgroundPosition", "-423px -95px");
+        } else if (player.xFace == "left") {
+            $(".box").css("backgroundPosition", "493px -95px");
         }
     }
+    //falling
+    else if (player.yspeed < 0 && player.airborne) {
+        player.animFrame = 0;
+        if (player.xFace == "right") {
+            $(".box").css("backgroundPosition", "-423px 0px");
+        } else if (player.xFace == "left") {
+            $(".box").css("backgroundPosition", "494px 0px");
+        }
+    }
+    //crouching
+    else if (downDown && !rightDown && !leftDown) {
+        player.animFrame = 0;
+        if (player.xFace == "right") {
+            $(".box").css("backgroundPosition", "-352px -94px");
+        } else if (player.xFace == "left") {
+            $(".box").css("backgroundPosition", "423px -94px");
+        }
+    }
+    //standing
+    else if (!rightDown && !leftDown) {
+        player.animFrame = 0;
+        if (player.xFace == "right") {
+            $(".box").css("backgroundPosition", "-67px -190px");
+        } else if (player.xFace == "left") {
+            $(".box").css("backgroundPosition", "137px -190px");
+        }
+    }
+    //run
+    else if (rightDown && !this.airborne) {
+        if (player.animFrame == 30) {
+            player.animFrame = 0;
+            $(".box").css("background", "url('../images/p2_spritesheet.png') 0 0;");
+        }
+        else {
+            player.animFrame++;
+            $(".box").css("backgroundPosition", "-" + player.walk[Math.floor(player.animFrame/3)][0] + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px");
+        }
+    } else if (leftDown && !this.airborne) {
+        if (player.animFrame == 30) {
+            player.animFrame = 0;
+            $(".box").css("background", "url('../images/p2_spritesheet.png') 0 0;");
+        }
+        else {
+            player.animFrame++;
+            $(".box").css("backgroundPosition", (player.walk[Math.floor(player.animFrame/3)][0] + 70) + "px -" + player.walk[Math.floor(player.animFrame/3)][1] + "px");
+        }
+    }
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------camera object----------------------------------------------------------

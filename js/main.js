@@ -64,14 +64,16 @@ function keyPressDown(key) {
             if (layer < 5) {
                 if (!changing) {
                     changing = true;
-                    layer++;
                     for (i = 1; i <=5; i++) {
                         $("#objdiv" + i).css("display", "none");
                         $("#objdiv" + i)[0].classList.remove("animating");
                     }
-                    $("#objdiv" + (layer-1)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
-                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50"});
-                    $("#objdiv" + layer)[0].classList.add("animating");
+                    $("#objdiv" + (layer)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
+                    $("#objdiv" + (layer+1)).css({"display":"inline-block", "position":"absolute", "z-index":"50"});
+                    $("#objdiv" + (layer+1))[0].classList.add("animating");
+                    setTimeout (function() {
+                        layer++;
+                    }, 500);
                     setTimeout (function() {
                         changing = false;
                     }, 1000);
@@ -83,14 +85,16 @@ function keyPressDown(key) {
             if (layer > 1) {
                 if (!changing) {
                     changing = true;
-                    layer--;
                     for (i = 1; i <=5; i++) {
                         $("#objdiv" + i).css("display", "none");
                         $("#objdiv" + i)[0].classList.remove("animating");
                     }
-                    $("#objdiv" + (layer+1)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
-                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50"});
-                    $("#objdiv" + layer)[0].classList.add("animating");
+                    $("#objdiv" + (layer)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
+                    $("#objdiv" + (layer-1)).css({"display":"inline-block", "position":"absolute", "z-index":"50"});
+                    $("#objdiv" + (layer-1))[0].classList.add("animating");
+                    setTimeout (function() {
+                        layer--;
+                    }, 500);
                     setTimeout (function() {
                         changing = false;
                     }, 1000);
