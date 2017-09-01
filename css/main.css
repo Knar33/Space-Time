@@ -223,3 +223,18 @@ h1 {
 * {
     font-family: sans-serif;
 }
+
+.animating {
+  animation-duration: 1s;
+  animation-name: phaseIn;
+}
+
+@keyframes phaseIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 100;
+  }
+}

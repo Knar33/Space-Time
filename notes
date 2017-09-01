@@ -36,10 +36,9 @@ x    further back objects are darker
 x    walking into objects from the left causes camera to slowly pan to the left
 x    add more collectibles
 x    make sure all objects correspond to the correct image
-x    backjump glitch (moonjump) - The way I solved this makes the mid-air left/right button presses seem less responsive. 
-        It may not be worth keeping this change in, need to play around with it or find another solution
-?    fix phasing into objects
-    add invisible blocks
+     fix phasing into objects
+     add invisible blocks
+     add random tree/cloud generator
      
 WORLD BUILDER
 x        choose background color in worldbuilder (implemented on backend already)
@@ -62,3 +61,4 @@ OPTIONAL FEATURES FOR THE FUTURE AFTER RELEASE
     equippable items
     double jump
     general animation function to loop through all objects that need to animate (if other blocks need animation in the future)
+    add buttons to control in mobile

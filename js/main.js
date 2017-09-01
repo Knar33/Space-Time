@@ -65,56 +65,16 @@ function keyPressDown(key) {
                 if (!changing) {
                     changing = true;
                     layer++;
-                    $("#objdiv" + 1).css("display", "none");
-                    $("#objdiv" + 2).css("display", "none");
-                    $("#objdiv" + 3).css("display", "none");
-                    $("#objdiv" + 4).css("display", "none");
-                    $("#objdiv" + 5).css("display", "none");
-                    $("#objdiv" + (layer-1)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
-                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50", "opacity":"0"});
-                    
-                    var start = window.performance.now();
-                    var end = start;
-                    var myVar = setInterval(function(){ 
-                        end = window.performance.now();
-                        if (end < start + 300) {
-                            $("#objdiv" + (layer)).css("opacity", ((end - start) / 500));
-                        } else {
-                            $("#objdiv" + (layer)).css("opacity", "1");
-                            changing = false;
-                            clearInterval(myVar);
-                        }
-                        var1++;
-                    },100);
-                    
-                    /*
-                    //only updates DOM at end of while loop
-                    opacity = 1;
-                    var start = window.performance.now();
-                    var end = window.performance.now();
-                    
-                    for (i = 1; i <=100; i++) {
-                        while (end < start + (5 * i)) {
-                            end = window.performance.now();
-                        }
-                        $("#objdiv" + layer).css("opacity", (i/100));
+                    for (i = 1; i <=5; i++) {
+                        $("#objdiv" + i).css("display", "none");
+                        $("#objdiv" + i)[0].classList.remove("animating");
                     }
-                    changing = false;
-                    */
-                    
-                    /*
-                    //works but slowly depending on other functions
-                    var var1 = 0;
-                    var myVar = setInterval(function(){ 
-                        if (var1 < 100) {
-                            $("#objdiv" + (layer)).css("opacity", (var1/100));
-                        } else {
-                            clearInterval(myVar);
-                            changing = false;
-                        }
-                        var1++;
-                    },1);
-                    */
+                    $("#objdiv" + (layer-1)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
+                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50"});
+                    $("#objdiv" + layer)[0].classList.add("animating");
+                    setTimeout (function() {
+                        changing = false;
+                    }, 1000);
                 }
             }
             break;
@@ -124,41 +84,16 @@ function keyPressDown(key) {
                 if (!changing) {
                     changing = true;
                     layer--;
-                    $("#objdiv" + 1).css("display", "none");
-                    $("#objdiv" + 2).css("display", "none");
-                    $("#objdiv" + 3).css("display", "none");
-                    $("#objdiv" + 4).css("display", "none");
-                    $("#objdiv" + 5).css("display", "none");
+                    for (i = 1; i <=5; i++) {
+                        $("#objdiv" + i).css("display", "none");
+                        $("#objdiv" + i)[0].classList.remove("animating");
+                    }
                     $("#objdiv" + (layer+1)).css({"display":"inline-block", "position":"absolute", "z-index":"25"});
-                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50", "opacity":"0"});
-                    
-                    
-                    var start = window.performance.now();
-                    var end = start;
-                    var myVar = setInterval(function(){ 
-                        end = window.performance.now();
-                        if (end < start + 300) {
-                            $("#objdiv" + layer).css("opacity", ((end - start) / 500));
-                        } else {
-                            $("#objdiv" + layer).css("opacity", "1");
-                            changing = false;
-                            clearInterval(myVar);
-                        }
-                        var1++;
-                    },100);
-                    
-                    /*
-                    var var1 = 0;
-                    var myVar = setInterval(function(){ 
-                        if (var1 < 100) {
-                            $("#objdiv" + (layer)).css("opacity", (var1/100));
-                        } else {
-                            clearInterval(myVar);
-                            changing = false;
-                        }
-                        var1++;
-                    },1);
-                    */
+                    $("#objdiv" + layer).css({"display":"inline-block", "position":"absolute", "z-index":"50"});
+                    $("#objdiv" + layer)[0].classList.add("animating");
+                    setTimeout (function() {
+                        changing = false;
+                    }, 1000);
                 }
             }
             break;
@@ -324,7 +259,7 @@ setInterval(function() {
             if (player.xspeed > 0) {
                 player.xpos++;
                 //array of all objects with x values that could potentially collide
-                var returnedObjects = objects[layer].filter(function(obj) {return  player.xpos + player.xBox - 1 == obj.xpos;});
+                var returnedObjects = objects[layer].filter(function(obj) {return player.xpos + player.xBox - 1 == obj.xpos;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
                         object.collide(player, "left");
