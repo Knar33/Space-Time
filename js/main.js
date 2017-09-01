@@ -253,7 +253,24 @@ setInterval(function() {
         if (player.yspeed != 0) {
             player.airborne = true;
         }
-
+        
+        //no movement object collision - for phasing into objects
+        var returnedObjects = objects[layer].filter(function(obj) {return (
+                ((player.xpos < obj.xpos + obj.xBox) && (player.xpos > obj.xpos))
+            ||
+                ((player.xpos + player.xBox < obj.xpos + obj.xBox) && (player.xpos + player.xBox > obj.xpos))
+            ||
+                ((player.ypos < obj.ypos + obj.yBox) && (player.ypos > obj.ypos))
+            ||
+                ((player.ypos + player.yBox < obj.ypos + obj.yBox) && (player.ypos + player.yBox > obj.ypos))
+            );
+        });
+        returnedObjects.forEach(function(object) {
+            if (checkCollision(player, object) || checkCollision(object, player)) {
+                object.collide(player, "inside");
+            }
+        });
+        
         //horizontal movement
         for (i = 0; i < Math.abs(player.xspeed); i++) {
             if (player.xspeed > 0) {

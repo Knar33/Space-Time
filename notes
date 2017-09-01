@@ -36,9 +36,7 @@ x    further back objects are darker
 x    walking into objects from the left causes camera to slowly pan to the left
 x    add more collectibles
 x    make sure all objects correspond to the correct image
-     fix phasing into objects
-     add invisible blocks
-     add random tree/cloud generator
+x    fix phasing into objects
      
 WORLD BUILDER
 x        choose background color in worldbuilder (implemented on backend already)
