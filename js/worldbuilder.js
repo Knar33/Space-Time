@@ -1,6 +1,8 @@
-blankLevel(100, 20);
+var grid = level[1];
 
-$("body").append("<div class='grid' id='grid' style='position: relative; top: 0; left: 0; margin-left: 420px; height: " + grid.height * 70 + "px; width: " + grid.width  * 70 + "px;'></div>");
+$("body").append("<div class='grid' id='grid' style='position: relative; top: 0; left: 0; margin-left: 420px; height: " + level[1].height * 70 + "px; width: " + level[1].width  * 70 + "px;'></div>");
+
+createLayout();
 
 var layer = 1;
 
@@ -27,8 +29,7 @@ var selectedLayer = 1;
 var selection = 0;
 
 function changeLevel() {
-    selectedLevel = layer;
-    grid = level[selectedLevel];
+    grid = level[layer];
     createLayout()
 }
 
@@ -63,9 +64,9 @@ function changebgColor() {
 }
 
 function changeStartingPos() {
-    grid.startXPos = parseInt($("#startXPos")[0].value);
-    grid.startYPos = parseInt($("#startYPos")[0].value);
-    $("#player").css({"bottom": grid.startYPos + "px", "left": grid.startXPos + "px"});
+    level[1].startXPos = parseInt($("#startXPos")[0].value);
+    level[1].startYPos = parseInt($("#startYPos")[0].value);
+    $("#player").css({"bottom": level[1].startYPos + "px", "left": level[1].startXPos + "px"});
 }
 
 function changeBG(x, y) {
@@ -75,7 +76,7 @@ function changeBG(x, y) {
     } else {
         $(box)[0].src = "images/blank.png";
     }
-    grid.vals[selectedLayer][y][x] = selection;
+    level[1].vals[selectedLayer][y][x] = selection;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -102,33 +103,33 @@ $("#toolbar").append(inputHTML);
 
 //creating this as a function lets user choose which map they want to edit
 function createLayout() {
-    $("#grid").css({"height": ((grid.height * 70) + "px"), "width": ((grid.width  * 70) + "px")})
+    $("#grid").css({"height": ((level[1].height * 70) + "px"), "width": ((level[1].width  * 70) + "px")})
     $("#grid")[0].innerHTML = "";
     //create grid layout
     for (i = 1; i < 5; i++) {
-        for (y = 0; y < grid.height; y++) {
-            for (x = 0; x < grid.width; x++) {
+        for (y = 0; y < level[1].height; y++) {
+            for (x = 0; x < level[1].width; x++) {
                 $("#grid").append("<img src='images/" + (grid.vals[i][y][x] != 0 ? grid.vals[i][y][x] : "blank") + ".png' class='gridLayer" + i + "' id='" + i + "-" + x.toString() + "-" + y.toString() + "' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + x * 70 + "px' draggable='false'>");
             }
         }
     }
 
     //top interaction layer
-    for (y = 0; y < grid.height; y++) {
-        for (x = 0; x < grid.width; x++) {
+    for (y = 0; y < level[1].height; y++) {
+        for (x = 0; x < level[1].width; x++) {
             $("#grid").append("<div class='gridBox' data-x='" + x + "' data-y='" + y +"' style='bottom: " + y*70 + "px; left: " + x * 70 + "px' onmousedown='changeBG(" + x + ", " + y + ")'></div>");
         }
     }
 
     //player image
-    $("#grid").append("<img src='images/player.png' class='gridLayer3' id='player' style='position: absolute; bottom: " + grid.startYPos + "px; left: " + grid.startXPos + "px' draggable='false'>");
+    $("#grid").append("<img src='images/player.png' class='gridLayer3' id='player' style='position: absolute; bottom: " + level[1].startYPos + "px; left: " + level[1].startXPos + "px' draggable='false'>");
 
     $("body").css("background", "linear-gradient(" + grid.bgColor1 + ", " + grid.bgColor2 + ")");
  
     $("#bgColor1")[0].value = grid.bgColor1;
     $("#bgColor2")[0].value = grid.bgColor2;
-    $("#startXPos")[0].value = grid.startXPos;
-    $("#startXPos")[0].value = grid.startYPos;
+    $("#startXPos")[0].value = level[1].startXPos;
+    $("#startXPos")[0].value = level[1].startYPos;
 }
 createLayout();
 

@@ -27,7 +27,6 @@ function leftKey(keyDown) {
     } else {
         leftDown = false;
     }
-    
 }
 
 //these are here for the option to have alternative control schemes, like on-screen buttons for mobile
@@ -348,8 +347,8 @@ setInterval(function() {
         }
         //player death check
         if (player.dead) {
-            player.ypos = grid.startYPos;
-            player.xpos = grid.startXPos;
+            player.ypos = level[1].startYPos;
+            player.xpos = level[1].startXPos;
             $(".box").css({"bottom": player.ypos, "left": player.xpos});
             player.dead = false;
             player.xspeed = 0;

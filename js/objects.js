@@ -79,7 +79,7 @@ player.animate = function() {
 
 var camera = new Object();
 camera.scroll = function() {
-    window.scrollTo(player.xpos - (window.innerWidth / 2) + 35, (grid.height * 70) - player.ypos - (window.innerHeight / 2) - 35);
+    window.scrollTo(player.xpos - (window.innerWidth / 2) + 35, (level[1].height * 70) - player.ypos - (window.innerHeight / 2) - 35);
 }
     
 //physics variables
@@ -94,7 +94,7 @@ camera.scroll = function() {
 function buildWorld() {
     camera.scroll();
     
-    $("body")[0].innerHTML = "<div id='objdiv1' style='background: linear-gradient(" + level[1].bgColor1 + ", " + level[1].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div class='box'></div></div><div id='objdiv2' style='background: linear-gradient(" + level[2].bgColor1 + ", " + level[2].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div class='box'></div></div><div id='objdiv3' style='background: linear-gradient(" + level[3].bgColor1 + ", " + level[3].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div class='box'></div></div><div id='objdiv4' style='background: linear-gradient(" + level[4].bgColor1 + ", " + level[4].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div class='box'></div></div><div id='objdiv5' style='background: linear-gradient(" + level[5].bgColor1 + ", " + level[5].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (grid.height * 70 - 2) + "px; width: " + (grid.width  * 70) + "px;'><div class='box'></div></div><div class='ui'><div class='padded''>Objects to collect:</div></div>";
+    $("body")[0].innerHTML = "<div id='objdiv1' style='background: linear-gradient(" + level[1].bgColor1 + ", " + level[1].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (level[1].height * 70 - 2) + "px; width: " + (level[1].width  * 70) + "px;'><div class='box'></div></div><div id='objdiv2' style='background: linear-gradient(" + level[2].bgColor1 + ", " + level[2].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (level[1].height * 70 - 2) + "px; width: " + (level[1].width  * 70) + "px;'><div class='box'></div></div><div id='objdiv3' style='background: linear-gradient(" + level[3].bgColor1 + ", " + level[3].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (level[1].height * 70 - 2) + "px; width: " + (level[1].width  * 70) + "px;'><div class='box'></div></div><div id='objdiv4' style='background: linear-gradient(" + level[4].bgColor1 + ", " + level[4].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (level[1].height * 70 - 2) + "px; width: " + (level[1].width  * 70) + "px;'><div class='box'></div></div><div id='objdiv5' style='background: linear-gradient(" + level[5].bgColor1 + ", " + level[5].bgColor2 + "); overflow: hidden; position: relative; top: 0; left: 0; height: " + (level[1].height * 70 - 2) + "px; width: " + (level[1].width  * 70) + "px;'><div class='box'></div></div><div class='ui'><div class='padded''>Objects to collect:</div></div>";
     
     objects = [];
     collectibles = [];
@@ -107,8 +107,8 @@ function buildWorld() {
     //player object
     player.xspeed = 0;
     player.yspeed = 0;
-    player.xpos = grid.startXPos;
-    player.ypos = grid.startYPos;
+    player.xpos = level[1].startXPos;
+    player.ypos = level[1].startYPos;
     player.animFrame = 0;
     player.airborne = true;
     player.xFace = "right";
@@ -116,7 +116,7 @@ function buildWorld() {
     player.friction = 0;
     //player animations
     
-    $(".box").css({"left": grid.startXPos, "bottom": grid.startYPos})
+    $(".box").css({"left": level[1].startXPos, "bottom": level[1].startYPos})
     
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -126,8 +126,8 @@ function buildWorld() {
         objects[i] = [];
         
         //create background layer 1 images
-        for (y = 0; y < grid.height; y++) {
-            for (x = 0; x < grid.width; x++) {
+        for (y = 0; y < level[1].height; y++) {
+            for (x = 0; x < level[1].width; x++) {
                 if (level[i].vals[1][y][x] != 0) {
                     thisTile = "images/" + level[i].vals[1][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile shadowed1' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 1;' src='" + thisTile + "'>");
@@ -136,8 +136,8 @@ function buildWorld() {
         }
 
         //create background layer 2 images
-        for (y = 0; y < grid.height; y++) {
-            for (x = 0; x < grid.width; x++) {
+        for (y = 0; y < level[1].height; y++) {
+            for (x = 0; x < level[1].width; x++) {
                 if (level[i].vals[2][y][x] != 0) {
                     thisTile = "images/" + level[i].vals[2][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile shadowed2' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 2' src='" + thisTile + "'>");
@@ -146,8 +146,8 @@ function buildWorld() {
         }
 
         //create foreground layer images
-        for (y = 0; y < grid.height; y++) {
-            for (x = 0; x < grid.width; x++) {
+        for (y = 0; y < level[1].height; y++) {
+            for (x = 0; x < level[1].width; x++) {
                 if (level[i].vals[4][y][x] != 0) {
                     thisTile = "images/" + level[i].vals[4][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 4;' src='" + thisTile + "'>");
@@ -156,8 +156,8 @@ function buildWorld() {
         }
 
         //create player level objects from grid array
-        for (y = 0; y < grid.height; y++) {
-            for (x = 0; x < grid.width; x++) {
+        for (y = 0; y < level[1].height; y++) {
+            for (x = 0; x < level[1].width; x++) {
                 if (level[i].vals[3][y][x] != 0) {
                     thisTile = "images/" + level[i].vals[3][y][x] + ".png";
                     $("#objdiv" + i).append("<img class='tile' id='" + x + "-" + y + "-" + i + "' style='position: absolute; left: " + x*70 + "px; bottom: " + y*70 + "px; z-index: 3;' src='" + thisTile + "'>");
@@ -1549,7 +1549,7 @@ function buildWorld() {
 
     //right boundry
     var blockRight = new Object();
-    blockRight.xpos = grid.width * 70;
+    blockRight.xpos = level[1].width * 70;
     blockRight.ypos = -500;
     blockRight.xBox = 2;
     blockRight.yBox = 10000;
