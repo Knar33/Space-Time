@@ -76,7 +76,7 @@ function changeBG(x, y) {
     } else {
         $(box)[0].src = "images/blank.png";
     }
-    level[1].vals[selectedLayer][y][x] = selection;
+    level[layer].vals[selectedLayer][y][x] = selection;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------

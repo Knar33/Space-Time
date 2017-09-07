@@ -37,6 +37,8 @@ x    walking into objects from the left causes camera to slowly pan to the left
 x    add more collectibles
 x    make sure all objects correspond to the correct image
 x    fix phasing into objects
+     maybe? allow player to press 1-5 to change to that dimension
+     make objects have no min-width (grass is too big)
      
 WORLD BUILDER
 x        choose background color in worldbuilder (implemented on backend already)
@@ -45,6 +47,7 @@ x        let builder choose player starting position
 x    show/hide blocks in worldbuilder depending on which layer is selected
 x    add tool icons to make them more clear (eraser/grid)
 x    resize collectibles to 70x70 max
+     turn off q/e hotkeys when textboxes are active
      
 FRONT END VISUALSs
 x     revamp index page
