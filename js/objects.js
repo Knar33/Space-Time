@@ -1467,7 +1467,7 @@ function buildWorld() {
                             }
                             objects[i].push(thisObj);
                             collectibles.push(thisObj);
-                            $(".ui").append("<img src='" + thisTile + "' id='" + x + "-" + y + "-" + i + "-gui'>");
+                            $(".ui").append("<img style='margin: 2px;' src='" + thisTile + "' id='" + x + "-" + y + "-" + i + "-gui'>");
                             break;    
 
         //Spaceship
