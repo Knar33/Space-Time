@@ -316,7 +316,7 @@ setInterval(function() {
                         object.collide(player, "right");
                     }
                 });
-                if (player.xpos == 0) {
+                if (player.xpos < 0) {
                     player.xpos++;
                 }
                 $(".box").css("left", player.xpos + "px");
@@ -358,7 +358,7 @@ setInterval(function() {
                         object.collide(player, "top");
                     }
                 });
-                if (player.xpos == 0) {
+                if (player.ypos < 0) {
                     player.dead = true;
                 }
                 $(".box").css("bottom", player.ypos + "px");
