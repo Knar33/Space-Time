@@ -300,6 +300,9 @@ setInterval(function() {
                         object.collide(player, "left");
                     }
                 });
+                if ((player.xpos + player.xBox) == (grid.width * 70)) {
+                    player.xpos--;
+                }
                 $(".box").css("left", player.xpos + "px");
                 updateDebug();
                 camera.scroll();
@@ -313,6 +316,9 @@ setInterval(function() {
                         object.collide(player, "right");
                     }
                 });
+                if (player.xpos == 0) {
+                    player.xpos++;
+                }
                 $(".box").css("left", player.xpos + "px");
                 updateDebug();
                 camera.scroll();
@@ -352,6 +358,9 @@ setInterval(function() {
                         object.collide(player, "top");
                     }
                 });
+                if (player.xpos == 0) {
+                    player.dead = true;
+                }
                 $(".box").css("bottom", player.ypos + "px");
                 updateDebug();
                 camera.scroll();
