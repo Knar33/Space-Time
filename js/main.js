@@ -178,7 +178,7 @@ function checkCollision(obj1, obj2) {
 }
 
 function updateDebug() {
-    $("#debug")[0].innerHTML="xGrid: " + player.xGrid + "<br>yGrid: " + player.yGrid;
+    //$("#debug")[0].innerHTML="xGrid: " + player.xGrid + "<br>yGrid: " + player.yGrid;
 }
 
 $("document").ready(function(){
