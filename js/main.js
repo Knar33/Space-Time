@@ -72,6 +72,7 @@ function keyPressDown(key) {
                     $("#objdiv" + (layer+1))[0].classList.add("animating");
                     setTimeout (function() {
                         layer++;
+                        changeObjArr();
                     }, 500);
                     setTimeout (function() {
                         changing = false;
@@ -93,6 +94,7 @@ function keyPressDown(key) {
                     $("#objdiv" + (layer-1))[0].classList.add("animating");
                     setTimeout (function() {
                         layer--;
+                        changeObjArr();
                     }, 500);
                     setTimeout (function() {
                         changing = false;
@@ -176,7 +178,7 @@ function checkCollision(obj1, obj2) {
 }
 
 function updateDebug() {
-    //$("#debug")[0].innerHTML="Debug<br>xpos: " + player.xpos + "<br>ypos: " + player.ypos + "<br>xspeed: " + player.xspeed.toFixed(2) + "<br>yspeed: " + player.yspeed.toFixed(2);
+    $("#debug")[0].innerHTML="xGrid: " + player.xGrid + "<br>yGrid: " + player.yGrid;
 }
 
 $("document").ready(function(){
@@ -196,6 +198,23 @@ function applyFriction(obj) {
     }
 }
 
+var returnedObjs = [];
+function changeObjArr() {
+    player.xGrid = Math.floor(player.xpos / 70);
+    player.yGrid = Math.floor(player.ypos / 70);
+    returnedObjs = objects[layer].filter(function(obj) {
+            return (
+                obj.xpos > (player.xGrid * 70) - 280
+                &&
+                obj.xpos < (player.xGrid * 70) + 280
+                &&
+                obj.ypos > (player.yGrid * 70) - 280
+                &&
+                obj.ypos < (player.yGrid * 70) + 280
+            );
+        });
+}
+changeObjArr();
 //----------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------main runtime function--------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -209,7 +228,6 @@ var lastFrameTime = 0;
 var isPaused = true;
 var pauseTimer = 0;
 var pauseStart = window.performance.now();
-
 setInterval(function() {
     //timing
     pauseTimer = window.performance.now();
@@ -260,24 +278,18 @@ setInterval(function() {
         
         //no movement object collision - for phasing into objects
         //filter function should be changed for performance - check only the 9 tiles around the players position
-        var returnedObjects = objects[layer].filter(function(obj) {return (
-                ((player.xpos < obj.xpos + obj.xBox) && (player.xpos > obj.xpos))
-            ||
-                ((player.xpos + player.xBox < obj.xpos + obj.xBox) && (player.xpos + player.xBox > obj.xpos))
-            ||
-                ((player.ypos < obj.ypos + obj.yBox) && (player.ypos > obj.ypos))
-            ||
-                ((player.ypos + player.yBox < obj.ypos + obj.yBox) && (player.ypos + player.yBox > obj.ypos))
-            );
-        });
-        returnedObjects.forEach(function(object) {
-            if (checkCollision(player, object) || checkCollision(object, player)) {
-                object.collide(player, "inside");
-            }
-        });
+        
         
         //horizontal movement
         for (i = 0; i < Math.abs(player.xspeed); i++) {
+            if ((Math.floor(player.xpos / 70) != player.xGrid) || (Math.floor(player.ypos / 70) != player.yGrid)) {
+                changeObjArr();
+            }
+            returnedObjs.forEach(function(object) {
+                if (checkCollision(player, object) || checkCollision(object, player)) {
+                    object.collide(player, "inside");
+                }
+            });
             if (player.xspeed > 0) {
                 player.xpos++;
                 //array of all objects with x values that could potentially collide
@@ -309,6 +321,14 @@ setInterval(function() {
 
         //vertical movement
         for (i = 0; i < Math.abs(player.yspeed); i++) {
+            if ((Math.floor(player.xpos / 70) != player.xGrid) || (Math.floor(player.ypos / 70) != player.yGrid)) {
+                changeObjArr();
+            }
+            returnedObjs.forEach(function(object) {
+                if (checkCollision(player, object) || checkCollision(object, player)) {
+                    object.collide(player, "inside");
+                }
+            });
             if (player.yspeed > 0) {
                 player.ypos++;
                 //array of all objects with y values that could potentially collide
