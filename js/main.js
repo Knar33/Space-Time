@@ -294,7 +294,7 @@ setInterval(function() {
                 player.xpos++;
                 //array of all objects with x values that could potentially collide
                 //filter function should be changed for performance - check only the 9 tiles around the players position
-                var returnedObjects = objects[layer].filter(function(obj) {return player.xpos + player.xBox - 1 == obj.xpos;});
+                var returnedObjects = returnedObjs.filter(function(obj) {return player.xpos + player.xBox - 1 == obj.xpos;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
                         object.collide(player, "left");
@@ -307,7 +307,7 @@ setInterval(function() {
                 player.xpos--;
                 //array of all objects with x values that could potentially collide
                 //filter function should be changed for performance - check only the 9 tiles around the players position
-                var returnedObjects = objects[layer].filter(function(obj) {return  player.xpos == obj.xpos + obj.xBox - 1;});
+                var returnedObjects = returnedObjs.filter(function(obj) {return  player.xpos == obj.xpos + obj.xBox - 1;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
                         object.collide(player, "right");
@@ -333,7 +333,7 @@ setInterval(function() {
                 player.ypos++;
                 //array of all objects with y values that could potentially collide
                 //filter function should be changed for performance - check only the 9 tiles around the players position
-                var returnedObjects = objects[layer].filter(function(obj) {return  player.ypos + player.yBox - 1 == obj.ypos;});
+                var returnedObjects = returnedObjs.filter(function(obj) {return  player.ypos + player.yBox - 1 == obj.ypos;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
                         object.collide(player, "bottom");
@@ -346,7 +346,7 @@ setInterval(function() {
                 player.ypos--;
                 //array of all objects with y values that could potentially collide
                 //filter function should be changed for performance - check only the 9 tiles around the players position
-                var returnedObjects = objects[layer].filter(function(obj) {return  player.ypos == obj.ypos + obj.yBox - 1;});
+                var returnedObjects = returnedObjs.filter(function(obj) {return  player.ypos == obj.ypos + obj.yBox - 1;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
                         object.collide(player, "top");
