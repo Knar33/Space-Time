@@ -108,6 +108,7 @@ function keyPressDown(key) {
         case 68:
             rightKey(true);
             break;
+        //when up arrow is held, screen shakes...
         case 38:
         case 87:
             upKey(true);
@@ -258,6 +259,7 @@ setInterval(function() {
         }
         
         //no movement object collision - for phasing into objects
+        //filter function should be changed for performance - check only the 9 tiles around the players position
         var returnedObjects = objects[layer].filter(function(obj) {return (
                 ((player.xpos < obj.xpos + obj.xBox) && (player.xpos > obj.xpos))
             ||
@@ -279,6 +281,7 @@ setInterval(function() {
             if (player.xspeed > 0) {
                 player.xpos++;
                 //array of all objects with x values that could potentially collide
+                //filter function should be changed for performance - check only the 9 tiles around the players position
                 var returnedObjects = objects[layer].filter(function(obj) {return player.xpos + player.xBox - 1 == obj.xpos;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
@@ -291,6 +294,7 @@ setInterval(function() {
             } else if (player.xspeed < 0) {
                 player.xpos--;
                 //array of all objects with x values that could potentially collide
+                //filter function should be changed for performance - check only the 9 tiles around the players position
                 var returnedObjects = objects[layer].filter(function(obj) {return  player.xpos == obj.xpos + obj.xBox - 1;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
@@ -308,6 +312,7 @@ setInterval(function() {
             if (player.yspeed > 0) {
                 player.ypos++;
                 //array of all objects with y values that could potentially collide
+                //filter function should be changed for performance - check only the 9 tiles around the players position
                 var returnedObjects = objects[layer].filter(function(obj) {return  player.ypos + player.yBox - 1 == obj.ypos;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
@@ -320,6 +325,7 @@ setInterval(function() {
             } else if (player.yspeed < 0) {
                 player.ypos--;
                 //array of all objects with y values that could potentially collide
+                //filter function should be changed for performance - check only the 9 tiles around the players position
                 var returnedObjects = objects[layer].filter(function(obj) {return  player.ypos == obj.ypos + obj.yBox - 1;});
                 returnedObjects.forEach(function(object) {
                     if (checkCollision(player, object) || checkCollision(object, player)) {
